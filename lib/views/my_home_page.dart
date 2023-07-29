@@ -1,16 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/layout/main_layout.dart';
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
+class MyHomePage extends StatelessWidget {
   final String title;
 
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
+  const MyHomePage({super.key, required this.title});
 
-class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return MainLayout(
