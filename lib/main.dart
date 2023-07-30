@@ -4,7 +4,7 @@ import 'package:frontend/services/authentication.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  Authentication().initialize();
+  await Authentication().initialize();
   runApp(const MyApp());
 }
 
@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       onGenerateRoute: RouteGenerator().generateRoute,
-      initialRoute: '/login',
+      initialRoute: '/',
     );
   }
 }
