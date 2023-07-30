@@ -1,10 +1,11 @@
 import 'dart:ui';
 
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:frontend/views/auth/authenticate_input_widget.dart';
 
 import '../../resource/resource.dart';
+
+import 'authenticate_button_widget.dart';
 
 class SignupPage extends StatefulWidget {
   const SignupPage({super.key});
@@ -23,7 +24,7 @@ class _SignupPageState extends State<SignupPage> {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: ScrollConfiguration(
-        behavior: LoginPageBehavior(),
+        behavior: const ScrollBehavior(),
         child: SingleChildScrollView(
           child: SizedBox(
             height: size.height,
@@ -62,7 +63,7 @@ class _SignupPageState extends State<SignupPage> {
                                     child: Column(
                                       children: [
                                         Text(
-                                          Resource().loginLabel,
+                                          Resource().signupLabel,
                                           style: TextStyle(
                                             fontSize: 25,
                                             fontWeight: FontWeight.w600,
@@ -72,7 +73,7 @@ class _SignupPageState extends State<SignupPage> {
                                         Padding(
                                             padding: const EdgeInsets.all(10.0),
                                             child: Text(
-                                              Resource().loginHelperMessage,
+                                              Resource().signupHelperMessage,
                                               style: TextStyle(
                                                 fontSize: 12,
                                                 fontWeight: FontWeight.w600,
@@ -108,50 +109,19 @@ class _SignupPageState extends State<SignupPage> {
                                       onChanged: (value) => setState(() {
                                             password2 = value;
                                           })),
-                                  Padding(
-                                      padding: const EdgeInsets.all(10.0),
-                                      child: Row(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          RichText(
-                                            text: TextSpan(
-                                              text: 'Forgotten password!',
-                                              style: const TextStyle(
-                                                color: Colors.white,
-                                              ),
-                                              recognizer: TapGestureRecognizer()
-                                                ..onTap = forgotPasswordAction,
-                                            ),
-                                          )
-                                        ],
-                                      )),
-                                  SizedBox(height: size.width * .3),
-                                  InkWell(
-                                    splashColor: Colors.transparent,
-                                    highlightColor: Colors.transparent,
-                                    onTap: loginAction,
-                                    child: Container(
-                                      margin: EdgeInsets.only(
-                                        bottom: size.width * .05,
-                                      ),
-                                      height: size.width / 8,
-                                      width: size.width / 1.25,
-                                      alignment: Alignment.center,
-                                      decoration: BoxDecoration(
-                                        color: Colors.black.withOpacity(.1),
-                                        borderRadius: BorderRadius.circular(20),
-                                      ),
-                                      child: const Text(
-                                        'Sing-In',
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.w600,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
+                                  const Spacer(),
+                                  Column(
+                                    children: [
+                                      AuthenticateButtonWidget(
+                                          text: "ユーザ登録",
+                                          color: Colors.black,
+                                          onTap: signup),
+                                      AuthenticateButtonWidget(
+                                          text: "ログインへ",
+                                          color: Colors.red,
+                                          onTap: toLoginPage)
+                                    ],
+                                  )
                                 ],
                               ),
                             ),
@@ -172,9 +142,9 @@ class _SignupPageState extends State<SignupPage> {
     );
   }
 
-  void loginAction() {}
+  void signup() {}
 
-  void forgotPasswordAction() {}
+  void toLoginPage() {
+    Navigator.pushNamedAndRemoveUntil(context, "/login", (route) => false);
+  }
 }
-
-class LoginPageBehavior extends ScrollBehavior {}
