@@ -26,7 +26,7 @@ class _LoginPageState extends State<LoginPage> {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: ScrollConfiguration(
-        behavior: LoginPageBehavior(),
+        behavior: const ScrollBehavior(),
         child: SingleChildScrollView(
           child: SizedBox(
             height: size.height,
@@ -176,7 +176,7 @@ class _LoginPageState extends State<LoginPage> {
     }
   }
 
-  void toSignupPage() {}
+  void toSignupPage() {
+    Navigator.pushNamedAndRemoveUntil(context, "/signup", (route) => false);
+  }
 }
-
-class LoginPageBehavior extends ScrollBehavior {}
