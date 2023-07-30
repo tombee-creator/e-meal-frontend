@@ -14,6 +14,9 @@ class Authentication {
     await Firebase.initializeApp(
       options: DefaultFirebaseOptions.currentPlatform,
     );
+    try {
+      await FirebaseAuth.instance.currentUser?.reload();
+    } catch (_) {}
   }
 
   bool get isAuthenticated => FirebaseAuth.instance.currentUser != null;
