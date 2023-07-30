@@ -45,3 +45,7 @@ app.*.map.json
 
 pubspec.lock
 Podfile.lock
+firebase_options.dart
+firebase_app_id_file.json
+google-services.json
+GoogleService-Info.plist
