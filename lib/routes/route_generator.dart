@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/services/authentication.dart';
 import 'package:frontend/views/auth/login_page.dart';
+import 'package:frontend/views/auth/signup_page.dart';
 
 import '../views/my_home_page.dart';
 
@@ -14,6 +15,7 @@ class RouteGenerator {
   static const String root = '/';
   static const String home = '/home';
   static const String login = '/login';
+  static const String signup = '/signup';
 
   Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -28,6 +30,10 @@ class RouteGenerator {
       case login:
         return MaterialPageRoute(
           builder: (_) => const LoginPage(),
+        );
+      case signup:
+        return MaterialPageRoute(
+          builder: (_) => const SignupPage(),
         );
       default:
         return MaterialPageRoute(
