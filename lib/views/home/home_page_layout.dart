@@ -26,7 +26,7 @@ class HomePageLayoutState extends State<HomePageLayout> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: widget.screens[current],
+      body: SafeArea(child: widget.screens[current]),
       bottomNavigationBar: HomeButtonList(
         menu: widget.menu,
         selected: current,
