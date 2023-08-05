@@ -19,6 +19,15 @@ class Authentication {
     } catch (_) {}
   }
 
+  User get currentUser {
+    final user = FirebaseAuth.instance.currentUser;
+    if (user == null) {
+      throw UnsupportedError("認証されていません");
+    } else {
+      return user;
+    }
+  }
+
   bool get isAuthenticated => FirebaseAuth.instance.currentUser != null;
 
   Future<UserCredential> login(String email, String password) async {
