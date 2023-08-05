@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:frontend/services/authentication.dart';
 import 'package:frontend/views/common/avatar.dart';
 import 'package:frontend/views/common/icon_size.dart';
-import 'package:frontend/views/home/components/profile/profile_text_component.dart';
-import 'package:frontend/views/home/components/profile/top_profile_item_component.dart';
+import 'package:frontend/views/profile/profile_text_component.dart';
+import 'package:frontend/views/profile/top_profile_item_component.dart';
 
 class ProfileComponent extends StatefulWidget {
   const ProfileComponent({super.key});
