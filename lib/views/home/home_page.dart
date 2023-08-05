@@ -16,7 +16,7 @@ class HomePage extends StatelessWidget {
       title: "つみたべ",
       menu: [
         HomeMenuModel("ホーム", Icons.home_filled),
-        HomeMenuModel("設定", Icons.settings)
+        HomeMenuModel("プロフィール", Icons.person)
       ],
       screens: const <Widget>[HomeComponent(), ProfileComponent()],
     );
