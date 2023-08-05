@@ -30,12 +30,14 @@ class HomePageLayoutState extends State<HomePageLayout> {
       bottomNavigationBar: HomeButtonList(
         menu: widget.menu,
         selected: current,
-        onTap: (selected) {
-          setState(() {
-            current = selected;
-          });
-        },
+        onTap: onTap,
       ),
     );
+  }
+
+  void onTap(selected) {
+    setState(() {
+      current = selected;
+    });
   }
 }
