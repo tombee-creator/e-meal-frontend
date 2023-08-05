@@ -3,7 +3,7 @@ import 'package:frontend/services/authentication.dart';
 import 'package:frontend/views/auth/login_page.dart';
 import 'package:frontend/views/auth/signup_page.dart';
 
-import '../home/home_page.dart';
+import '../pages/home_page.dart';
 
 /// flutterアプリのルートを作成するクラス
 class RouteGenerator {

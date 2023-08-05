@@ -30,8 +30,12 @@ class _ProfileComponentState extends State<ProfileComponent> {
           Center(child: createTopRowProfile(context, userEmail, userPhotoUrl)),
           Padding(
             padding: const EdgeInsets.all(10.0),
-            child:
-                ProfileTextComponent(icon: Icons.mail_outline, text: userEmail),
+            child: ProfileTextComponent(
+                icon: Icons.mail_outline,
+                child: Text(
+                  userEmail,
+                  style: const TextStyle(fontSize: 16.0),
+                )),
           ),
         ],
       ),
