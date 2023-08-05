@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/routes/route_generator.dart';
+import 'package:frontend/views/routes/route_generator.dart';
 import 'package:frontend/services/authentication.dart';
 
 Future<void> main() async {
