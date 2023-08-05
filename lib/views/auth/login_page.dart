@@ -5,6 +5,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:frontend/services/authentication.dart';
 import 'package:frontend/views/auth/authenticate_button_widget.dart';
 import 'package:frontend/views/auth/authenticate_input_widget.dart';
 
@@ -162,18 +163,9 @@ class _LoginPageState extends State<LoginPage> {
 
   void login() {
     try {
-      FirebaseAuth.instance
-          .signInWithEmailAndPassword(email: email, password: password)
-          .then((credentials) {
-        Navigator.pushNamedAndRemoveUntil(context, "/", (route) => false);
-      });
-    } on FirebaseAuthException catch (e) {
-      if (e.code == 'user-not-found') {
-        print('No user found for that email.');
-      } else if (e.code == 'wrong-password') {
-        print('Wrong password provided for that user.');
-      }
-    }
+      Authentication().login(email, password).then((_) =>
+          Navigator.pushNamedAndRemoveUntil(context, "/", (route) => false));
+    } on FirebaseAuthException catch (_) {}
   }
 
   void toSignupPage() {
