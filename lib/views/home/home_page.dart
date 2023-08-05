@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/views/home/home_page_layout.dart';
 
-import '../models/HomeMenuModel.dart';
+import '../../models/HomeMenuModel.dart';
 
 class HomePage extends StatelessWidget {
   final String title;
