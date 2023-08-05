@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/views/home/components/home_component.dart';
-import 'package:frontend/views/home/components/profile_component.dart';
+import 'package:frontend/views/home/components/profile/profile_component.dart';
 import 'package:frontend/views/home/home_page_layout.dart';
 
 import '../../models/home_menu_model.dart';
