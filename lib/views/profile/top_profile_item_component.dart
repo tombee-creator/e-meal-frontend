@@ -13,32 +13,33 @@ class TopProfileItemComponent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          children: [
-            Column(
+    return Expanded(
+        child: Container(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
               children: [
-                Icon(
-                  icon,
-                  size: 28.0,
+                Column(
+                  children: [
+                    Icon(
+                      icon,
+                      size: 28.0,
+                    ),
+                    Text(
+                      label,
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(fontSize: 12.0),
+                    )
+                  ],
                 ),
-                Text(
-                  label,
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(fontSize: 12.0),
-                )
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    value.toString(),
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(fontSize: 16.0),
+                  ),
+                ),
               ],
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                value.toString(),
-                textAlign: TextAlign.center,
-                style: const TextStyle(fontSize: 16.0),
-              ),
-            ),
-          ],
-        ));
+            )));
   }
 }
