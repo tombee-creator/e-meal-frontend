@@ -11,24 +11,22 @@ class RecipeListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-        child: FutureBuilder(
-            future: future,
-            builder: ((context, snapshot) {
-              final data = snapshot.data;
-              if (data == null) {
-                return GridView.count(
-                    crossAxisCount: 3,
-                    children: List.generate(9, (index) => index)
-                        .map((index) => const DishLoadingView())
-                        .toList());
-              }
-              return GridView.count(
-                cacheExtent: 1000,
+    return FutureBuilder(
+        future: future,
+        builder: ((context, snapshot) {
+          final data = snapshot.data;
+          if (data == null) {
+            return GridView.count(
                 crossAxisCount: 3,
-                children:
-                    data.map((dish) => DishListItemView(dish: dish)).toList(),
-              );
-            })));
+                children: List.generate(9, (index) => index)
+                    .map((index) => const DishLoadingView())
+                    .toList());
+          }
+          return GridView.count(
+            cacheExtent: 1000,
+            crossAxisCount: 3,
+            children: data.map((dish) => DishListItemView(dish: dish)).toList(),
+          );
+        }));
   }
 }
