@@ -1,10 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 
-class DishModel {
+class RecipeModel {
   final User userId;
   final String title;
   final String description;
   final String url;
 
-  DishModel(this.userId, this.title, this.description, this.url);
+  RecipeModel(this.userId, this.title, this.description, this.url);
 }
