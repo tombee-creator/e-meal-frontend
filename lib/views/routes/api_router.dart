@@ -2,18 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:frontend/services/authentication.dart';
 import 'package:frontend/views/auth/login_page.dart';
 import 'package:frontend/views/auth/signup_page.dart';
+import 'package:frontend/views/pages/recipe_page.dart';
 
 import '../pages/home_page.dart';
 
 /// flutterアプリのルートを作成するクラス
-class RouteGenerator {
-  RouteGenerator? _instance;
+class ApiRouter {
+  ApiRouter? _instance;
 
-  factory() => _instance ??= RouteGenerator();
+  factory() => _instance ??= ApiRouter();
 
   // 各ページを定義
   static const String root = '/';
   static const String home = '/home';
+  static const String recipe = '/recipes';
   static const String login = '/login';
   static const String signup = '/signup';
 
@@ -26,6 +28,10 @@ class RouteGenerator {
       case home:
         return MaterialPageRoute(
           builder: (_) => const HomePage(title: "つみたべ"),
+        );
+      case recipe:
+        return MaterialPageRoute(
+          builder: (_) => const RecipePage(title: "つみたべ"),
         );
       case login:
         return MaterialPageRoute(

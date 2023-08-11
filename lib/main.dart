@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/views/routes/route_generator.dart';
+import 'package:frontend/views/routes/api_router.dart';
 import 'package:frontend/services/authentication.dart';
 
 Future<void> main() async {
@@ -18,8 +18,8 @@ class MyApp extends StatelessWidget {
       title: 'つみたべ',
       theme: ThemeData.light(),
       darkTheme: ThemeData.dark(),
-      onGenerateRoute: RouteGenerator().generateRoute,
-      initialRoute: '/',
+      onGenerateRoute: ApiRouter().generateRoute,
+      initialRoute: '/home',
     );
   }
 }
