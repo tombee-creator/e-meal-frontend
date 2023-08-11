@@ -30,8 +30,16 @@ class _ProfileComponentState extends State<ProfileComponent> {
         child: createTopRowProfile(context, userEmail, userPhotoUrl)));
     list.add(
       const TabBar(tabs: <Widget>[
-        Tab(icon: Icon(Icons.dinner_dining)),
-        Tab(icon: Icon(Icons.money))
+        Tab(
+            icon: Icon(
+          Icons.dinner_dining,
+          color: Colors.black,
+        )),
+        Tab(
+            icon: Icon(
+          Icons.money,
+          color: Colors.black,
+        ))
       ]),
     );
     list.add(Expanded(
