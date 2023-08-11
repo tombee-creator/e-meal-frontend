@@ -19,7 +19,7 @@ class RecipeListView extends StatelessWidget {
             return GridView.count(
                 crossAxisCount: 3,
                 children: List.generate(9, (index) => index)
-                    .map((index) => const DishLoadingView())
+                    .map((index) => const RecipeLoadingView())
                     .toList());
           }
           return GridView.count(
