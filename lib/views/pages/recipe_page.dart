@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/services/database.dart';
-import 'package:frontend/views/common/recipe/recipe_detail_view.dart';
-import 'package:frontend/views/common/recipe/recipe_list_view.dart';
-import 'package:frontend/views/common/recipe/recipe_loading_view.dart';
+import 'package:frontend/views/home/components/recipe/recipe_detail_view.dart';
+import 'package:frontend/views/home/components/recipe/recipe_list_view.dart';
+import 'package:frontend/views/home/components/recipe/recipe_loading_view.dart';
 
 class RecipePage extends StatelessWidget {
   final String title;
@@ -18,7 +18,7 @@ class RecipePage extends StatelessWidget {
           appBar: AppBar(
             title: Text(title),
           ),
-          body: RecipeListView(future: Database().getDishes()));
+          body: RecipeListView(future: Database().getRecipes()));
     }
 
     return Scaffold(
@@ -27,7 +27,7 @@ class RecipePage extends StatelessWidget {
         ),
         body: SafeArea(
             child: FutureBuilder(
-                future: Database().getDishItem(id),
+                future: Database().getRecipeItem(id),
                 builder: ((context, snapshot) {
                   final recipe = snapshot.data;
                   if (recipe == null) {

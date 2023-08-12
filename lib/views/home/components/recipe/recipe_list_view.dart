@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:frontend/models/recipe.dart';
 
-import '../../../models/recipe_model.dart';
 import 'recipe_loading_view.dart';
 import 'recipe_list_item_view.dart';
 
 class RecipeListView extends StatelessWidget {
-  final Future<List<RecipeModel>> future;
+  final Future<List<Recipe>> future;
 
   const RecipeListView({super.key, required this.future});
 
@@ -23,9 +23,12 @@ class RecipeListView extends StatelessWidget {
                     .toList());
           }
           return GridView.count(
+            childAspectRatio: 0.6,
             cacheExtent: 1000,
             crossAxisCount: 3,
-            children: data.map((dish) => DishListItemView(dish: dish)).toList(),
+            children: data
+                .map((recipe) => RecipeListItemView(recipe: recipe))
+                .toList(),
           );
         }));
   }
