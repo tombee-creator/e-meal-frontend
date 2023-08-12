@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/views/home/components/home_component.dart';
+import 'package:frontend/views/home/components/post/post_view.dart';
 import 'package:frontend/views/profile/profile_component.dart';
 import 'package:frontend/views/home/home_page_layout.dart';
 
@@ -16,9 +17,10 @@ class HomePage extends StatelessWidget {
       title: "つみたべ",
       menu: [
         HomeMenuModel("ホーム", Icons.home_filled),
+        HomeMenuModel("レシピ追加", Icons.add_outlined),
         HomeMenuModel("プロフィール", Icons.person)
       ],
-      screens: const <Widget>[HomeComponent(), ProfileComponent()],
+      screens: const <Widget>[HomeComponent(), PostView(), ProfileComponent()],
     );
   }
 }

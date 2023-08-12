@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:frontend/services/authentication.dart';
 import 'package:frontend/services/database.dart';
 import 'package:frontend/views/common/avatar.dart';
-import 'package:frontend/views/common/recipe/recipe_list_view.dart';
+import 'package:frontend/views/home/components/recipe/recipe_list_view.dart';
 import 'package:frontend/views/common/icon_size.dart';
 import 'package:frontend/views/profile/top_profile_item_component.dart';
 
@@ -44,8 +44,8 @@ class _ProfileComponentState extends State<ProfileComponent> {
     );
     list.add(Expanded(
         child: TabBarView(children: [
-      RecipeListView(future: Database().getDishes()),
-      RecipeListView(future: Database().getDishes()),
+      RecipeListView(future: Database().getRecipes()),
+      RecipeListView(future: Database().getRecipes()),
     ])));
 
     return DefaultTabController(
