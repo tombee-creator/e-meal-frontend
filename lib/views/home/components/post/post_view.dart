@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/models/recipe.dart';
 import 'package:frontend/services/authentication.dart';
-
-import '../../../../services/database.dart';
+import 'package:frontend/services/database.dart';
+import 'package:frontend/helper/crud_api.dart';
 
 class PostView extends StatelessWidget {
   const PostView({super.key});
@@ -12,8 +12,11 @@ class PostView extends StatelessWidget {
     return Center(
         child: ElevatedButton(
       onPressed: () async {
-        await Database().addRecipe(Recipe("aaaaa", Authentication().currentUser,
-            "title", "description", "https://picsum.photos/id/100/640/640/"));
+        final api =
+            Database().provider(CRUDApi<Recipe>("recipes", Recipe.fromJson));
+        await api.post((id) => Recipe(id, Authentication().currentUser, "title",
+                "description", "https://picsum.photos/id/100/640/640/")
+            .toJson());
       },
       child: const Text(
         "Add Recipe",
