@@ -15,6 +15,7 @@ Recipe _$RecipeFromJson(Map<String, dynamic> json) => Recipe(
     );
 
 Map<String, dynamic> _$RecipeToJson(Recipe instance) => <String, dynamic>{
+      'id': instance.id,
       'user': UserConverter.toJson(instance.user),
       'title': instance.title,
       'description': instance.description,

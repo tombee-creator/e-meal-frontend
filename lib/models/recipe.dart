@@ -6,7 +6,6 @@ part 'recipe.g.dart';
 
 @JsonSerializable()
 class Recipe {
-  @JsonKey(includeFromJson: true, includeToJson: false)
   final String id;
 
   @JsonKey(fromJson: UserConverter.fromJson, toJson: UserConverter.toJson)
