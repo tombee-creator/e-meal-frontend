@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/models/recipe.dart';
 import 'package:frontend/services/database.dart';
-import 'package:frontend/helper/crud_api.dart';
+import 'package:frontend/services/firestore_crud_api.dart';
 import 'package:frontend/views/home/components/recipe/recipe_detail_view.dart';
 import 'package:frontend/views/home/components/recipe/recipe_list_view.dart';
 import 'package:frontend/views/home/components/recipe/recipe_loading_view.dart';
@@ -15,8 +15,8 @@ class RecipePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final id = this.id;
-    final api =
-        Database().provider(CRUDApi<Recipe>("recipes", Recipe.fromJson));
+    final api = Database()
+        .provider(FirestoreCRUDApi<Recipe>("recipes", Recipe.fromJson));
     if (id == null) {
       return Scaffold(
           appBar: AppBar(

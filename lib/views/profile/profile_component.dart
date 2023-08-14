@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:frontend/models/recipe.dart';
 import 'package:frontend/services/authentication.dart';
 import 'package:frontend/services/database.dart';
-import 'package:frontend/helper/crud_api.dart';
+import 'package:frontend/services/firestore_crud_api.dart';
 import 'package:frontend/views/common/avatar.dart';
 import 'package:frontend/views/home/components/recipe/recipe_list_view.dart';
 import 'package:frontend/views/common/icon_size.dart';
@@ -45,8 +45,9 @@ class _ProfileComponentState extends State<ProfileComponent> {
       ]),
     );
 
-    final result =
-        Database().provider(CRUDApi<Recipe>("recipes", Recipe.fromJson)).list();
+    final result = Database()
+        .provider(FirestoreCRUDApi<Recipe>("recipes", Recipe.fromJson))
+        .list();
     list.add(Expanded(
         child: TabBarView(children: [
       RecipeListView(future: result),

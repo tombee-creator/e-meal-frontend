@@ -17,12 +17,18 @@ class RecipeListItemView extends StatelessWidget {
         child: Card(
             child: Column(children: [
           Image.network(recipe.url),
-          Padding(
-              padding: const EdgeInsets.all(0.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [Text(recipe.title), Text(recipe.description)],
-              ))
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              Text(recipe.title,
+                  textAlign: TextAlign.end, overflow: TextOverflow.ellipsis),
+              Text(
+                recipe.description,
+                overflow: TextOverflow.ellipsis,
+                maxLines: 2,
+              )
+            ],
+          )
         ])));
   }
 }
