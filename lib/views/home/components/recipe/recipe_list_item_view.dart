@@ -14,18 +14,6 @@ class RecipeListItemView extends StatelessWidget {
           Navigator.of(context).push(MaterialPageRoute(
               builder: (_) => RecipePage(title: "つみたべ", id: recipe.id)));
         },
-        child: Card(
-            child: Column(children: [
-          AspectRatio(aspectRatio: 1.0, child: Image.network(recipe.url)),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              Text(
-                recipe.comment,
-                overflow: TextOverflow.ellipsis,
-              )
-            ],
-          )
-        ])));
+        child: AspectRatio(aspectRatio: 1.0, child: Image.network(recipe.url)));
   }
 }

@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:frontend/models/recipe.dart';
-
-import 'recipe_loading_view.dart';
-import 'recipe_list_item_view.dart';
+import 'package:frontend/views/home/components/recipe/recipe_list_item_view.dart';
+import 'package:frontend/views/home/components/recipe/recipe_loading_view.dart';
 
 class RecipeListView extends StatelessWidget {
   final Future<List<Recipe>> future;
@@ -23,7 +22,6 @@ class RecipeListView extends StatelessWidget {
                     .toList());
           }
           return GridView.count(
-            childAspectRatio: 0.6,
             cacheExtent: 1000,
             crossAxisCount: 3,
             children: data
