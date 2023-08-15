@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
       title: 'つみたべ',
       theme: ThemeData.dark(),
       onGenerateRoute: ApiRouter().generateRoute,
-      initialRoute: '/home',
+      initialRoute: '/',
     );
   }
 }
