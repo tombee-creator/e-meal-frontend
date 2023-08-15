@@ -1,26 +1,73 @@
-import 'package:flutter/material.dart';
-import 'package:frontend/models/recipe.dart';
-import 'package:frontend/services/authentication.dart';
-import 'package:frontend/services/database.dart';
-import 'package:frontend/services/firestore_crud_api.dart';
+import 'dart:io';
 
-class PostView extends StatelessWidget {
+import 'package:flutter/material.dart';
+import 'package:frontend/helper/image_picker_provider.dart';
+import 'package:frontend/views/home/components/post/recipe_field_form.dart';
+import 'package:frontend/views/home/components/post/recipe_post_button.dart';
+
+class PostView extends StatefulWidget {
   const PostView({super.key});
 
   @override
+  State<StatefulWidget> createState() => _PostViewState();
+}
+
+class _PostViewState extends State<PostView> {
+  double cost = 0.0;
+  String comment = "";
+  File? image;
+
+  @override
   Widget build(BuildContext context) {
-    return Center(
-        child: ElevatedButton(
-      onPressed: () async {
-        final api = Database()
-            .provider(FirestoreCRUDApi<Recipe>("recipes", Recipe.fromJson));
-        await api.post((id) => Recipe(id, Authentication().currentUser,
-                "タイトル$id", "$id$id$id", "https://picsum.photos/id/100/640/640/")
-            .toJson());
-      },
-      child: const Text(
-        "Add Recipe",
-      ),
-    ));
+    final imageWidget = image == null
+        ? const Icon(Icons.camera)
+        : Image.file(image!, fit: BoxFit.cover);
+    return Column(
+      children: [
+        Center(
+          child: AspectRatio(
+              aspectRatio: 1.0,
+              child: GestureDetector(
+                  onTap: () async {
+                    getImage();
+                  },
+                  child: imageWidget)),
+        ),
+        RecipeFieldForm(
+          hintText: "コメント",
+          icon: Icons.description,
+          onChange: (comment) {
+            setState(() {
+              this.comment = comment;
+            });
+          },
+        ),
+        RecipeFieldForm(
+          hintText: "コスト",
+          icon: Icons.currency_yen,
+          onChange: (cost) {
+            final parsedCost = double.tryParse(cost) ?? 0.0;
+            setState(() {
+              this.cost = parsedCost;
+            });
+          },
+        ),
+        const Spacer(),
+        RecipePostButton(
+          comment: comment,
+          image: image,
+          cost: cost,
+        )
+      ],
+    );
+  }
+
+  Future getImage() async {
+    final provider = ImagePickerProvider();
+    provider.getImage((image) {
+      setState(() {
+        this.image = image;
+      });
+    });
   }
 }
