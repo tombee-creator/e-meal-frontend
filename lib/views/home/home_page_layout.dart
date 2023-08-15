@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/models/home_menu_model.dart';
-import 'package:frontend/views/home/buttons/home_button_list.dart';
+import 'package:tsumitabe_app/models/home_menu_model.dart';
+import 'package:tsumitabe_app/views/home/buttons/home_button_list.dart';
 
 class HomePageLayout extends StatefulWidget {
   final String title;

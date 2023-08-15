@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/models/recipe.dart';
-import 'package:frontend/views/home/components/recipe/recipe_list_item_view.dart';
-import 'package:frontend/views/home/components/recipe/recipe_loading_view.dart';
+import 'package:tsumitabe_app/models/recipe.dart';
+import 'package:tsumitabe_app/views/home/components/recipe/recipe_list_item_view.dart';
+import 'package:tsumitabe_app/views/home/components/recipe/recipe_loading_view.dart';
 
 class RecipeListView extends StatelessWidget {
   final Future<List<Recipe>> future;

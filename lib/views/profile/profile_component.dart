@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/models/recipe.dart';
-import 'package:frontend/services/authentication.dart';
-import 'package:frontend/services/database.dart';
-import 'package:frontend/services/firestore_crud_api.dart';
-import 'package:frontend/views/common/avatar.dart';
-import 'package:frontend/views/home/components/recipe/recipe_list_view.dart';
-import 'package:frontend/views/common/icon_size.dart';
-import 'package:frontend/views/profile/top_profile_item_component.dart';
+import 'package:tsumitabe_app/models/recipe.dart';
+import 'package:tsumitabe_app/services/authentication.dart';
+import 'package:tsumitabe_app/services/database.dart';
+import 'package:tsumitabe_app/services/firestore_crud_api.dart';
+import 'package:tsumitabe_app/views/common/avatar.dart';
+import 'package:tsumitabe_app/views/home/components/recipe/recipe_list_view.dart';
+import 'package:tsumitabe_app/views/common/icon_size.dart';
+import 'package:tsumitabe_app/views/profile/top_profile_item_component.dart';
 
 class ProfileComponent extends StatefulWidget {
   const ProfileComponent({super.key});

@@ -5,9 +5,9 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:frontend/services/authentication.dart';
-import 'package:frontend/views/auth/authenticate_button_widget.dart';
-import 'package:frontend/views/auth/authenticate_input_widget.dart';
+import 'package:tsumitabe_app/services/authentication.dart';
+import 'package:tsumitabe_app/views/auth/authenticate_button_widget.dart';
+import 'package:tsumitabe_app/views/auth/authenticate_input_widget.dart';
 
 import '../../resource/resource.dart';
 

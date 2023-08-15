@@ -2,10 +2,10 @@ import 'dart:io';
 import 'package:uuid/uuid.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:frontend/models/recipe.dart';
-import 'package:frontend/services/authentication.dart';
-import 'package:frontend/services/database.dart';
-import 'package:frontend/services/firestore_crud_api.dart';
+import 'package:tsumitabe_app/models/recipe.dart';
+import 'package:tsumitabe_app/services/authentication.dart';
+import 'package:tsumitabe_app/services/database.dart';
+import 'package:tsumitabe_app/services/firestore_crud_api.dart';
 
 enum ButtonState { WAITING, UPLOAD_IMAGE, POST_DATA, SUCCESS, FAILED }
 

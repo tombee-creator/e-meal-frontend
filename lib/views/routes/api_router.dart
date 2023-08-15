@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/services/authentication.dart';
-import 'package:frontend/views/auth/login_page.dart';
-import 'package:frontend/views/auth/signup_page.dart';
-import 'package:frontend/views/pages/recipe_page.dart';
+import 'package:tsumitabe_app/services/authentication.dart';
+import 'package:tsumitabe_app/views/auth/login_page.dart';
+import 'package:tsumitabe_app/views/auth/signup_page.dart';
+import 'package:tsumitabe_app/views/pages/recipe_page.dart';
 
 import '../pages/home_page.dart';
 

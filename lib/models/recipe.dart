@@ -1,5 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:frontend/models/converters/user_converter.dart';
+import 'package:tsumitabe_app/models/converters/user_converter.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'recipe.g.dart';

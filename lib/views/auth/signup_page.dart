@@ -2,8 +2,8 @@ import 'dart:ui';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:frontend/services/authentication.dart';
-import 'package:frontend/views/auth/authenticate_input_widget.dart';
+import 'package:tsumitabe_app/services/authentication.dart';
+import 'package:tsumitabe_app/views/auth/authenticate_input_widget.dart';
 
 import '../../resource/resource.dart';
 

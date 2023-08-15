@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:frontend/views/routes/api_router.dart';
-import 'package:frontend/services/authentication.dart';
+import 'package:tsumitabe_app/views/routes/api_router.dart';
+import 'package:tsumitabe_app/services/authentication.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
