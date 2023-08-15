@@ -23,16 +23,16 @@ class HomePageLayoutState extends State<HomePageLayout> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: SafeArea(child: widget.screens[current]),
-      bottomNavigationBar: HomeButtonList(
-        menu: widget.menu,
-        selected: current,
-        onTap: onTap,
-      ),
-    );
+        appBar: AppBar(
+          title: Text(widget.title),
+        ),
+        body: SafeArea(child: widget.screens[current]),
+        bottomNavigationBar: HomeButtonList(
+          menu: widget.menu,
+          selected: current,
+          onTap: onTap,
+        ),
+        resizeToAvoidBottomInset: false);
   }
 
   void onTap(selected) {
