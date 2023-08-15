@@ -11,13 +11,18 @@ class Recipe {
   @JsonKey(fromJson: UserConverter.fromJson, toJson: UserConverter.toJson)
   final User user;
 
-  final String title;
-
-  final String description;
+  final String comment;
 
   final String url;
 
-  Recipe(this.id, this.user, this.title, this.description, this.url);
+  final double cost;
+
+  final DateTime create;
+
+  final DateTime update;
+
+  Recipe(this.id, this.user, this.comment, this.url, this.cost, this.create,
+      this.update);
 
   factory Recipe.fromJson(Map<String, dynamic> json) => _$RecipeFromJson(json);
 
