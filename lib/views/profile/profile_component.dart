@@ -47,7 +47,7 @@ class _ProfileComponentState extends State<ProfileComponent> {
 
     final result = Database()
         .provider(FirestoreCRUDApi<Recipe>("recipes", Recipe.fromJson))
-        .list();
+        .list(query: (ref) => ref.orderBy("create", descending: true));
     list.add(Expanded(
         child: TabBarView(children: [
       RecipeListView(future: result),

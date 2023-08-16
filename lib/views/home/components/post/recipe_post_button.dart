@@ -47,13 +47,14 @@ class _RecipePostButtonState extends State<RecipePostButton> {
   }
 
   Widget getIcon() {
-    return switch (state) {
+    return Container(
+        child: switch (state) {
       ButtonState.WAITING => const Icon(Icons.post_add),
       ButtonState.UPLOAD_IMAGE => CircularProgressIndicator(value: progress),
       ButtonState.POST_DATA => CircularProgressIndicator(),
       ButtonState.SUCCESS => const Icon(Icons.check),
       ButtonState.FAILED => const Icon(Icons.close)
-    };
+    });
   }
 
   Future postRecipe() async {
@@ -72,7 +73,8 @@ class _RecipePostButtonState extends State<RecipePostButton> {
 
   Future<String> uploadImageFile() async {
     try {
-      final fileBaseName = Uuid().v4();
+      final fileBaseName =
+          "${const Uuid().v4()}-${DateTime.now().toIso8601String()}";
       final storage = FirebaseStorage.instance.ref("$fileBaseName.png");
       final image = widget.image;
       if (image == null) {

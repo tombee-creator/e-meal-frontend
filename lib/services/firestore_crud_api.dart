@@ -8,9 +8,13 @@ class FirestoreCRUDApi<T> implements CRUDApi<T> {
   FirestoreCRUDApi(this.collection, this.converter);
 
   @override
-  Future<List<T>> list() async {
-    final snapshot =
-        await FirebaseFirestore.instance.collection(collection).get();
+  Future<List<T>> list(
+      {Query<Map<String, dynamic>> Function(
+              CollectionReference<Map<String, dynamic>>)?
+          query}) async {
+    final ref = FirebaseFirestore.instance.collection(collection);
+    final queriedList = query != null ? query(ref) : ref;
+    final snapshot = await queriedList.get();
     return snapshot.docs.map((item) => converter(item.data())).toList();
   }
 

@@ -22,7 +22,9 @@ class RecipePage extends StatelessWidget {
           appBar: AppBar(
             title: Text(title),
           ),
-          body: RecipeListView(future: api.list()));
+          body: RecipeListView(
+              future: api.list(
+                  query: (ref) => ref.orderBy("create", descending: true))));
     }
 
     return Scaffold(
