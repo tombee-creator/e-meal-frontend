@@ -16,15 +16,9 @@ class CacheProvider {
     return path;
   }
 
-  Future<bool> exists(String url) async {
-    final _path = await pathFrom(url);
-    return File(_path).exists();
-  }
+  Future<bool> exists(String url) async => File(await pathFrom(url)).exists();
 
-  Future<File> read(String url) async {
-    final _path = await pathFrom(url);
-    return File(_path);
-  }
+  Future<File> read(String url) async => File(await pathFrom(url));
 
   Future write(String url) async {
     final path = await pathFrom(url);
