@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tsumitabe_app/models/recipe.dart';
+import 'package:tsumitabe_app/views/helper/image/image_helper.dart';
 
 class RecipeDetailView extends StatelessWidget {
   final Recipe recipe;
@@ -10,7 +11,7 @@ class RecipeDetailView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Image.network(recipe.url),
+        ImageHelper.image(recipe.url),
       ],
     );
   }

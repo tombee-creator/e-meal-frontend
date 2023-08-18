@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:tsumitabe_app/services/authentication.dart';
 import 'package:tsumitabe_app/views/auth/authenticate_input_widget.dart';
+import 'package:tsumitabe_app/views/helper/image/image_helper.dart';
 
 import '../../resource/resource.dart';
 
@@ -34,10 +35,8 @@ class _SignupPageState extends State<SignupPage> {
               children: [
                 SizedBox(
                   height: size.height,
-                  child: Image.network(
-                    Resource().backgroundImageUrl,
-                    fit: BoxFit.fitHeight,
-                  ),
+                  child: FittedBox(
+                      child: ImageHelper.image(Resource().backgroundImageUrl)),
                 ),
                 Center(
                   child: Column(

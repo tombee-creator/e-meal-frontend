@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tsumitabe_app/models/recipe.dart';
+import 'package:tsumitabe_app/views/helper/image/image_helper.dart';
 import 'package:tsumitabe_app/views/pages/recipe_page.dart';
 
 class RecipeListItemView extends StatelessWidget {
@@ -14,6 +15,7 @@ class RecipeListItemView extends StatelessWidget {
           Navigator.of(context).push(MaterialPageRoute(
               builder: (_) => RecipePage(title: "つみたべ", id: recipe.id)));
         },
-        child: AspectRatio(aspectRatio: 1.0, child: Image.network(recipe.url)));
+        child: AspectRatio(
+            aspectRatio: 1.0, child: ImageHelper.image(recipe.url)));
   }
 }

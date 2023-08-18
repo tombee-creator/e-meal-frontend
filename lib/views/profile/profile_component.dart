@@ -4,6 +4,7 @@ import 'package:tsumitabe_app/services/authentication.dart';
 import 'package:tsumitabe_app/services/database.dart';
 import 'package:tsumitabe_app/services/firestore_crud_api.dart';
 import 'package:tsumitabe_app/views/common/avatar.dart';
+import 'package:tsumitabe_app/views/home/components/cost/food_cost_list.dart';
 import 'package:tsumitabe_app/views/home/components/recipe/recipe_list_view.dart';
 import 'package:tsumitabe_app/views/common/icon_size.dart';
 import 'package:tsumitabe_app/views/profile/top_profile_item_component.dart';
@@ -45,13 +46,14 @@ class _ProfileComponentState extends State<ProfileComponent> {
       ]),
     );
 
-    final result = Database()
-        .provider(FirestoreCRUDApi<Recipe>("recipes", Recipe.fromJson))
-        .list(query: (ref) => ref.orderBy("create", descending: true));
+    final api = Database()
+        .provider(FirestoreCRUDApi<Recipe>("recipes", Recipe.fromJson));
     list.add(Expanded(
         child: TabBarView(children: [
-      RecipeListView(future: result),
-      RecipeListView(future: result),
+      RecipeListView(
+          future: api.list(
+              query: (ref) => ref.orderBy("create", descending: true))),
+      FoodCostList(future: api.list(query: (ref) => ref.orderBy("create"))),
     ])));
 
     return DefaultTabController(

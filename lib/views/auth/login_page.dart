@@ -8,6 +8,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:tsumitabe_app/services/authentication.dart';
 import 'package:tsumitabe_app/views/auth/authenticate_button_widget.dart';
 import 'package:tsumitabe_app/views/auth/authenticate_input_widget.dart';
+import 'package:tsumitabe_app/views/helper/image/image_helper.dart';
 
 import '../../resource/resource.dart';
 
@@ -35,10 +36,8 @@ class _LoginPageState extends State<LoginPage> {
               children: [
                 SizedBox(
                   height: size.height,
-                  child: Image.network(
-                    Resource().backgroundImageUrl,
-                    fit: BoxFit.fitHeight,
-                  ),
+                  child: FittedBox(
+                      child: ImageHelper.image(Resource().backgroundImageUrl)),
                 ),
                 Center(
                   child: Column(
