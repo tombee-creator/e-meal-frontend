@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tsumitabe_app/models/recipe.dart';
-import 'package:tsumitabe_app/views/home/components/cost/cost_chart_view.dart';
+import 'package:tsumitabe_app/views/home/components/cost/cost_chart_controller.dart';
 import 'package:tsumitabe_app/views/home/components/cost/cost_description_item.dart.dart';
 
 class FoodCostDescriptionView extends StatelessWidget {
@@ -43,11 +43,11 @@ class FoodCostDescriptionView extends StatelessWidget {
                   ],
                 ),
               ),
-              Expanded(
+              const Expanded(
                   flex: 2,
                   child: Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: CostChartView(recipes: data),
+                    padding: EdgeInsets.all(12.0),
+                    child: CostChartControllerView(),
                   )),
               Expanded(flex: 1, child: Container()),
             ],

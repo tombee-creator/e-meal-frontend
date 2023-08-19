@@ -6,38 +6,9 @@ import 'package:tsumitabe_app/models/recipe.dart';
 
 class CostChartView extends StatelessWidget {
   final List<Recipe> recipes;
+  final DateTime focus;
 
-  const CostChartView({super.key, required this.recipes});
-
-  Widget bottomTitles(double value, TitleMeta meta) {
-    final dateList = recipes
-        .map((recipe) => DateTime(
-            recipe.create.year, recipe.create.month, recipe.create.day))
-        .toSet()
-        .toList();
-    const style = TextStyle(fontSize: 10);
-    final date = dateList[value.toInt()];
-    return SideTitleWidget(
-      axisSide: meta.axisSide,
-      child: Text('${date.month}/${date.day}', style: style),
-    );
-  }
-
-  Widget leftTitles(double value, TitleMeta meta) {
-    if (value == meta.max) {
-      return Container();
-    }
-    const style = TextStyle(
-      fontSize: 10,
-    );
-    return SideTitleWidget(
-      axisSide: meta.axisSide,
-      child: Text(
-        meta.formattedValue,
-        style: style,
-      ),
-    );
-  }
+  const CostChartView({super.key, required this.recipes, required this.focus});
 
   @override
   Widget build(BuildContext context) {
@@ -50,10 +21,9 @@ class CostChartView extends StatelessWidget {
           show: true,
           bottomTitles: AxisTitles(
             sideTitles: SideTitles(
-              showTitles: true,
-              reservedSize: 28,
-              getTitlesWidget: bottomTitles,
-            ),
+                showTitles: true,
+                getTitlesWidget: bottomTitles,
+                reservedSize: 42),
           ),
           leftTitles: AxisTitles(
             sideTitles: SideTitles(
@@ -80,11 +50,58 @@ class CostChartView extends StatelessWidget {
     );
   }
 
+  Widget bottomTitles(double value, TitleMeta meta) {
+    final dateList =
+        List.generate(7, (index) => focus.add(Duration(days: -index)))
+            .reversed
+            .toList();
+    const style = TextStyle(fontSize: 10);
+    final date = dateList[value.toInt()];
+    final weekdayName = weekdayNameFrom(date.weekday);
+    return SideTitleWidget(
+      axisSide: meta.axisSide,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Text('${date.month}/${date.day}', style: style),
+          Text(weekdayName, style: style),
+        ],
+      ),
+    );
+  }
+
+  String weekdayNameFrom(int weekday) => switch (weekday) {
+        1 => "月",
+        2 => "火",
+        3 => "水",
+        4 => "木",
+        5 => "金",
+        6 => "土",
+        7 => "日",
+        _ => ""
+      };
+
+  Widget leftTitles(double value, TitleMeta meta) {
+    if (value == meta.max) {
+      return Container();
+    }
+    const style = TextStyle(
+      fontSize: 10,
+    );
+    return SideTitleWidget(
+      axisSide: meta.axisSide,
+      child: Text(
+        meta.formattedValue,
+        style: style,
+      ),
+    );
+  }
+
   List<BarChartGroupData> getData(double barsWidth, double barsSpace) {
-    final dateList = recipes
-        .map((recipe) => DateTime(
-            recipe.create.year, recipe.create.month, recipe.create.day))
-        .toSet();
+    final dateList =
+        List.generate(7, (index) => focus.add(Duration(days: -index)))
+            .reversed
+            .toList();
     final list = dateList
         .map((date) =>
             recipes.where((recipe) => isSameDay(recipe.create, date)).toList())
