@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:tsumitabe_app/models/recipe.dart';
 import 'package:tsumitabe_app/views/home/components/cost/cost_description_item.dart.dart';
 
-class FoodCostList extends StatelessWidget {
+class FoodCostDescriptionView extends StatelessWidget {
   final Future<List<Recipe>> future;
 
-  const FoodCostList({super.key, required this.future});
+  const FoodCostDescriptionView({super.key, required this.future});
 
   @override
   Widget build(BuildContext context) {
@@ -14,25 +14,29 @@ class FoodCostList extends StatelessWidget {
         future: future,
         builder: ((context, snapshot) {
           final data = snapshot.data ?? [];
-          final sum = data.isNotEmpty
-              ? data.map((item) => item.cost).reduce((v1, v2) => v1 + v2)
-              : 0.0;
-          final average = data.isNotEmpty ? sum / data.length : 0.0;
           return Column(
             children: [
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  CostDescriptionItem(
+                  CostDescriptionItem.generate(
+                    data: data,
                     icon: Icons.calendar_month,
                     label: "今月の食費",
-                    value: sum,
+                    value: (data) => data
+                        .map((item) => item.cost)
+                        .reduce((v1, v2) => v1 + v2),
                   ),
-                  CostDescriptionItem(
+                  CostDescriptionItem.generate(
+                    data: data,
                     icon: Icons.attach_money,
                     label: "毎食費の平均",
-                    value: average,
+                    value: (data) =>
+                        data
+                            .map((item) => item.cost)
+                            .reduce((v1, v2) => v1 + v2) /
+                        data.length,
                   ),
                 ],
               ),

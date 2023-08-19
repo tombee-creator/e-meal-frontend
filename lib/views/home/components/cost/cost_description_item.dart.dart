@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tsumitabe_app/models/recipe.dart';
 
 class CostDescriptionItem extends StatelessWidget {
   final IconData icon;
@@ -44,5 +45,17 @@ class CostDescriptionItem extends StatelessWidget {
                 ),
               ],
             )));
+  }
+
+  static CostDescriptionItem generate(
+      {required List<Recipe> data,
+      required IconData icon,
+      required String label,
+      required double Function(List<Recipe> data) value}) {
+    return CostDescriptionItem(
+      icon: Icons.calendar_month,
+      label: "今月の食費",
+      value: data.isNotEmpty ? value(data) : 0.0,
+    );
   }
 }
