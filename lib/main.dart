@@ -15,8 +15,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'つみたべ',
-      theme: ThemeData.dark(),
+      title: 'e-Meal',
+      theme: ThemeData(primarySwatch: Colors.teal),
       onGenerateRoute: ApiRouter().generateRoute,
       initialRoute: '/',
     );

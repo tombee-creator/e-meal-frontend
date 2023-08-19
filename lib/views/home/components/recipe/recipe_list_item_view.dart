@@ -13,7 +13,7 @@ class RecipeListItemView extends StatelessWidget {
     return GestureDetector(
         onTap: () {
           Navigator.of(context).push(MaterialPageRoute(
-              builder: (_) => RecipePage(title: "つみたべ", id: recipe.id)));
+              builder: (_) => RecipePage(title: "e-Meal", id: recipe.id)));
         },
         child: AspectRatio(
             aspectRatio: 1.0, child: ImageHelper.image(recipe.url)));

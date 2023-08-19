@@ -14,7 +14,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return HomePageLayout(
-      title: "つみたべ",
+      title: "e-Meal",
       menu: [
         HomeMenuModel("ホーム", Icons.home_filled),
         HomeMenuModel("レシピ追加", Icons.add_outlined),

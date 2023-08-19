@@ -27,11 +27,11 @@ class ApiRouter {
         );
       case home:
         return MaterialPageRoute(
-          builder: (_) => const HomePage(title: "つみたべ"),
+          builder: (_) => const HomePage(title: "e-Meal"),
         );
       case recipe:
         return MaterialPageRoute(
-          builder: (_) => const RecipePage(title: "つみたべ"),
+          builder: (_) => const RecipePage(title: "e-Meal"),
         );
       case login:
         return MaterialPageRoute(
@@ -51,7 +51,7 @@ class ApiRouter {
   Widget redirect(BuildContext context) {
     final auth = Authentication();
     if (auth.isAuthenticated) {
-      return const HomePage(title: "つみたべ");
+      return const HomePage(title: "e-Meal");
     } else {
       return const LoginPage();
     }
