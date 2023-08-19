@@ -1,0 +1,139 @@
+import 'dart:math';
+
+import 'package:fl_chart/fl_chart.dart';
+import 'package:flutter/material.dart';
+import 'package:tsumitabe_app/models/recipe.dart';
+
+class CostChartView extends StatelessWidget {
+  final List<Recipe> recipes;
+
+  const CostChartView({super.key, required this.recipes});
+
+  Widget bottomTitles(double value, TitleMeta meta) {
+    final dateList = recipes
+        .map((recipe) => DateTime(
+            recipe.create.year, recipe.create.month, recipe.create.day))
+        .toSet()
+        .toList();
+    const style = TextStyle(fontSize: 10);
+    final date = dateList[value.toInt()];
+    return SideTitleWidget(
+      axisSide: meta.axisSide,
+      child: Text('${date.month}/${date.day}', style: style),
+    );
+  }
+
+  Widget leftTitles(double value, TitleMeta meta) {
+    if (value == meta.max) {
+      return Container();
+    }
+    const style = TextStyle(
+      fontSize: 10,
+    );
+    return SideTitleWidget(
+      axisSide: meta.axisSide,
+      child: Text(
+        meta.formattedValue,
+        style: style,
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return BarChart(
+      BarChartData(
+        barTouchData: BarTouchData(
+          enabled: false,
+        ),
+        titlesData: FlTitlesData(
+          show: true,
+          bottomTitles: AxisTitles(
+            sideTitles: SideTitles(
+              showTitles: true,
+              reservedSize: 28,
+              getTitlesWidget: bottomTitles,
+            ),
+          ),
+          leftTitles: AxisTitles(
+            sideTitles: SideTitles(
+              showTitles: true,
+              reservedSize: 40,
+              getTitlesWidget: leftTitles,
+            ),
+          ),
+          topTitles: const AxisTitles(
+            sideTitles: SideTitles(showTitles: false),
+          ),
+          rightTitles: const AxisTitles(
+            sideTitles: SideTitles(showTitles: false),
+          ),
+        ),
+        gridData: const FlGridData(
+          show: false,
+        ),
+        borderData: FlBorderData(
+          show: false,
+        ),
+        barGroups: getData(32.0, 20.0),
+      ),
+    );
+  }
+
+  List<BarChartGroupData> getData(double barsWidth, double barsSpace) {
+    final dateList = recipes
+        .map((recipe) => DateTime(
+            recipe.create.year, recipe.create.month, recipe.create.day))
+        .toSet();
+    final list = dateList
+        .map((date) =>
+            recipes.where((recipe) => isSameDay(recipe.create, date)).toList())
+        .toList();
+    return list.asMap().entries.map((entry) {
+      final rodData = generateRodData(entry.value);
+      return BarChartGroupData(
+        x: entry.key,
+        barsSpace: barsSpace,
+        barRods: [
+          BarChartRodData(
+              toY: maxCostInWeek(),
+              rodStackItems: rodData,
+              borderRadius: BorderRadius.zero,
+              width: barsWidth,
+              color: Colors.transparent),
+        ],
+      );
+    }).toList();
+  }
+
+  bool isSameDay(DateTime a, DateTime b) {
+    return a.difference(b).inDays == 0 && a.day == b.day;
+  }
+
+  double maxCostInWeek() {
+    final dateList = recipes
+        .map((recipe) => DateTime(
+            recipe.create.year, recipe.create.month, recipe.create.day))
+        .toSet();
+    final list = dateList
+        .map((date) =>
+            recipes.where((recipe) => isSameDay(recipe.create, date)).toList())
+        .map((items) => items.map((item) => item.cost))
+        .map((items) => items.reduce((a1, a2) => a1 + a2))
+        .toList();
+    return list.reduce(max);
+  }
+
+  List<BarChartRodStackItem> generateRodData(List<Recipe> items) {
+    final list = <BarChartRodStackItem>[];
+    if (items.isNotEmpty) {
+      final colors = [Colors.black, Colors.black12, Colors.black26];
+      var cost = 0.0;
+      for (final i in List.generate(items.length, (index) => index)) {
+        list.add(BarChartRodStackItem(cost, cost + items[i].cost, colors[i]));
+        cost += items[i].cost;
+      }
+    }
+    return list;
+  }
+}
