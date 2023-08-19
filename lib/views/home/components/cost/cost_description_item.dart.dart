@@ -36,7 +36,7 @@ class CostDescriptionItem extends StatelessWidget {
                   children: [
                     const Icon(Icons.currency_yen),
                     Text(
-                      value.toString(),
+                      value.toStringAsFixed(1),
                       textAlign: TextAlign.center,
                       style: const TextStyle(fontSize: 24.0),
                     )

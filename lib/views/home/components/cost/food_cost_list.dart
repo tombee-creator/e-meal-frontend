@@ -17,6 +17,7 @@ class FoodCostList extends StatelessWidget {
           final sum = data.isNotEmpty
               ? data.map((item) => item.cost).reduce((v1, v2) => v1 + v2)
               : 0.0;
+          final average = data.isNotEmpty ? sum / data.length : 0.0;
           return Column(
             children: [
               Row(
@@ -31,7 +32,7 @@ class FoodCostList extends StatelessWidget {
                   CostDescriptionItem(
                     icon: Icons.attach_money,
                     label: "毎食費の平均",
-                    value: sum / data.length,
+                    value: average,
                   ),
                 ],
               ),
