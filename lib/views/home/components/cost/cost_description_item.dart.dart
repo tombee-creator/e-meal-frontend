@@ -53,8 +53,8 @@ class CostDescriptionItem extends StatelessWidget {
       required String label,
       required double Function(List<Recipe> data) value}) {
     return CostDescriptionItem(
-      icon: Icons.calendar_month,
-      label: "今月の食費",
+      icon: icon,
+      label: label,
       value: data.isNotEmpty ? value(data) : 0.0,
     );
   }
