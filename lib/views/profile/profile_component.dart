@@ -35,7 +35,7 @@ class _ProfileComponentState extends State<ProfileComponent> {
       const TabBar(tabs: <Widget>[
         Tab(
             icon: Icon(
-          Icons.dinner_dining,
+          Icons.lunch_dining,
           color: Colors.black,
         )),
         Tab(
