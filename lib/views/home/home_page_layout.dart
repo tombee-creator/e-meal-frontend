@@ -6,12 +6,14 @@ class HomePageLayout extends StatefulWidget {
   final String title;
   final List<Widget> screens;
   final List<HomeMenuModel> menu;
+  final List<Widget> actions;
 
   const HomePageLayout(
       {super.key,
       required this.title,
       required this.menu,
-      required this.screens});
+      required this.screens,
+      required this.actions});
 
   @override
   State<StatefulWidget> createState() => HomePageLayoutState();
@@ -23,16 +25,18 @@ class HomePageLayoutState extends State<HomePageLayout> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text(widget.title),
-        ),
-        body: SafeArea(child: widget.screens[current]),
-        bottomNavigationBar: HomeButtonList(
-          menu: widget.menu,
-          selected: current,
-          onTap: onTap,
-        ),
-        resizeToAvoidBottomInset: false);
+      appBar: AppBar(
+        title: Text(widget.title),
+        actions: [widget.actions[current]],
+      ),
+      body: SafeArea(child: widget.screens[current]),
+      bottomNavigationBar: HomeButtonList(
+        menu: widget.menu,
+        selected: current,
+        onTap: onTap,
+      ),
+      resizeToAvoidBottomInset: false,
+    );
   }
 
   void onTap(selected) {
