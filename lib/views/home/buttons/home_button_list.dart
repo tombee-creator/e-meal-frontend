@@ -19,6 +19,7 @@ class HomeButtonList extends StatelessWidget {
             BottomNavigationBarItem(icon: Icon(item.icon), label: item.label))
         .toList();
     return BottomNavigationBar(
+      type: BottomNavigationBarType.fixed,
       items: items,
       currentIndex: selected,
       onTap: onTap,
