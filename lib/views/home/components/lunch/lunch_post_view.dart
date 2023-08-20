@@ -2,17 +2,17 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:emeal_app/helper/image_picker_provider.dart';
-import 'package:emeal_app/views/home/components/post/recipe_field_form.dart';
-import 'package:emeal_app/views/home/components/post/recipe_post_button.dart';
+import 'package:emeal_app/views/home/components/lunch/recipe_field_form.dart';
+import 'package:emeal_app/views/home/components/lunch/recipe_post_button.dart';
 
-class PostView extends StatefulWidget {
-  const PostView({super.key});
+class LunchPostView extends StatefulWidget {
+  const LunchPostView({super.key});
 
   @override
-  State<StatefulWidget> createState() => _PostViewState();
+  State<StatefulWidget> createState() => _LunchPostViewState();
 }
 
-class _PostViewState extends State<PostView> {
+class _LunchPostViewState extends State<LunchPostView> {
   double cost = 0.0;
   String comment = "";
   File? image;
