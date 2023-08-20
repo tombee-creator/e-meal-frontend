@@ -1,5 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:tsumitabe_app/models/converters/user_converter.dart';
+import 'package:emeal_app/models/converters/user_converter.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'recipe.g.dart';
@@ -17,12 +17,12 @@ class Recipe {
 
   final double cost;
 
-  final DateTime create;
+  final DateTime created;
 
-  final DateTime update;
+  final DateTime updated;
 
-  Recipe(this.id, this.user, this.comment, this.url, this.cost, this.create,
-      this.update);
+  Recipe(this.id, this.user, this.comment, this.url, this.cost, this.created,
+      this.updated);
 
   factory Recipe.fromJson(Map<String, dynamic> json) => _$RecipeFromJson(json);
 

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tsumitabe_app/helper/cache_provider.dart';
+import 'package:emeal_app/helper/cache_provider.dart';
 
 class ImageHelper {
   static Widget image(String url) => FutureBuilder(

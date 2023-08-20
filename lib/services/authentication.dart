@@ -37,7 +37,7 @@ class Authentication {
 
   Future<UserCredential> signup(
       String email, String password1, String password2) async {
-    if (password1 == password2) {
+    if (password1 != password2) {
       throw UnsupportedError("パスワードが一致していません");
     }
     return await FirebaseAuth.instance

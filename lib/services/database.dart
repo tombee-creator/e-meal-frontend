@@ -1,4 +1,4 @@
-import 'package:tsumitabe_app/helper/crud_api_provider.dart';
+import 'package:emeal_app/helper/crud_api_provider.dart';
 
 class Database extends CrudAPIProvider {
   Database? _instance;

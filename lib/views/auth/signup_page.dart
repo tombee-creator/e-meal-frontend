@@ -2,9 +2,9 @@ import 'dart:ui';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:tsumitabe_app/services/authentication.dart';
-import 'package:tsumitabe_app/views/auth/authenticate_input_widget.dart';
-import 'package:tsumitabe_app/views/helper/image/image_helper.dart';
+import 'package:emeal_app/services/authentication.dart';
+import 'package:emeal_app/views/auth/authenticate_input_widget.dart';
+import 'package:emeal_app/views/helper/image/image_helper.dart';
 
 import '../../resource/resource.dart';
 

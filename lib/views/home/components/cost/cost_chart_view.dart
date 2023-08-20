@@ -2,7 +2,7 @@ import 'dart:math';
 
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:tsumitabe_app/models/recipe.dart';
+import 'package:emeal_app/models/recipe.dart';
 
 class CostChartView extends StatelessWidget {
   final List<Recipe> recipes;
@@ -104,7 +104,7 @@ class CostChartView extends StatelessWidget {
             .toList();
     final list = dateList
         .map((date) =>
-            recipes.where((recipe) => isSameDay(recipe.create, date)).toList())
+            recipes.where((recipe) => isSameDay(recipe.created, date)).toList())
         .toList();
     return list.asMap().entries.map((entry) {
       final rodData = generateRodData(entry.value);
@@ -130,11 +130,11 @@ class CostChartView extends StatelessWidget {
   double maxCostInWeek() {
     final dateList = recipes
         .map((recipe) => DateTime(
-            recipe.create.year, recipe.create.month, recipe.create.day))
+            recipe.created.year, recipe.created.month, recipe.created.day))
         .toSet();
     final list = dateList
         .map((date) =>
-            recipes.where((recipe) => isSameDay(recipe.create, date)).toList())
+            recipes.where((recipe) => isSameDay(recipe.created, date)).toList())
         .map((items) => items.map((item) => item.cost))
         .map((items) => items.reduce((a1, a2) => a1 + a2))
         .toList();

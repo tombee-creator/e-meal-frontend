@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:tsumitabe_app/helper/crud_api.dart';
+import 'package:emeal_app/helper/crud_api.dart';
 
 class FirestoreCRUDApi<T> implements CRUDApi<T> {
   final String collection;

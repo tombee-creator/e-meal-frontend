@@ -1,5 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:tsumitabe_app/services/authentication.dart';
+import 'package:emeal_app/services/authentication.dart';
 
 class UserConverter {
   const UserConverter();

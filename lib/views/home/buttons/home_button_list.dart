@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tsumitabe_app/models/home_menu_model.dart';
+import 'package:emeal_app/models/home_menu_model.dart';
 
 class HomeButtonList extends StatelessWidget {
   final List<HomeMenuModel> menu;

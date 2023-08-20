@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:tsumitabe_app/models/recipe.dart';
-import 'package:tsumitabe_app/services/authentication.dart';
-import 'package:tsumitabe_app/services/database.dart';
-import 'package:tsumitabe_app/services/firestore_crud_api.dart';
-import 'package:tsumitabe_app/views/common/avatar.dart';
-import 'package:tsumitabe_app/views/home/components/cost/food_cost_description_view.dart';
-import 'package:tsumitabe_app/views/home/components/recipe/recipe_list_view.dart';
-import 'package:tsumitabe_app/views/common/icon_size.dart';
-import 'package:tsumitabe_app/views/profile/top_profile_item_component.dart';
+import 'package:emeal_app/models/recipe.dart';
+import 'package:emeal_app/services/authentication.dart';
+import 'package:emeal_app/services/database.dart';
+import 'package:emeal_app/services/firestore_crud_api.dart';
+import 'package:emeal_app/views/common/avatar.dart';
+import 'package:emeal_app/views/home/components/cost/food_cost_description_view.dart';
+import 'package:emeal_app/views/home/components/recipe/recipe_list_view.dart';
+import 'package:emeal_app/views/common/icon_size.dart';
+import 'package:emeal_app/views/profile/top_profile_item_component.dart';
 
 class ProfileComponent extends StatefulWidget {
   const ProfileComponent({super.key});
@@ -52,9 +52,9 @@ class _ProfileComponentState extends State<ProfileComponent> {
         child: TabBarView(children: [
       RecipeListView(
           future: api.list(
-              query: (ref) => ref.orderBy("create", descending: true))),
+              query: (ref) => ref.orderBy("created", descending: true))),
       FoodCostDescriptionView(
-          future: api.list(query: (ref) => ref.orderBy("create"))),
+          future: api.list(query: (ref) => ref.orderBy("created"))),
     ])));
 
     return DefaultTabController(

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:tsumitabe_app/models/recipe.dart';
-import 'package:tsumitabe_app/services/database.dart';
-import 'package:tsumitabe_app/services/firestore_crud_api.dart';
-import 'package:tsumitabe_app/views/home/components/cost/cost_chart_view.dart';
+import 'package:emeal_app/models/recipe.dart';
+import 'package:emeal_app/services/database.dart';
+import 'package:emeal_app/services/firestore_crud_api.dart';
+import 'package:emeal_app/views/home/components/cost/cost_chart_view.dart';
 
 class CostChartControllerView extends StatefulWidget {
   const CostChartControllerView({super.key});
@@ -44,10 +44,10 @@ class _CostChartControllerViewState extends State<CostChartControllerView> {
             child: FutureBuilder(
           future: api.list(
               query: (ref) => ref
-                  .where("create",
+                  .where("created",
                       isGreaterThan: startDate.toIso8601String(),
                       isLessThanOrEqualTo: focusDate.toIso8601String())
-                  .orderBy("create")),
+                  .orderBy("created")),
           builder: (context, snapshot) {
             final recipes = snapshot.data;
             if (recipes == null) {

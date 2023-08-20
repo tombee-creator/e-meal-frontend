@@ -12,8 +12,8 @@ Recipe _$RecipeFromJson(Map<String, dynamic> json) => Recipe(
       json['comment'] as String,
       json['url'] as String,
       (json['cost'] as num).toDouble(),
-      DateTime.parse(json['create'] as String),
-      DateTime.parse(json['update'] as String),
+      DateTime.parse(json['created'] as String),
+      DateTime.parse(json['updated'] as String),
     );
 
 Map<String, dynamic> _$RecipeToJson(Recipe instance) => <String, dynamic>{
@@ -22,6 +22,6 @@ Map<String, dynamic> _$RecipeToJson(Recipe instance) => <String, dynamic>{
       'comment': instance.comment,
       'url': instance.url,
       'cost': instance.cost,
-      'create': instance.create.toIso8601String(),
-      'update': instance.update.toIso8601String(),
+      'created': instance.created.toIso8601String(),
+      'updated': instance.updated.toIso8601String(),
     };

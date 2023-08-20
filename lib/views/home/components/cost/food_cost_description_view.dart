@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:tsumitabe_app/models/recipe.dart';
-import 'package:tsumitabe_app/views/home/components/cost/cost_chart_controller.dart';
-import 'package:tsumitabe_app/views/home/components/cost/cost_description_item.dart.dart';
+import 'package:emeal_app/models/recipe.dart';
+import 'package:emeal_app/views/home/components/cost/cost_chart_controller.dart';
+import 'package:emeal_app/views/home/components/cost/cost_description_item.dart.dart';
 
 class FoodCostDescriptionView extends StatelessWidget {
   final Future<List<Recipe>> future;

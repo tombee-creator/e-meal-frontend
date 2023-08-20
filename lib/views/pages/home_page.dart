@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:tsumitabe_app/views/home/components/home_component.dart';
-import 'package:tsumitabe_app/views/home/components/post/post_view.dart';
-import 'package:tsumitabe_app/views/profile/profile_component.dart';
-import 'package:tsumitabe_app/views/home/home_page_layout.dart';
+import 'package:emeal_app/views/home/components/home_component.dart';
+import 'package:emeal_app/views/home/components/post/post_view.dart';
+import 'package:emeal_app/views/profile/profile_component.dart';
+import 'package:emeal_app/views/home/home_page_layout.dart';
 
 import '../../models/home_menu_model.dart';
 

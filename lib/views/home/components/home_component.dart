@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:tsumitabe_app/models/recipe.dart';
-import 'package:tsumitabe_app/services/database.dart';
-import 'package:tsumitabe_app/services/firestore_crud_api.dart';
-import 'package:tsumitabe_app/views/home/components/recipe/recipe_list_view.dart';
+import 'package:emeal_app/models/recipe.dart';
+import 'package:emeal_app/services/database.dart';
+import 'package:emeal_app/services/firestore_crud_api.dart';
+import 'package:emeal_app/views/home/components/recipe/recipe_list_view.dart';
 
 class HomeComponent extends StatefulWidget {
   const HomeComponent({super.key});
@@ -19,6 +19,6 @@ class _HomeComponentState extends State<HomeComponent> {
 
     return RecipeListView(
         future:
-            api.list(query: (ref) => ref.orderBy("create", descending: true)));
+            api.list(query: (ref) => ref.orderBy("created", descending: true)));
   }
 }

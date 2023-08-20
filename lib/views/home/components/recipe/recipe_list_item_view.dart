@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:tsumitabe_app/models/recipe.dart';
-import 'package:tsumitabe_app/views/helper/image/image_helper.dart';
-import 'package:tsumitabe_app/views/pages/recipe_page.dart';
+import 'package:emeal_app/models/recipe.dart';
+import 'package:emeal_app/views/helper/image/image_helper.dart';
+import 'package:emeal_app/views/pages/recipe_page.dart';
 
 class RecipeListItemView extends StatelessWidget {
   final Recipe recipe;
