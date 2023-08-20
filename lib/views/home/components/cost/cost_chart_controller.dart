@@ -26,6 +26,8 @@ class _CostChartControllerViewState extends State<CostChartControllerView> {
         .provider(FirestoreCRUDApi<Recipe>("recipes", Recipe.fromJson));
     final startDate =
         DateTime(focusDate.year, focusDate.month, focusDate.day - 7);
+    final endDate =
+        DateTime(focusDate.year, focusDate.month, focusDate.day, 23, 59, 59);
     return Row(
       children: [
         SizedBox(
@@ -46,7 +48,7 @@ class _CostChartControllerViewState extends State<CostChartControllerView> {
               query: (ref) => ref
                   .where("created",
                       isGreaterThan: startDate.toIso8601String(),
-                      isLessThanOrEqualTo: focusDate.toIso8601String())
+                      isLessThanOrEqualTo: endDate.toIso8601String())
                   .orderBy("created")),
           builder: (context, snapshot) {
             final recipes = snapshot.data;
