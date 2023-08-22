@@ -9,12 +9,10 @@ class MealPrepsComponent extends StatefulWidget {
   const MealPrepsComponent({super.key, required this.pageState});
 
   @override
-  State<StatefulWidget> createState() => _MealPrepsComponentState();
-
-  icon() => IconButton(onPressed: () {}, icon: const Icon(Icons.list));
+  State<StatefulWidget> createState() => MealPrepsComponentState();
 }
 
-class _MealPrepsComponentState extends State<MealPrepsComponent> {
+class MealPrepsComponentState extends State<MealPrepsComponent> {
   @override
   Widget build(BuildContext context) {
     if (widget.pageState == PageState.list) {
@@ -23,4 +21,22 @@ class _MealPrepsComponentState extends State<MealPrepsComponent> {
       return const MealPrepListComponent();
     }
   }
+
+  // void toggle() {
+  //   setState(() {
+  //     if (pageState == PageState.post) {
+  //       pageState = PageState.list;
+  //     } else {
+  //       pageState = PageState.post;
+  //     }
+  //   });
+  // }
+
+  // IconData icon() {
+  //   if (pageState == PageState.list) {
+  //     return Icons.post_add;
+  //   } else {
+  //     return Icons.list;
+  //   }
+  // }
 }

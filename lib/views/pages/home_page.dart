@@ -1,4 +1,5 @@
 import 'package:emeal_app/models/home_menu_model.dart';
+import 'package:emeal_app/views/home/components/materials/materials_view.dart';
 import 'package:emeal_app/views/home/components/meal_preps/meal_preps_component.dart';
 import 'package:emeal_app/views/home/components/lunch/lunch_view.dart';
 import 'package:flutter/material.dart';
@@ -14,11 +15,11 @@ class HomePage extends StatefulWidget {
   const HomePage({super.key, required this.title});
 
   @override
-  State<StatefulWidget> createState() => _HomePageState();
+  State<StatefulWidget> createState() => HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
-  PageState pageState = PageState.post;
+class HomePageState extends State<HomePage> {
+  var pageState = PageState.post;
 
   @override
   Widget build(BuildContext context) {
@@ -26,26 +27,31 @@ class _HomePageState extends State<HomePage> {
       title: "e-Meal",
       menu: [
         HomeMenuModel("ホーム", Icons.home_filled),
-        HomeMenuModel("作り置き管理", Icons.inventory),
-        HomeMenuModel("食事管理", Icons.lunch_dining),
+        HomeMenuModel("食材", Icons.food_bank),
+        HomeMenuModel("食材", Icons.food_bank),
+        HomeMenuModel("食材", Icons.food_bank),
         HomeMenuModel("プロフィール", Icons.person)
       ],
       screens: <Widget>[
         const HomeComponent(),
+        MaterialsView(pageState: pageState),
         MealPrepsComponent(pageState: pageState),
         LunchView(pageState: pageState),
         const ProfileComponent()
       ],
       actions: [
         IconButton(onPressed: logout, icon: const Icon(Icons.logout)),
-        IconButton(onPressed: togglePageState, icon: Icon(icon())),
-        IconButton(onPressed: togglePageState, icon: Icon(icon())),
+        IconButton(onPressed: toggle, icon: Icon(icon())),
+        IconButton(onPressed: toggle, icon: Icon(icon())),
+        IconButton(onPressed: toggle, icon: Icon(icon())),
         IconButton(onPressed: logout, icon: const Icon(Icons.logout)),
       ],
     );
   }
 
-  void togglePageState() {
+  void logout() {}
+
+  void toggle() {
     setState(() {
       if (pageState == PageState.post) {
         pageState = PageState.list;
@@ -56,12 +62,11 @@ class _HomePageState extends State<HomePage> {
   }
 
   IconData icon() {
-    if (pageState == PageState.list) {
+    final state = pageState;
+    if (state == PageState.list) {
       return Icons.post_add;
     } else {
       return Icons.list;
     }
   }
-
-  void logout() {}
 }

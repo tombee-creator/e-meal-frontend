@@ -19,45 +19,59 @@ class _LunchPostViewState extends State<LunchPostView> {
 
   @override
   Widget build(BuildContext context) {
-    final imageWidget = image == null
+    final src = image;
+    final imageWidget = src == null
         ? const Icon(Icons.camera)
-        : Image.file(image!, fit: BoxFit.cover);
+        : Image.file(src, fit: BoxFit.cover);
     return Column(
       children: [
-        Center(
-          child: AspectRatio(
-              aspectRatio: 1.0,
+        Expanded(
+          flex: 5,
+          child: Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: Center(
               child: GestureDetector(
                   onTap: () async {
                     getImage();
                   },
-                  child: imageWidget)),
+                  child: AspectRatio(
+                    aspectRatio: 1.0,
+                    child: imageWidget,
+                  )),
+            ),
+          ),
         ),
-        RecipeFieldForm(
-          hintText: "コメント",
-          icon: Icons.description,
-          onChange: (comment) {
-            setState(() {
-              this.comment = comment;
-            });
-          },
-        ),
-        RecipeFieldForm(
-          hintText: "コスト",
-          icon: Icons.currency_yen,
-          onChange: (cost) {
-            final parsedCost = double.tryParse(cost) ?? 0.0;
-            setState(() {
-              this.cost = parsedCost;
-            });
-          },
-        ),
-        const Spacer(),
-        RecipePostButton(
-          comment: comment,
-          image: image,
-          cost: cost,
-        )
+        Expanded(
+            flex: 3,
+            child: Column(
+              children: [
+                RecipeFieldForm(
+                  hintText: "コメント",
+                  icon: Icons.description,
+                  onChange: (comment) {
+                    setState(() {
+                      this.comment = comment;
+                    });
+                  },
+                ),
+                RecipeFieldForm(
+                  hintText: "コスト",
+                  icon: Icons.currency_yen,
+                  onChange: (cost) {
+                    final parsedCost = double.tryParse(cost) ?? 0.0;
+                    setState(() {
+                      this.cost = parsedCost;
+                    });
+                  },
+                ),
+                const Spacer(),
+                RecipePostButton(
+                  comment: comment,
+                  image: image,
+                  cost: cost,
+                )
+              ],
+            ))
       ],
     );
   }
