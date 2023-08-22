@@ -16,40 +16,38 @@ class FoodCostDescriptionView extends StatelessWidget {
           final data = snapshot.data ?? [];
           return Column(
             children: [
-              Padding(
-                padding: const EdgeInsets.all(12.0),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    CostDescriptionItem.generate(
-                      data: data,
-                      icon: Icons.calendar_month,
-                      label: "今月の食費",
-                      value: (data) => data
-                          .map((item) => item.cost)
-                          .reduce((v1, v2) => v1 + v2),
-                    ),
-                    CostDescriptionItem.generate(
-                      data: data,
-                      icon: Icons.attach_money,
-                      label: "毎食費の平均",
-                      value: (data) =>
-                          data
-                              .map((item) => item.cost)
-                              .reduce((v1, v2) => v1 + v2) /
-                          data.length,
-                    ),
-                  ],
-                ),
+              const Text("今月の食費"),
+              const Divider(),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  CostDescriptionItem.generate(
+                    data: data,
+                    icon: Icons.calendar_month,
+                    label: "今月の食費",
+                    value: (data) => data
+                        .map((item) => item.cost)
+                        .reduce((v1, v2) => v1 + v2),
+                  ),
+                  CostDescriptionItem.generate(
+                    data: data,
+                    icon: Icons.attach_money,
+                    label: "毎食費の平均",
+                    value: (data) =>
+                        data
+                            .map((item) => item.cost)
+                            .reduce((v1, v2) => v1 + v2) /
+                        data.length,
+                  ),
+                ],
               ),
               const Expanded(
-                  flex: 2,
+                  flex: 3,
                   child: Padding(
                     padding: EdgeInsets.all(12.0),
                     child: CostChartControllerView(),
                   )),
-              Expanded(flex: 1, child: Container()),
             ],
           );
         }));

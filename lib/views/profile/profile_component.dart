@@ -5,7 +5,6 @@ import 'package:emeal_app/services/database.dart';
 import 'package:emeal_app/services/firestore_crud_api.dart';
 import 'package:emeal_app/views/common/avatar.dart';
 import 'package:emeal_app/views/home/components/cost/food_cost_description_view.dart';
-import 'package:emeal_app/views/home/components/recipe/recipe_list_view.dart';
 import 'package:emeal_app/views/common/icon_size.dart';
 import 'package:emeal_app/views/profile/top_profile_item_component.dart';
 
@@ -28,43 +27,27 @@ class _ProfileComponentState extends State<ProfileComponent> {
     }
 
     final list = <Widget>[];
-    list.add(Padding(
-        padding: const EdgeInsets.all(10.0),
-        child: createTopRowProfile(context, userEmail, userPhotoUrl)));
-    list.add(
-      const TabBar(tabs: <Widget>[
-        Tab(
-            icon: Icon(
-          Icons.lunch_dining,
-          color: Colors.black,
-        )),
-        Tab(
-            icon: Icon(
-          Icons.money,
-          color: Colors.black,
-        ))
-      ]),
-    );
-
+    list.add(Expanded(
+        flex: 2,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            topProfile(context, userEmail, userPhotoUrl),
+          ],
+        )));
     final api = Database()
         .provider(FirestoreCRUDApi<Recipe>("recipes", Recipe.fromJson));
     list.add(Expanded(
-        child: TabBarView(children: [
-      RecipeListView(
-          future: api.list(
-              query: (ref) => ref.orderBy("created", descending: true))),
-      FoodCostDescriptionView(
+      flex: 3,
+      child: FoodCostDescriptionView(
           future: api.list(query: (ref) => ref.orderBy("created"))),
-    ])));
-
-    return DefaultTabController(
-        length: 2,
-        child: Column(
-          children: list,
-        ));
+    ));
+    return Column(
+      children: list,
+    );
   }
 
-  Widget createTopRowProfile(
+  Widget topProfile(
       BuildContext context, String userEmail, String? userPhotoUrl) {
     final items = <Widget>[];
     items.add(Stack(
@@ -76,7 +59,6 @@ class _ProfileComponentState extends State<ProfileComponent> {
             child: Icon(Icons.add_circle_outline_outlined)),
       ],
     ));
-    items.add(const Spacer());
     items.add(const IntrinsicWidth(
       child: Row(
         children: [
@@ -87,8 +69,7 @@ class _ProfileComponentState extends State<ProfileComponent> {
         ],
       ),
     ));
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
+    return Column(
       children: items,
     );
   }
