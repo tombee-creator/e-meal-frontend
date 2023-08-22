@@ -1,3 +1,4 @@
+import 'package:emeal_app/generated/l10n.dart';
 import 'package:emeal_app/models/home_menu_model.dart';
 import 'package:emeal_app/views/home/components/materials/materials_view.dart';
 import 'package:emeal_app/views/home/components/meal_preps/meal_preps_component.dart';
@@ -25,24 +26,38 @@ class HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return HomePageLayout(
       title: "e-Meal",
+      tabCount: 3,
+      bottoms: const [
+        null,
+        TabBar(tabs: [
+          Tab(
+            icon: Icon(Icons.inventory),
+          ),
+          Tab(
+            icon: Icon(Icons.archive),
+          ),
+          Tab(
+            icon: Icon(Icons.lunch_dining),
+          ),
+        ]),
+        null
+      ],
       menu: [
-        HomeMenuModel("ホーム", Icons.home_filled),
-        HomeMenuModel("食材", Icons.food_bank),
-        HomeMenuModel("食材", Icons.food_bank),
-        HomeMenuModel("食材", Icons.food_bank),
-        HomeMenuModel("プロフィール", Icons.person)
+        HomeMenuModel(S.of(context).home_menu_button_HOME, Icons.home_filled),
+        HomeMenuModel(S.of(context).home_menu_button_COST, Icons.food_bank),
+        HomeMenuModel(S.of(context).home_menu_button_PROFILE, Icons.person)
       ],
       screens: <Widget>[
         const HomeComponent(),
-        MaterialsView(pageState: pageState),
-        MealPrepsComponent(pageState: pageState),
-        LunchView(pageState: pageState),
+        TabBarView(children: [
+          MaterialsView(pageState: pageState),
+          MealPrepsComponent(pageState: pageState),
+          LunchView(pageState: pageState),
+        ]),
         const ProfileComponent()
       ],
       actions: [
         IconButton(onPressed: logout, icon: const Icon(Icons.logout)),
-        IconButton(onPressed: toggle, icon: Icon(icon())),
-        IconButton(onPressed: toggle, icon: Icon(icon())),
         IconButton(onPressed: toggle, icon: Icon(icon())),
         IconButton(onPressed: logout, icon: const Icon(Icons.logout)),
       ],

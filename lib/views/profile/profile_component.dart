@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:emeal_app/models/recipe.dart';
 import 'package:emeal_app/services/authentication.dart';
-import 'package:emeal_app/services/database.dart';
-import 'package:emeal_app/services/firestore_crud_api.dart';
 import 'package:emeal_app/views/common/avatar.dart';
 import 'package:emeal_app/views/home/components/cost/food_cost_description_view.dart';
 import 'package:emeal_app/views/common/icon_size.dart';
@@ -35,12 +32,9 @@ class _ProfileComponentState extends State<ProfileComponent> {
             topProfile(context, userEmail, userPhotoUrl),
           ],
         )));
-    final api = Database()
-        .provider(FirestoreCRUDApi<Recipe>("recipes", Recipe.fromJson));
-    list.add(Expanded(
+    list.add(const Expanded(
       flex: 3,
-      child: FoodCostDescriptionView(
-          future: api.list(query: (ref) => ref.orderBy("created"))),
+      child: FoodCostDescriptionView(),
     ));
     return Column(
       children: list,

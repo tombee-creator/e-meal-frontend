@@ -1,22 +1,37 @@
+import 'package:emeal_app/services/database.dart';
+import 'package:emeal_app/services/firestore_crud_api.dart';
+import 'package:emeal_app/views/helper/utils/datetime_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:emeal_app/models/recipe.dart';
 import 'package:emeal_app/views/home/components/cost/cost_chart_controller.dart';
 import 'package:emeal_app/views/home/components/cost/cost_description_item.dart.dart';
 
-class FoodCostDescriptionView extends StatelessWidget {
-  final Future<List<Recipe>> future;
+class FoodCostDescriptionView extends StatefulWidget {
+  const FoodCostDescriptionView({super.key});
 
-  const FoodCostDescriptionView({super.key, required this.future});
+  @override
+  State<StatefulWidget> createState() => _FoodCostDescriptionViewState();
+}
+
+class _FoodCostDescriptionViewState extends State<FoodCostDescriptionView> {
+  DateTime focus = DateTime.now();
 
   @override
   Widget build(BuildContext context) {
+    final api = Database()
+        .provider(FirestoreCRUDApi<Recipe>("recipes", Recipe.fromJson));
+    final start = DateTime(focus.year, focus.month, 1);
+    final end = DateTime(focus.year, focus.month + 1, 1);
     return FutureBuilder(
-        future: future,
+        future: api.list(
+            query: (ref) => ref.where("created",
+                isGreaterThanOrEqualTo: start.toIso8601String(),
+                isLessThanOrEqualTo: end.toIso8601String())),
         builder: ((context, snapshot) {
           final data = snapshot.data ?? [];
           return Column(
             children: [
-              const Text("今月の食費"),
+              Text("${focus.toFormattedString(format: "yyyy/MM")}の食費"),
               const Divider(),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
