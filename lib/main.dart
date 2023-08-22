@@ -1,9 +1,13 @@
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:emeal_app/generated/l10n.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/date_symbol_data_local.dart';
 import 'package:emeal_app/views/routes/api_router.dart';
 import 'package:emeal_app/services/authentication.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await initializeDateFormatting("ja_JP");
   await Authentication().initialize();
   runApp(const MyApp());
 }
@@ -11,10 +15,16 @@ Future<void> main() async {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      localizationsDelegates: const [
+        S.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: S.delegate.supportedLocales,
       title: 'e-Meal',
       theme: ThemeData(primarySwatch: Colors.teal),
       onGenerateRoute: ApiRouter().generateRoute,
