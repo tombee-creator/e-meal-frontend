@@ -14,8 +14,8 @@ class HomeComponent extends StatefulWidget {
 class _HomeComponentState extends State<HomeComponent> {
   @override
   Widget build(BuildContext context) {
-    final api =
-        Database().provider(FirestoreCRUDApi<Meal>("recipes", Meal.fromJson));
+    final api = Database()
+        .provider(FirestoreCRUDApi<Meal>(Meal.collection, Meal.fromJson));
 
     return RecipeListView(
         future: api.list(
