@@ -18,8 +18,8 @@ class MealView extends StatefulWidget {
 class MealViewState extends State<MealView> {
   @override
   Widget build(BuildContext context) {
-    final api =
-        Database().provider<Meal>(FirestoreCRUDApi("recipes", Meal.fromJson));
+    final api = Database()
+        .provider<Meal>(FirestoreCRUDApi(Meal.collection, Meal.fromJson));
     return Stack(
       children: [
         FutureBuilder(

@@ -10,6 +10,7 @@ class MealListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView(
+      padding: const EdgeInsets.all(12.0),
       children: meals
           .map((recipe) => SizedBox(
                 height: 120,
