@@ -1,4 +1,5 @@
 import 'package:emeal_app/views/pages/ingredient_page.dart';
+import 'package:emeal_app/views/pages/meal_preps_page.dart';
 import 'package:flutter/material.dart';
 import 'package:emeal_app/services/authentication.dart';
 import 'package:emeal_app/views/auth/login_page.dart';
@@ -34,7 +35,7 @@ class ApiRouter {
         );
       case prep:
         return MaterialPageRoute(
-          builder: (_) => const IngredientPage(title: "e-Meal"),
+          builder: (_) => const MealPrepsPage(title: "e-Meal"),
         );
       case ingredient:
         return MaterialPageRoute(

@@ -1,6 +1,6 @@
 import 'package:emeal_app/views/home/components/ingredient/ingredient_view.dart';
+import 'package:emeal_app/views/home/components/meal-preps/meal_preps_view.dart';
 import 'package:emeal_app/views/home/components/meal/meal_view.dart';
-import 'package:emeal_app/views/home/components/meal_preps/meal_preps_component.dart';
 import 'package:flutter/material.dart';
 
 class MealTabBarView extends StatefulWidget {
@@ -18,18 +18,22 @@ class _MealTabBarViewState extends State<MealTabBarView> {
       children: [
         const TabBarView(children: [
           IngredientView(),
-          MealPrepsComponent(),
+          MealPrepView(),
           MealView(),
         ]),
         Positioned(
             right: 20.0,
             bottom: 20.0,
-            child: FloatingActionButton(
-              child: const Icon(Icons.post_add),
-              onPressed: () {
-                Navigator.of(context)
-                    .pushNamed(links[DefaultTabController.of(context).index]);
-              },
+            child: SizedBox(
+              width: 64,
+              height: 64,
+              child: FloatingActionButton(
+                child: const Icon(Icons.post_add),
+                onPressed: () {
+                  Navigator.of(context)
+                      .pushNamed(links[DefaultTabController.of(context).index]);
+                },
+              ),
             ))
       ],
     );
