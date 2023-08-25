@@ -26,7 +26,7 @@ class _LunchPostViewState extends State<LunchPostView> {
     return Column(
       children: [
         Expanded(
-          flex: 5,
+          flex: 2,
           child: Padding(
             padding: const EdgeInsets.all(12.0),
             child: Center(
@@ -42,7 +42,7 @@ class _LunchPostViewState extends State<LunchPostView> {
           ),
         ),
         Expanded(
-            flex: 3,
+            flex: 2,
             child: Column(
               children: [
                 RecipeFieldForm(
