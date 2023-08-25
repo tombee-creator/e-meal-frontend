@@ -1,12 +1,12 @@
+import 'package:emeal_app/views/home/components/meal-grid/meal_list_grid_item_view.dart';
+import 'package:emeal_app/views/home/components/meal-grid/meal_loading_view.dart';
 import 'package:flutter/material.dart';
 import 'package:emeal_app/models/meal.dart';
-import 'package:emeal_app/views/home/components/recipe/recipe_list_item_view.dart';
-import 'package:emeal_app/views/home/components/recipe/recipe_loading_view.dart';
 
-class RecipeListView extends StatelessWidget {
+class MealListGridView extends StatelessWidget {
   final Future<List<Meal>> future;
 
-  const RecipeListView({super.key, required this.future});
+  const MealListGridView({super.key, required this.future});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +18,7 @@ class RecipeListView extends StatelessWidget {
             return GridView.count(
                 crossAxisCount: 3,
                 children: List.generate(9, (index) => index)
-                    .map((index) => const RecipeLoadingView())
+                    .map((index) => const MealLoadingView())
                     .toList());
           }
           return GridView.count(
@@ -26,9 +26,8 @@ class RecipeListView extends StatelessWidget {
             crossAxisCount: 3,
             mainAxisSpacing: 2.0,
             crossAxisSpacing: 2.0,
-            children: data
-                .map((recipe) => RecipeListItemView(recipe: recipe))
-                .toList(),
+            children:
+                data.map((meal) => MealListGridItemView(meal: meal)).toList(),
           );
         }));
   }

@@ -4,7 +4,6 @@ import 'package:emeal_app/models/meal.dart';
 import 'package:emeal_app/services/database.dart';
 import 'package:emeal_app/services/firestore_crud_api.dart';
 import 'package:emeal_app/views/home/components/meal/meal_detail_view.dart';
-import 'package:emeal_app/views/home/components/recipe/recipe_loading_view.dart';
 
 class MealPage extends StatelessWidget {
   final String title;
@@ -37,7 +36,9 @@ class MealPage extends StatelessWidget {
                 builder: ((context, snapshot) {
                   final recipe = snapshot.data;
                   if (recipe == null) {
-                    return const RecipeLoadingView();
+                    return const Center(
+                      child: Text("ロード中"),
+                    );
                   }
                   return RecipeDetailView(recipe: recipe);
                 }))));

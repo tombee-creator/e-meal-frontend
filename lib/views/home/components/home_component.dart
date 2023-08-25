@@ -1,8 +1,8 @@
+import 'package:emeal_app/views/home/components/meal-grid/meal_list_grid_view.dart';
 import 'package:flutter/material.dart';
 import 'package:emeal_app/models/meal.dart';
 import 'package:emeal_app/services/database.dart';
 import 'package:emeal_app/services/firestore_crud_api.dart';
-import 'package:emeal_app/views/home/components/recipe/recipe_list_view.dart';
 
 class HomeComponent extends StatefulWidget {
   const HomeComponent({super.key});
@@ -17,7 +17,7 @@ class _HomeComponentState extends State<HomeComponent> {
     final api = Database()
         .provider(FirestoreCRUDApi<Meal>(Meal.collection, Meal.fromJson));
 
-    return RecipeListView(
+    return MealListGridView(
         future: api.list(
             query: (ref) =>
                 ref.orderBy("created", descending: true).limit(15)));

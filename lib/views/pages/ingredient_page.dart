@@ -4,7 +4,6 @@ import 'package:emeal_app/views/home/components/ingredient/ingredient_post_view.
 import 'package:flutter/material.dart';
 import 'package:emeal_app/services/database.dart';
 import 'package:emeal_app/services/firestore_crud_api.dart';
-import 'package:emeal_app/views/home/components/recipe/recipe_loading_view.dart';
 
 class IngredientPage extends StatelessWidget {
   final String title;
@@ -37,7 +36,9 @@ class IngredientPage extends StatelessWidget {
                 builder: ((context, snapshot) {
                   final ingredient = snapshot.data;
                   if (ingredient == null) {
-                    return const RecipeLoadingView();
+                    return const Center(
+                      child: Text("ロード中"),
+                    );
                   }
                   return IngredientDetailView(ingredient: ingredient);
                 }))));
