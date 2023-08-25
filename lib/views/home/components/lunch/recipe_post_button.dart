@@ -7,7 +7,7 @@ import 'package:emeal_app/services/authentication.dart';
 import 'package:emeal_app/services/database.dart';
 import 'package:emeal_app/services/firestore_crud_api.dart';
 
-enum ButtonState { WAITING, UPLOAD_IMAGE, POST_DATA, SUCCESS, FAILED }
+enum ButtonState { wating, uploadImage, postData, success, failed }
 
 class RecipePostButton extends StatefulWidget {
   final String comment;
@@ -27,11 +27,11 @@ class RecipePostButton extends StatefulWidget {
 class _RecipePostButtonState extends State<RecipePostButton> {
   String path = "";
   double progress = 0.0;
-  ButtonState state = ButtonState.WAITING;
+  ButtonState state = ButtonState.wating;
 
   bool get _isEnabled {
     return widget.image != null &&
-        state == ButtonState.WAITING &&
+        state == ButtonState.wating &&
         widget.comment.isNotEmpty &&
         widget.cost != 0.0;
   }
@@ -49,26 +49,28 @@ class _RecipePostButtonState extends State<RecipePostButton> {
   Widget getIcon() {
     return Container(
         child: switch (state) {
-      ButtonState.WAITING => const Icon(Icons.post_add),
-      ButtonState.UPLOAD_IMAGE => CircularProgressIndicator(value: progress),
-      ButtonState.POST_DATA => CircularProgressIndicator(),
-      ButtonState.SUCCESS => const Icon(Icons.check),
-      ButtonState.FAILED => const Icon(Icons.close)
+      ButtonState.wating => const Icon(Icons.post_add),
+      ButtonState.uploadImage => CircularProgressIndicator(value: progress),
+      ButtonState.postData => CircularProgressIndicator(),
+      ButtonState.success => const Icon(Icons.check),
+      ButtonState.failed => const Icon(Icons.close)
     });
   }
 
   Future postRecipe() async {
     setState(() {
-      state = ButtonState.UPLOAD_IMAGE;
+      state = ButtonState.uploadImage;
     });
     final url = await uploadImageFile();
     setState(() {
-      state = ButtonState.UPLOAD_IMAGE;
+      state = ButtonState.uploadImage;
     });
     await postRecipeData(url);
     setState(() {
-      state = ButtonState.SUCCESS;
+      state = ButtonState.success;
     });
+    Future.delayed(const Duration(seconds: 1))
+        .then((value) => Navigator.of(context).pop());
   }
 
   Future<String> uploadImageFile() async {

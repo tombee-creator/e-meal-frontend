@@ -1,9 +1,9 @@
+import 'package:emeal_app/views/home/components/lunch/lunch_post_view.dart';
 import 'package:flutter/material.dart';
 import 'package:emeal_app/models/recipe.dart';
 import 'package:emeal_app/services/database.dart';
 import 'package:emeal_app/services/firestore_crud_api.dart';
 import 'package:emeal_app/views/home/components/recipe/recipe_detail_view.dart';
-import 'package:emeal_app/views/home/components/recipe/recipe_list_view.dart';
 import 'package:emeal_app/views/home/components/recipe/recipe_loading_view.dart';
 
 class RecipePage extends StatelessWidget {
@@ -20,11 +20,11 @@ class RecipePage extends StatelessWidget {
     if (id == null) {
       return Scaffold(
           appBar: AppBar(
-            title: Text(title),
+            title: const Text("投稿"),
           ),
-          body: RecipeListView(
-              future: api.list(
-                  query: (ref) => ref.orderBy("create", descending: true))));
+          body: const SafeArea(
+            child: LunchPostView(),
+          ));
     }
 
     return Scaffold(
