@@ -1,12 +1,12 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'recipe.dart';
+part of 'meal.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-Recipe _$RecipeFromJson(Map<String, dynamic> json) => Recipe(
+Meal _$MealFromJson(Map<String, dynamic> json) => Meal(
       json['id'] as String,
       UserConverter.fromJson(json['user'] as String),
       json['comment'] as String,
@@ -16,7 +16,7 @@ Recipe _$RecipeFromJson(Map<String, dynamic> json) => Recipe(
       DateTime.parse(json['updated'] as String),
     );
 
-Map<String, dynamic> _$RecipeToJson(Recipe instance) => <String, dynamic>{
+Map<String, dynamic> _$MealToJson(Meal instance) => <String, dynamic>{
       'id': instance.id,
       'user': UserConverter.toJson(instance.user),
       'comment': instance.comment,

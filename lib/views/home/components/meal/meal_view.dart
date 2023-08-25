@@ -1,25 +1,25 @@
-import 'package:emeal_app/models/recipe.dart';
+import 'package:emeal_app/models/meal.dart';
 import 'package:emeal_app/services/authentication.dart';
 import 'package:emeal_app/services/database.dart';
 import 'package:emeal_app/services/firestore_crud_api.dart';
-import 'package:emeal_app/views/home/components/lunch/lunch_list_view.dart';
+import 'package:emeal_app/views/home/components/meal/meal_list_view.dart';
 import 'package:emeal_app/views/pages/home_page.dart';
 import 'package:flutter/material.dart';
 
-class LunchView extends StatefulWidget {
+class MealView extends StatefulWidget {
   final PageState pageState;
 
-  const LunchView({super.key, required this.pageState});
+  const MealView({super.key, required this.pageState});
 
   @override
-  State<StatefulWidget> createState() => LunchViewState();
+  State<StatefulWidget> createState() => MealViewState();
 }
 
-class LunchViewState extends State<LunchView> {
+class MealViewState extends State<MealView> {
   @override
   Widget build(BuildContext context) {
-    final api = Database()
-        .provider<Recipe>(FirestoreCRUDApi("recipes", Recipe.fromJson));
+    final api =
+        Database().provider<Meal>(FirestoreCRUDApi("recipes", Meal.fromJson));
     return Stack(
       children: [
         FutureBuilder(
@@ -35,7 +35,7 @@ class LunchViewState extends State<LunchView> {
                   child: Text("データを取得中です"),
                 );
               }
-              return LunchListView(recipes: data);
+              return MealListView(meals: data);
             })),
         Positioned(
             right: 20.0,
@@ -43,7 +43,7 @@ class LunchViewState extends State<LunchView> {
             child: FloatingActionButton(
               child: const Icon(Icons.post_add),
               onPressed: () {
-                Navigator.of(context).pushNamed("/recipes");
+                Navigator.of(context).pushNamed("/meals");
               },
             ))
       ],

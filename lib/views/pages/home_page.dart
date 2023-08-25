@@ -2,7 +2,7 @@ import 'package:emeal_app/generated/l10n.dart';
 import 'package:emeal_app/models/home_menu_model.dart';
 import 'package:emeal_app/views/home/components/materials/materials_view.dart';
 import 'package:emeal_app/views/home/components/meal_preps/meal_preps_component.dart';
-import 'package:emeal_app/views/home/components/lunch/lunch_view.dart';
+import 'package:emeal_app/views/home/components/meal/meal_view.dart';
 import 'package:flutter/material.dart';
 import 'package:emeal_app/views/home/components/home_component.dart';
 import 'package:emeal_app/views/profile/profile_component.dart';
@@ -52,7 +52,7 @@ class HomePageState extends State<HomePage> {
         TabBarView(children: [
           MaterialsView(pageState: pageState),
           MealPrepsComponent(pageState: pageState),
-          LunchView(pageState: pageState),
+          MealView(pageState: pageState),
         ]),
         const ProfileComponent()
       ],

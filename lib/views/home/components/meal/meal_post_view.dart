@@ -2,17 +2,17 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:emeal_app/helper/image_picker_provider.dart';
-import 'package:emeal_app/views/home/components/lunch/recipe_field_form.dart';
-import 'package:emeal_app/views/home/components/lunch/recipe_post_button.dart';
+import 'package:emeal_app/views/home/components/meal/meal_field_form.dart';
+import 'package:emeal_app/views/home/components/meal/meal_post_button.dart';
 
-class LunchPostView extends StatefulWidget {
-  const LunchPostView({super.key});
+class MealPostView extends StatefulWidget {
+  const MealPostView({super.key});
 
   @override
-  State<StatefulWidget> createState() => _LunchPostViewState();
+  State<StatefulWidget> createState() => _MealPostViewState();
 }
 
-class _LunchPostViewState extends State<LunchPostView> {
+class _MealPostViewState extends State<MealPostView> {
   double cost = 0.0;
   String comment = "";
   File? image;
@@ -45,7 +45,7 @@ class _LunchPostViewState extends State<LunchPostView> {
             flex: 2,
             child: Column(
               children: [
-                RecipeFieldForm(
+                MealFieldForm(
                   hintText: "コメント",
                   icon: Icons.description,
                   onChange: (comment) {
@@ -54,7 +54,7 @@ class _LunchPostViewState extends State<LunchPostView> {
                     });
                   },
                 ),
-                RecipeFieldForm(
+                MealFieldForm(
                   hintText: "コスト",
                   icon: Icons.currency_yen,
                   onChange: (cost) {
@@ -65,7 +65,7 @@ class _LunchPostViewState extends State<LunchPostView> {
                   },
                 ),
                 const Spacer(),
-                RecipePostButton(
+                MealPostButton(
                   comment: comment,
                   image: image,
                   cost: cost,

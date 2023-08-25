@@ -15,7 +15,7 @@ class ApiRouter {
   // 各ページを定義
   static const String root = '/';
   static const String home = '/home';
-  static const String recipe = '/recipes';
+  static const String recipe = '/meals';
   static const String login = '/login';
   static const String signup = '/signup';
 
@@ -31,7 +31,7 @@ class ApiRouter {
         );
       case recipe:
         return MaterialPageRoute(
-          builder: (_) => const RecipePage(title: "e-Meal"),
+          builder: (_) => const MealPage(title: "e-Meal"),
         );
       case login:
         return MaterialPageRoute(

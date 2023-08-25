@@ -2,7 +2,7 @@ import 'package:emeal_app/services/database.dart';
 import 'package:emeal_app/services/firestore_crud_api.dart';
 import 'package:emeal_app/views/helper/utils/datetime_extension.dart';
 import 'package:flutter/material.dart';
-import 'package:emeal_app/models/recipe.dart';
+import 'package:emeal_app/models/meal.dart';
 import 'package:emeal_app/views/home/components/cost/cost_chart_controller.dart';
 import 'package:emeal_app/views/home/components/cost/cost_description_item.dart.dart';
 
@@ -18,8 +18,8 @@ class _FoodCostDescriptionViewState extends State<FoodCostDescriptionView> {
 
   @override
   Widget build(BuildContext context) {
-    final api = Database()
-        .provider(FirestoreCRUDApi<Recipe>("recipes", Recipe.fromJson));
+    final api =
+        Database().provider(FirestoreCRUDApi<Meal>("recipes", Meal.fromJson));
     final start = DateTime(focus.year, focus.month, 1);
     final end = DateTime(focus.year, focus.month + 1, 1);
     return FutureBuilder(

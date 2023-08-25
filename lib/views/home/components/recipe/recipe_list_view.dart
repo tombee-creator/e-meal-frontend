@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:emeal_app/models/recipe.dart';
+import 'package:emeal_app/models/meal.dart';
 import 'package:emeal_app/views/home/components/recipe/recipe_list_item_view.dart';
 import 'package:emeal_app/views/home/components/recipe/recipe_loading_view.dart';
 
 class RecipeListView extends StatelessWidget {
-  final Future<List<Recipe>> future;
+  final Future<List<Meal>> future;
 
   const RecipeListView({super.key, required this.future});
 

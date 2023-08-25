@@ -2,10 +2,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:emeal_app/models/converters/user_converter.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part 'recipe.g.dart';
+part 'meal.g.dart';
 
 @JsonSerializable()
-class Recipe {
+class Meal {
   final String id;
 
   @JsonKey(fromJson: UserConverter.fromJson, toJson: UserConverter.toJson)
@@ -21,10 +21,10 @@ class Recipe {
 
   final DateTime updated;
 
-  Recipe(this.id, this.user, this.comment, this.url, this.cost, this.created,
+  Meal(this.id, this.user, this.comment, this.url, this.cost, this.created,
       this.updated);
 
-  factory Recipe.fromJson(Map<String, dynamic> json) => _$RecipeFromJson(json);
+  factory Meal.fromJson(Map<String, dynamic> json) => _$MealFromJson(json);
 
-  Map<String, dynamic> toJson() => _$RecipeToJson(this);
+  Map<String, dynamic> toJson() => _$MealToJson(this);
 }

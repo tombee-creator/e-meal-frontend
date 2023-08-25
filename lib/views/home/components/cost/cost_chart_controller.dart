@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:emeal_app/models/recipe.dart';
+import 'package:emeal_app/models/meal.dart';
 import 'package:emeal_app/services/database.dart';
 import 'package:emeal_app/services/firestore_crud_api.dart';
 import 'package:emeal_app/views/home/components/cost/cost_chart_view.dart';
@@ -22,8 +22,8 @@ class _CostChartControllerViewState extends State<CostChartControllerView> {
 
   @override
   Widget build(BuildContext context) {
-    final api = Database()
-        .provider(FirestoreCRUDApi<Recipe>("recipes", Recipe.fromJson));
+    final api =
+        Database().provider(FirestoreCRUDApi<Meal>("recipes", Meal.fromJson));
     final startDate =
         DateTime(focusDate.year, focusDate.month, focusDate.day - 7);
     final endDate =
@@ -51,15 +51,15 @@ class _CostChartControllerViewState extends State<CostChartControllerView> {
                       isLessThanOrEqualTo: endDate.toIso8601String())
                   .orderBy("created")),
           builder: (context, snapshot) {
-            final recipes = snapshot.data;
-            if (recipes == null) {
+            final meals = snapshot.data;
+            if (meals == null) {
               return const Center(child: CircularProgressIndicator());
             }
-            if (recipes.isEmpty) {
+            if (meals.isEmpty) {
               return const Center(child: Text("ただいまデータはありません"));
             }
             return CostChartView(
-              recipes: recipes,
+              meals: meals,
               focus: focusDate,
             );
           },

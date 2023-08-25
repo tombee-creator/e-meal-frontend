@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:emeal_app/models/recipe.dart';
+import 'package:emeal_app/models/meal.dart';
 import 'package:emeal_app/views/helper/image/image_helper.dart';
 import 'package:emeal_app/views/pages/recipe_page.dart';
 
 class RecipeListItemView extends StatelessWidget {
-  final Recipe recipe;
+  final Meal recipe;
 
   const RecipeListItemView({super.key, required this.recipe});
 
@@ -13,7 +13,7 @@ class RecipeListItemView extends StatelessWidget {
     return GestureDetector(
         onTap: () {
           Navigator.of(context).push(MaterialPageRoute(
-              builder: (_) => RecipePage(title: "e-Meal", id: recipe.id)));
+              builder: (_) => MealPage(title: "e-Meal", id: recipe.id)));
         },
         child: AspectRatio(
             aspectRatio: 1.0, child: ImageHelper.image(recipe.url)));

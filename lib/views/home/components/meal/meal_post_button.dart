@@ -2,29 +2,29 @@ import 'dart:io';
 import 'package:uuid/uuid.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:emeal_app/models/recipe.dart';
+import 'package:emeal_app/models/meal.dart';
 import 'package:emeal_app/services/authentication.dart';
 import 'package:emeal_app/services/database.dart';
 import 'package:emeal_app/services/firestore_crud_api.dart';
 
 enum ButtonState { wating, uploadImage, postData, success, failed }
 
-class RecipePostButton extends StatefulWidget {
+class MealPostButton extends StatefulWidget {
   final String comment;
   final double cost;
   final File? image;
 
-  const RecipePostButton(
+  const MealPostButton(
       {super.key,
       required this.comment,
       required this.cost,
       required this.image});
 
   @override
-  State<StatefulWidget> createState() => _RecipePostButtonState();
+  State<StatefulWidget> createState() => _MealPostButtonState();
 }
 
-class _RecipePostButtonState extends State<RecipePostButton> {
+class _MealPostButtonState extends State<MealPostButton> {
   String path = "";
   double progress = 0.0;
   ButtonState state = ButtonState.wating;
@@ -115,9 +115,9 @@ class _RecipePostButtonState extends State<RecipePostButton> {
   }
 
   Future postRecipeData(String url) async {
-    final api = Database()
-        .provider(FirestoreCRUDApi<Recipe>("recipes", Recipe.fromJson));
-    await api.post((id) => Recipe(id, Authentication().currentUser,
+    final api =
+        Database().provider(FirestoreCRUDApi<Meal>("meals", Meal.fromJson));
+    await api.post((id) => Meal(id, Authentication().currentUser,
             widget.comment, url, widget.cost, DateTime.now(), DateTime.now())
         .toJson());
   }

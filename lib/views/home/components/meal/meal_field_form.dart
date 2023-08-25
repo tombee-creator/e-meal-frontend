@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class RecipeFieldForm extends StatelessWidget {
+class MealFieldForm extends StatelessWidget {
   final String hintText;
   final IconData? icon;
   final void Function(String) onChange;
 
-  const RecipeFieldForm({
+  const MealFieldForm({
     super.key,
     required this.hintText,
     required this.onChange,

@@ -2,13 +2,13 @@ import 'dart:math';
 
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:emeal_app/models/recipe.dart';
+import 'package:emeal_app/models/meal.dart';
 
 class CostChartView extends StatelessWidget {
-  final List<Recipe> recipes;
+  final List<Meal> meals;
   final DateTime focus;
 
-  const CostChartView({super.key, required this.recipes, required this.focus});
+  const CostChartView({super.key, required this.meals, required this.focus});
 
   @override
   Widget build(BuildContext context) {
@@ -104,7 +104,7 @@ class CostChartView extends StatelessWidget {
             .toList();
     final list = dateList
         .map((date) =>
-            recipes.where((recipe) => isSameDay(recipe.created, date)).toList())
+            meals.where((recipe) => isSameDay(recipe.created, date)).toList())
         .toList();
     return list.asMap().entries.map((entry) {
       final rodData = generateRodData(entry.value);
@@ -128,20 +128,20 @@ class CostChartView extends StatelessWidget {
   }
 
   double maxCostInWeek() {
-    final dateList = recipes
+    final dateList = meals
         .map((recipe) => DateTime(
             recipe.created.year, recipe.created.month, recipe.created.day))
         .toSet();
     final list = dateList
         .map((date) =>
-            recipes.where((recipe) => isSameDay(recipe.created, date)).toList())
+            meals.where((recipe) => isSameDay(recipe.created, date)).toList())
         .map((items) => items.map((item) => item.cost))
         .map((items) => items.reduce((a1, a2) => a1 + a2))
         .toList();
     return list.reduce(max);
   }
 
-  List<BarChartRodStackItem> generateRodData(List<Recipe> items) {
+  List<BarChartRodStackItem> generateRodData(List<Meal> items) {
     final list = <BarChartRodStackItem>[];
     if (items.isNotEmpty) {
       final colors = [Colors.black, Colors.black12, Colors.black26];

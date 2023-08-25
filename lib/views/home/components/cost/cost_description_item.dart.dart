@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:emeal_app/models/recipe.dart';
+import 'package:emeal_app/models/meal.dart';
 
 class CostDescriptionItem extends StatelessWidget {
   final IconData icon;
@@ -48,10 +48,10 @@ class CostDescriptionItem extends StatelessWidget {
   }
 
   static CostDescriptionItem generate(
-      {required List<Recipe> data,
+      {required List<Meal> data,
       required IconData icon,
       required String label,
-      required double Function(List<Recipe> data) value}) {
+      required double Function(List<Meal> data) value}) {
     return CostDescriptionItem(
       icon: icon,
       label: label,

@@ -1,12 +1,12 @@
-import 'package:emeal_app/models/recipe.dart';
+import 'package:emeal_app/models/meal.dart';
 import 'package:emeal_app/views/helper/image/image_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-class LunchListItemView extends StatelessWidget {
-  final Recipe recipe;
+class MealListItemView extends StatelessWidget {
+  final Meal recipe;
 
-  const LunchListItemView({super.key, required this.recipe});
+  const MealListItemView({super.key, required this.recipe});
 
   @override
   Widget build(BuildContext context) {
