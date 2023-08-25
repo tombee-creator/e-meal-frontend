@@ -13,7 +13,7 @@ class MealListView extends StatelessWidget {
       padding: const EdgeInsets.all(12.0),
       children: meals
           .map((recipe) => SizedBox(
-                height: 120,
+                height: 100,
                 child: MealListItemView(recipe: recipe),
               ))
           .toList(),
