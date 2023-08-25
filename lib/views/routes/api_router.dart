@@ -1,8 +1,9 @@
+import 'package:emeal_app/views/pages/ingredient_page.dart';
 import 'package:flutter/material.dart';
 import 'package:emeal_app/services/authentication.dart';
 import 'package:emeal_app/views/auth/login_page.dart';
 import 'package:emeal_app/views/auth/signup_page.dart';
-import 'package:emeal_app/views/pages/recipe_page.dart';
+import 'package:emeal_app/views/pages/meal_page.dart';
 
 import '../pages/home_page.dart';
 
@@ -15,6 +16,7 @@ class ApiRouter {
   // 各ページを定義
   static const String root = '/';
   static const String home = '/home';
+  static const String ingredient = '/ingredients';
   static const String recipe = '/meals';
   static const String login = '/login';
   static const String signup = '/signup';
@@ -28,6 +30,10 @@ class ApiRouter {
       case home:
         return MaterialPageRoute(
           builder: (_) => const HomePage(title: "e-Meal"),
+        );
+      case ingredient:
+        return MaterialPageRoute(
+          builder: (_) => const IngredientPage(title: "e-Meal"),
         );
       case recipe:
         return MaterialPageRoute(

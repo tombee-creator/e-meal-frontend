@@ -1,6 +1,6 @@
 import 'package:emeal_app/generated/l10n.dart';
 import 'package:emeal_app/models/home_menu_model.dart';
-import 'package:emeal_app/views/home/components/materials/materials_view.dart';
+import 'package:emeal_app/views/home/components/ingredient/ingredient_view.dart';
 import 'package:emeal_app/views/home/components/meal_preps/meal_preps_component.dart';
 import 'package:emeal_app/views/home/components/meal/meal_view.dart';
 import 'package:flutter/material.dart';
@@ -50,7 +50,7 @@ class HomePageState extends State<HomePage> {
       screens: <Widget>[
         const HomeComponent(),
         TabBarView(children: [
-          MaterialsView(pageState: pageState),
+          IngredientView(pageState: pageState),
           MealPrepsComponent(pageState: pageState),
           MealView(pageState: pageState),
         ]),
