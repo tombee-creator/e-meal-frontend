@@ -18,7 +18,8 @@ class _HomeComponentState extends State<HomeComponent> {
         .provider(FirestoreCRUDApi<Recipe>("recipes", Recipe.fromJson));
 
     return RecipeListView(
-        future:
-            api.list(query: (ref) => ref.orderBy("created", descending: true)));
+        future: api.list(
+            query: (ref) =>
+                ref.orderBy("created", descending: true).limit(15)));
   }
 }
