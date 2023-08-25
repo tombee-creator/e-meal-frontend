@@ -15,8 +15,8 @@ class MealPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final id = this.id;
-    final api =
-        Database().provider(FirestoreCRUDApi<Meal>("meals", Meal.fromJson));
+    final api = Database()
+        .provider(FirestoreCRUDApi<Meal>(Meal.collection, Meal.fromJson));
     if (id == null) {
       return Scaffold(
           appBar: AppBar(
