@@ -6,6 +6,8 @@ part 'meal.g.dart';
 
 @JsonSerializable()
 class Meal {
+  static const collection = "recipes";
+
   final String id;
 
   @JsonKey(fromJson: UserConverter.fromJson, toJson: UserConverter.toJson)
