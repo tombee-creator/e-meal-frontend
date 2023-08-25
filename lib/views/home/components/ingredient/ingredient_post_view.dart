@@ -13,6 +13,7 @@ class IngredientPostView extends StatefulWidget {
 
 class _IngredientPostViewState extends State<IngredientPostView> {
   double cost = 0.0;
+  int times = 1;
   String name = "";
   File? image;
 
@@ -63,12 +64,19 @@ class _IngredientPostViewState extends State<IngredientPostView> {
                     });
                   },
                 ),
+                MealFieldForm(
+                  hintText: "使用回数",
+                  icon: Icons.countertops,
+                  onChange: (times) {
+                    final parsedTimes = int.tryParse(times) ?? 1;
+                    setState(() {
+                      this.times = parsedTimes;
+                    });
+                  },
+                ),
                 const Spacer(),
                 IngredientPostButton(
-                  name: name,
-                  image: image,
-                  cost: cost,
-                )
+                    name: name, image: image, cost: cost, times: times)
               ],
             ))
       ],

@@ -19,12 +19,16 @@ class Ingredient {
 
   final double cost;
 
+  final int times;
+
+  final bool isUsedUp;
+
   final DateTime created;
 
   final DateTime updated;
 
-  Ingredient(this.id, this.user, this.url, this.name, this.cost, this.created,
-      this.updated);
+  Ingredient(this.id, this.user, this.name, this.url, this.cost, this.times,
+      this.isUsedUp, this.created, this.updated);
 
   factory Ingredient.fromJson(Map<String, dynamic> json) =>
       _$IngredientFromJson(json);

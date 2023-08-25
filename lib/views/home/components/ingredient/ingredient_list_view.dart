@@ -13,8 +13,14 @@ class IngredientListView extends StatelessWidget {
       padding: const EdgeInsets.all(12.0),
       children: ingredients
           .map((ingredient) => SizedBox(
-                height: 120,
-                child: IngredientListItemView(ingredient: ingredient),
+                height: 100,
+                child: IngredientListItemView(
+                  ingredient: ingredient,
+                  count: 0,
+                  onSelected: (ingredient) {
+                    print(ingredient.name);
+                  },
+                ),
               ))
           .toList(),
     );

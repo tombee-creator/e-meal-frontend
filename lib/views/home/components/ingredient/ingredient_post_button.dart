@@ -3,7 +3,6 @@ import 'package:emeal_app/models/ingredient.dart';
 import 'package:uuid/uuid.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:emeal_app/models/meal.dart';
 import 'package:emeal_app/services/authentication.dart';
 import 'package:emeal_app/services/database.dart';
 import 'package:emeal_app/services/firestore_crud_api.dart';
@@ -13,10 +12,15 @@ enum ButtonState { wating, uploadImage, postData, success, failed }
 class IngredientPostButton extends StatefulWidget {
   final String name;
   final double cost;
+  final int times;
   final File? image;
 
   const IngredientPostButton(
-      {super.key, required this.name, required this.cost, required this.image});
+      {super.key,
+      required this.name,
+      required this.cost,
+      required this.times,
+      required this.image});
 
   @override
   State<StatefulWidget> createState() => _IngredientPostButtonState();
@@ -113,10 +117,18 @@ class _IngredientPostButtonState extends State<IngredientPostButton> {
   }
 
   Future postRecipeData(String url) async {
-    final api =
-        Database().provider(FirestoreCRUDApi<Meal>("meals", Meal.fromJson));
-    await api.post((id) => Ingredient(id, Authentication().currentUser,
-            widget.name, url, widget.cost, DateTime.now(), DateTime.now())
+    final api = Database().provider(FirestoreCRUDApi<Ingredient>(
+        Ingredient.collection, Ingredient.fromJson));
+    await api.post((id) => Ingredient(
+            id,
+            Authentication().currentUser,
+            widget.name,
+            url,
+            widget.cost,
+            widget.times,
+            false,
+            DateTime.now(),
+            DateTime.now())
         .toJson());
   }
 }
