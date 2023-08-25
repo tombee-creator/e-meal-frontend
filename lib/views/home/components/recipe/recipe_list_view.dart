@@ -24,6 +24,8 @@ class RecipeListView extends StatelessWidget {
           return GridView.count(
             cacheExtent: 1000,
             crossAxisCount: 3,
+            mainAxisSpacing: 2.0,
+            crossAxisSpacing: 2.0,
             children: data
                 .map((recipe) => RecipeListItemView(recipe: recipe))
                 .toList(),
