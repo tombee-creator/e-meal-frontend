@@ -17,6 +17,7 @@ class ApiRouter {
   static const String root = '/';
   static const String home = '/home';
   static const String ingredient = '/ingredients';
+  static const String prep = '/preps';
   static const String recipe = '/meals';
   static const String login = '/login';
   static const String signup = '/signup';
@@ -30,6 +31,10 @@ class ApiRouter {
       case home:
         return MaterialPageRoute(
           builder: (_) => const HomePage(title: "e-Meal"),
+        );
+      case prep:
+        return MaterialPageRoute(
+          builder: (_) => const IngredientPage(title: "e-Meal"),
         );
       case ingredient:
         return MaterialPageRoute(
