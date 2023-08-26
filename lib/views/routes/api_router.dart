@@ -27,32 +27,29 @@ class ApiRouter {
     switch (settings.name) {
       case root:
         return MaterialPageRoute(
-          builder: (context) => redirect(context),
-        );
+            builder: (context) => redirect(context), settings: settings);
       case home:
         return MaterialPageRoute(
-          builder: (_) => const HomePage(title: "e-Meal"),
-        );
+            builder: (_) => const HomePage(title: "e-Meal"),
+            settings: settings);
       case prep:
         return MaterialPageRoute(
-          builder: (_) => const MealPrepsPage(title: "e-Meal"),
-        );
+            builder: (_) => const MealPrepsPage(title: "e-Meal"),
+            settings: settings);
       case ingredient:
         return MaterialPageRoute(
-          builder: (_) => const IngredientPage(title: "e-Meal"),
-        );
+            builder: (_) => const IngredientPage(title: "e-Meal"),
+            settings: settings);
       case recipe:
         return MaterialPageRoute(
-          builder: (_) => const MealPage(title: "e-Meal"),
-        );
+            builder: (_) => const MealPage(title: "e-Meal"),
+            settings: settings);
       case login:
         return MaterialPageRoute(
-          builder: (_) => const LoginPage(),
-        );
+            builder: (_) => const LoginPage(), settings: settings);
       case signup:
         return MaterialPageRoute(
-          builder: (_) => const SignupPage(),
-        );
+            builder: (_) => const SignupPage(), settings: settings);
       default:
         return MaterialPageRoute(
           builder: (context) => redirect(context),
