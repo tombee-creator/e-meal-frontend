@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:emeal_app/models/ingredient.dart';
 import 'package:emeal_app/views/home/components/meal-preps/meal_preps_post_button.dart';
 import 'package:flutter/material.dart';
 import 'package:emeal_app/helper/image_picker_provider.dart';
@@ -12,10 +13,24 @@ class MealPrepPostView extends StatefulWidget {
 }
 
 class _MealPrepPostViewState extends State<MealPrepPostView> {
+  List<Ingredient> selected = <Ingredient>[];
   double cost = 0.0;
   int times = 1;
   String name = "";
   File? image;
+
+  @override
+  void didChangeDependencies() {
+    final args = ModalRoute.of(context)?.settings.arguments as Map;
+    selected = args['ingredients'] ?? [];
+
+    if (selected.isNotEmpty) {
+      cost = selected
+          .map((item) => item.cost / item.times)
+          .reduce((cost1, cost2) => cost1 + cost2);
+    }
+    super.didChangeDependencies();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,6 +38,7 @@ class _MealPrepPostViewState extends State<MealPrepPostView> {
     final imageWidget = src == null
         ? const Icon(Icons.camera)
         : Image.file(src, fit: BoxFit.cover);
+
     return Column(
       children: [
         Expanded(
@@ -55,7 +71,7 @@ class _MealPrepPostViewState extends State<MealPrepPostView> {
                   },
                 ),
                 MealFieldForm(
-                  hintText: "コスト",
+                  hintText: cost == 0.0 ? "コスト" : "$cost",
                   icon: Icons.currency_yen,
                   onChange: (cost) {
                     final parsedCost = double.tryParse(cost) ?? 0.0;
@@ -74,9 +90,12 @@ class _MealPrepPostViewState extends State<MealPrepPostView> {
                     });
                   },
                 ),
-                const Spacer(),
                 MealPrepPostButton(
-                    name: name, image: image, cost: cost, times: times)
+                    name: name,
+                    image: image,
+                    cost: cost,
+                    times: times,
+                    ingredients: selected)
               ],
             ))
       ],
