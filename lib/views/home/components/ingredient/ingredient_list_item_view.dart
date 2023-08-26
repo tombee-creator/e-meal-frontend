@@ -7,23 +7,23 @@ class IngredientListItemView extends StatelessWidget {
   final Ingredient ingredient;
   final int count;
   final void Function(Ingredient) onSelected;
+  final void Function(Ingredient) onRemove;
 
   const IngredientListItemView(
       {super.key,
       required this.ingredient,
       required this.count,
-      required this.onSelected});
+      required this.onSelected,
+      required this.onRemove});
 
   @override
   Widget build(BuildContext context) {
     final list = <Widget>[];
-    list.add(Card(
-        child: Row(children: [
-      AspectRatio(
-        aspectRatio: 1.0,
-        child: ImageHelper.image(ingredient.url),
-      ),
-      Expanded(
+    list.add(AspectRatio(
+      aspectRatio: 1.0,
+      child: ImageHelper.image(ingredient.url),
+    ));
+    list.add(Expanded(
         flex: 5,
         child: Padding(
           padding: const EdgeInsets.all(12.0),
@@ -36,12 +36,10 @@ class IngredientListItemView extends StatelessWidget {
                   .format(ingredient.created))
             ],
           ),
-        ),
-      )
-    ])));
+        )));
     if (count > 0) {
-      list.add(Align(
-        alignment: Alignment.topRight,
+      list.add(Padding(
+        padding: const EdgeInsets.all(12.0),
         child: CircleAvatar(
           radius: 18.0,
           child: Text(
@@ -53,10 +51,14 @@ class IngredientListItemView extends StatelessWidget {
     }
     return GestureDetector(
         onTap: () {
-          onSelected(ingredient);
+          if (count >= ingredient.times) {
+            onRemove(ingredient);
+          } else {
+            onSelected(ingredient);
+          }
         },
-        child: Stack(
-          children: list,
-        ));
+        child: Card(
+            color: count > 0 ? Theme.of(context).colorScheme.background : null,
+            child: Row(children: list)));
   }
 }

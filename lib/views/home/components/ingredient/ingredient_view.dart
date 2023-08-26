@@ -6,7 +6,15 @@ import 'package:emeal_app/views/home/components/ingredient/ingredient_list_view.
 import 'package:flutter/material.dart';
 
 class IngredientView extends StatefulWidget {
-  const IngredientView({super.key});
+  final List<Ingredient> selected;
+  final void Function(Ingredient) onSelected;
+  final void Function(Ingredient) onRemove;
+
+  const IngredientView(
+      {super.key,
+      required this.selected,
+      required this.onSelected,
+      required this.onRemove});
 
   @override
   State<StatefulWidget> createState() => IngredientViewState();
@@ -30,7 +38,12 @@ class IngredientViewState extends State<IngredientView> {
               child: Text("データを取得中です"),
             );
           }
-          return IngredientListView(ingredients: data);
+          return IngredientListView(
+            ingredients: data,
+            selected: widget.selected,
+            onSelected: widget.onSelected,
+            onRemove: widget.onRemove,
+          );
         }));
   }
 }
