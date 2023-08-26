@@ -55,7 +55,7 @@ class _IngredientPostViewState extends State<IngredientPostView> {
                   },
                 ),
                 MealFieldForm(
-                  hintText: "コスト",
+                  hintText: cost == 0.0 ? "コスト" : "$cost",
                   icon: Icons.currency_yen,
                   onChange: (cost) {
                     final parsedCost = double.tryParse(cost) ?? 0.0;
