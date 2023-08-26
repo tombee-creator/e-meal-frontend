@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:emeal_app/models/meal_prep.dart';
 import 'package:flutter/material.dart';
 import 'package:emeal_app/helper/image_picker_provider.dart';
 import 'package:emeal_app/views/home/components/meal/meal_field_form.dart';
@@ -13,9 +14,23 @@ class MealPostView extends StatefulWidget {
 }
 
 class _MealPostViewState extends State<MealPostView> {
+  List<MealPrep> selected = <MealPrep>[];
   double cost = 0.0;
   String comment = "";
   File? image;
+
+  @override
+  void didChangeDependencies() {
+    final args = ModalRoute.of(context)?.settings.arguments as Map;
+    selected = args['meal_preps'] ?? [];
+
+    if (selected.isNotEmpty) {
+      cost = selected
+          .map((item) => item.cost / item.times)
+          .reduce((cost1, cost2) => cost1 + cost2);
+    }
+    super.didChangeDependencies();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +70,7 @@ class _MealPostViewState extends State<MealPostView> {
                   },
                 ),
                 MealFieldForm(
-                  hintText: "コスト",
+                  hintText: "$cost",
                   icon: Icons.currency_yen,
                   onChange: (cost) {
                     final parsedCost = double.tryParse(cost) ?? 0.0;
@@ -66,10 +81,10 @@ class _MealPostViewState extends State<MealPostView> {
                 ),
                 const Spacer(),
                 MealPostButton(
-                  comment: comment,
-                  image: image,
-                  cost: cost,
-                )
+                    comment: comment,
+                    image: image,
+                    cost: cost,
+                    mealPreps: selected)
               ],
             ))
       ],

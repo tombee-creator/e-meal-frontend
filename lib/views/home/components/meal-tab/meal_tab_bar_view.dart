@@ -1,4 +1,5 @@
 import 'package:emeal_app/models/ingredient.dart';
+import 'package:emeal_app/models/meal_prep.dart';
 import 'package:emeal_app/views/home/components/ingredient/ingredient_view.dart';
 import 'package:emeal_app/views/home/components/meal-preps/meal_preps_view.dart';
 import 'package:emeal_app/views/home/components/meal/meal_view.dart';
@@ -8,11 +9,12 @@ class MealTabBarView extends StatefulWidget {
   const MealTabBarView({super.key});
 
   @override
-  State<StatefulWidget> createState() => _MealTabBarViewState();
+  State<StatefulWidget> createState() => MealTabBarViewState();
 }
 
-class _MealTabBarViewState extends State<MealTabBarView> {
-  List<Ingredient> selectedIngredients = [];
+class MealTabBarViewState extends State<MealTabBarView> {
+  List<Ingredient> ingredients = [];
+  List<MealPrep> mealPreps = [];
 
   @override
   Widget build(BuildContext context) {
@@ -20,18 +22,18 @@ class _MealTabBarViewState extends State<MealTabBarView> {
     return Stack(children: [
       TabBarView(children: [
         IngredientView(
-            selected: selectedIngredients,
+            selected: ingredients,
             onSelected: (ingredient) {
-              setState(() => selectedIngredients.add(ingredient));
+              setState(() => ingredients.add(ingredient));
             },
             onRemove: (ingredient) {
               setState(() {
-                selectedIngredients = selectedIngredients
+                ingredients = ingredients
                     .where((item) => item.id != ingredient.id)
                     .toList();
               });
             }),
-        const MealPrepView(),
+        MealPrepView(selected: mealPreps),
         const MealView(),
       ]),
       Positioned(
@@ -46,7 +48,8 @@ class _MealTabBarViewState extends State<MealTabBarView> {
                     Navigator.of(context).pushNamed(
                         links[DefaultTabController.of(context).index],
                         arguments: {
-                          'ingredients': selectedIngredients,
+                          'ingredients': ingredients,
+                          'meal_preps': mealPreps
                         });
                   })))
     ]);

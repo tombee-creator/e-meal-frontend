@@ -6,13 +6,16 @@ import 'package:emeal_app/views/home/components/meal-preps/meal_preps_list_view.
 import 'package:flutter/material.dart';
 
 class MealPrepView extends StatefulWidget {
-  const MealPrepView({super.key});
+  final List<MealPrep> selected;
+
+  const MealPrepView({super.key, required this.selected});
 
   @override
-  State<StatefulWidget> createState() => _MealPrepViewState();
+  State<StatefulWidget> createState() => MealPrepViewState();
 }
 
-class _MealPrepViewState extends State<MealPrepView> {
+class MealPrepViewState extends State<MealPrepView> {
+  final _key = GlobalKey<MealPrepViewState>();
   @override
   Widget build(BuildContext context) {
     final api = Database().provider<MealPrep>(
@@ -30,7 +33,7 @@ class _MealPrepViewState extends State<MealPrepView> {
               child: Text("データを取得中です"),
             );
           }
-          return MealPrepsListView(mealPreps: data);
+          return MealPrepsListView(key: _key, mealPreps: data);
         }));
   }
 }

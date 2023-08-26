@@ -1,4 +1,6 @@
 import 'dart:io';
+import 'package:emeal_app/models/meal_prep.dart';
+import 'package:emeal_app/models/meal_prep_contains.dart';
 import 'package:uuid/uuid.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
@@ -13,12 +15,14 @@ class MealPostButton extends StatefulWidget {
   final String comment;
   final double cost;
   final File? image;
+  final List<MealPrep> mealPreps;
 
   const MealPostButton(
       {super.key,
       required this.comment,
       required this.cost,
-      required this.image});
+      required this.image,
+      required this.mealPreps});
 
   @override
   State<StatefulWidget> createState() => _MealPostButtonState();
@@ -65,7 +69,14 @@ class _MealPostButtonState extends State<MealPostButton> {
     setState(() {
       state = ButtonState.postData;
     });
-    await postRecipeData(url);
+    final meal = await postRecipeData(url);
+    if (meal == null) {
+      setState(() {
+        state = ButtonState.failed;
+      });
+      return;
+    }
+    await postMealPrepListData(meal);
     setState(() {
       state = ButtonState.success;
     });
@@ -114,11 +125,24 @@ class _MealPostButtonState extends State<MealPostButton> {
     }
   }
 
-  Future postRecipeData(String url) async {
+  Future<Meal?> postRecipeData(String url) async {
     final api = Database()
         .provider(FirestoreCRUDApi<Meal>(Meal.collection, Meal.fromJson));
-    await api.post((id) => Meal(id, Authentication().currentUser,
+    return await api.post((id) => Meal(id, Authentication().currentUser,
             widget.comment, url, widget.cost, DateTime.now(), DateTime.now())
         .toJson());
+  }
+
+  Future<void> postMealPrepListData(Meal meal) async {
+    final api = Database().provider(FirestoreCRUDApi<Future<MealPrepContains>>(
+        MealPrepContains.collection, MealPrepContains.fromJson));
+    final ids = widget.mealPreps.map((item) => item.id).toSet();
+    for (final id in ids) {
+      final list = widget.mealPreps.where((item) => item.id == id);
+      final item = list.first;
+      await api.post((id) => MealPrepContains(id, Authentication().currentUser,
+              meal, item, list.length, DateTime.now(), DateTime.now())
+          .toJson());
+    }
   }
 }
