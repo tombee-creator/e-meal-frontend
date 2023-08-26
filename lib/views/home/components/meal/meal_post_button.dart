@@ -63,7 +63,7 @@ class _MealPostButtonState extends State<MealPostButton> {
     });
     final url = await uploadImageFile();
     setState(() {
-      state = ButtonState.uploadImage;
+      state = ButtonState.postData;
     });
     await postRecipeData(url);
     setState(() {
@@ -108,15 +108,15 @@ class _MealPostButtonState extends State<MealPostButton> {
         }
       });
       final imgUrl = await (await uploadTask).ref.getDownloadURL();
-      return imgUrl.replaceAll(Uri.parse(imgUrl).query, "") + "alt=media";
+      return "${imgUrl.replaceAll(Uri.parse(imgUrl).query, "")}alt=media";
     } catch (e) {
       rethrow;
     }
   }
 
   Future postRecipeData(String url) async {
-    final api =
-        Database().provider(FirestoreCRUDApi<Meal>("meals", Meal.fromJson));
+    final api = Database()
+        .provider(FirestoreCRUDApi<Meal>(Meal.collection, Meal.fromJson));
     await api.post((id) => Meal(id, Authentication().currentUser,
             widget.comment, url, widget.cost, DateTime.now(), DateTime.now())
         .toJson());
