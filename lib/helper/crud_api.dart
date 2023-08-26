@@ -6,5 +6,5 @@ abstract class CRUDApi<T> {
               CollectionReference<Map<String, dynamic>>)?
           query});
   Future<T?> get(String id);
-  Future<void> post(Map<String, dynamic> Function(String id) builder);
+  Future<T?> post(Map<String, dynamic> Function(String id) builder);
 }
