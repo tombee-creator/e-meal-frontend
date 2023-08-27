@@ -27,6 +27,9 @@ class MealPrep {
 
   final DateTime updated;
 
+  MealPrep usedUp() =>
+      MealPrep(id, user, name, url, cost, times, true, created, DateTime.now());
+
   factory MealPrep.fromJson(Map<String, dynamic> json) =>
       _$MealPrepFromJson(json);
 
