@@ -30,6 +30,7 @@ class IngredientViewState extends State<IngredientView> {
             query: (ref) => ref
                 .orderBy("created", descending: true)
                 .where("user", isEqualTo: Authentication().currentUser.uid)
+                .where("is_used_up", isEqualTo: false)
                 .limit(15)),
         builder: ((context, snapshot) {
           final data = snapshot.data;
