@@ -43,4 +43,15 @@ class FirestoreCRUDApi<T> implements CRUDApi<T> {
         .set(recipe);
     return await get(document.id);
   }
+
+  @override
+  Future<T?> put(
+      String id, T item, Map<String, dynamic> Function(T item) builder) async {
+    final itemJson = builder(item);
+    await FirebaseFirestore.instance
+        .collection(collection)
+        .doc(id)
+        .set(itemJson);
+    return await get(id);
+  }
 }
