@@ -25,6 +25,7 @@ class MealPrepViewState extends State<MealPrepView> {
             query: (ref) => ref
                 .orderBy("created", descending: true)
                 .where("user", isEqualTo: Authentication().currentUser.uid)
+                .where("is_used_up", isEqualTo: false)
                 .limit(15)),
         builder: ((context, snapshot) {
           final data = snapshot.data;
@@ -32,6 +33,9 @@ class MealPrepViewState extends State<MealPrepView> {
             return const Center(
               child: Text("データを取得中です"),
             );
+          }
+          if (data.isEmpty) {
+            return const Center(child: Text("作り置きをしましょう！"));
           }
           return MealPrepsListView(key: _key, mealPreps: data);
         }));

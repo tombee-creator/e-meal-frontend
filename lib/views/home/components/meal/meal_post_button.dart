@@ -62,6 +62,10 @@ class _MealPostButtonState extends State<MealPostButton> {
   }
 
   Future postRecipe() async {
+    final isConfirmed = await confirmUsedUp();
+    if (!isConfirmed) {
+      return;
+    }
     setState(() {
       state = ButtonState.uploadImage;
     });
@@ -139,10 +143,50 @@ class _MealPostButtonState extends State<MealPostButton> {
     final ids = widget.mealPreps.map((item) => item.id).toSet();
     for (final id in ids) {
       final list = widget.mealPreps.where((item) => item.id == id);
-      final item = list.first;
+      final item = list.last;
+      await putMealPrep(item);
       await api.post((id) => MealPrepContains(id, Authentication().currentUser,
               meal, item, list.length, DateTime.now(), DateTime.now())
           .toJson());
     }
+  }
+
+  Future<void> putMealPrep(MealPrep prep) async {
+    final api = Database().provider(
+        FirestoreCRUDApi<MealPrep>(MealPrep.collection, MealPrep.fromJson));
+    await api.put(prep.id, prep, (item) => item.toJson());
+  }
+
+  Future<bool> confirmUsedUp() async {
+    final ids = widget.mealPreps.map((item) => item.id).toSet();
+    for (final id in ids) {
+      final list = widget.mealPreps.where((item) => item.id == id);
+      final item = list.last;
+      if (item.isUsedUp) {
+        final result = await showDialog(
+            barrierDismissible: false,
+            context: context,
+            builder: (_) => AlertDialog(
+                  title: const Text("確認"),
+                  content: Text("${item.name}を使い切ります。\nよろしいですか？"),
+                  actions: [
+                    TextButton(
+                        child: const Text("OK"),
+                        onPressed: () {
+                          Navigator.pop(context, true);
+                        }),
+                    TextButton(
+                        child: const Text("Cancel"),
+                        onPressed: () {
+                          Navigator.pop(context, false);
+                        })
+                  ],
+                ));
+        if (!result) {
+          return false;
+        }
+      }
+    }
+    return true;
   }
 }

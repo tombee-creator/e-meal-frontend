@@ -64,6 +64,10 @@ class _MealPrepPostButtonState extends State<MealPrepPostButton> {
   }
 
   Future postRecipe() async {
+    final isConfirmed = await confirmUsedUp();
+    if (!isConfirmed) {
+      return;
+    }
     setState(() {
       state = ButtonState.uploadImage;
     });
@@ -151,7 +155,8 @@ class _MealPrepPostButtonState extends State<MealPrepPostButton> {
     final ids = widget.ingredients.map((item) => item.id).toSet();
     for (final id in ids) {
       final list = widget.ingredients.where((item) => item.id == id);
-      final item = list.first;
+      final item = list.last;
+      await putIngredient(item);
       await api.post((id) => PrepIngredientRelation(
               id,
               Authentication().currentUser,
@@ -162,5 +167,44 @@ class _MealPrepPostButtonState extends State<MealPrepPostButton> {
               DateTime.now())
           .toJson());
     }
+  }
+
+  Future<void> putIngredient(Ingredient ingredient) async {
+    final api = Database().provider(FirestoreCRUDApi<Ingredient>(
+        Ingredient.collection, Ingredient.fromJson));
+    await api.put(ingredient.id, ingredient, (item) => item.toJson());
+  }
+
+  Future<bool> confirmUsedUp() async {
+    final ids = widget.ingredients.map((item) => item.id).toSet();
+    for (final id in ids) {
+      final list = widget.ingredients.where((item) => item.id == id);
+      final item = list.last;
+      if (item.isUsedUp) {
+        final result = await showDialog(
+            barrierDismissible: false,
+            context: context,
+            builder: (_) => AlertDialog(
+                  title: const Text("確認"),
+                  content: Text("${item.name}を使い切ります。\nよろしいですか？"),
+                  actions: [
+                    TextButton(
+                        child: const Text("OK"),
+                        onPressed: () {
+                          Navigator.pop(context, true);
+                        }),
+                    TextButton(
+                        child: const Text("Cancel"),
+                        onPressed: () {
+                          Navigator.pop(context, false);
+                        })
+                  ],
+                ));
+        if (!result) {
+          return false;
+        }
+      }
+    }
+    return true;
   }
 }
