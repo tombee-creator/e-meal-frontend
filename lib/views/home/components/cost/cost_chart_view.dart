@@ -144,10 +144,14 @@ class CostChartView extends StatelessWidget {
   List<BarChartRodStackItem> generateRodData(List<Meal> items) {
     final list = <BarChartRodStackItem>[];
     if (items.isNotEmpty) {
-      final colors = [Colors.black, Colors.black12, Colors.black26];
+      final colors = [
+        Colors.black,
+        Colors.black12,
+      ];
       var cost = 0.0;
       for (final i in List.generate(items.length, (index) => index)) {
-        list.add(BarChartRodStackItem(cost, cost + items[i].cost, colors[i]));
+        list.add(
+            BarChartRodStackItem(cost, cost + items[i].cost, colors[i % 2]));
         cost += items[i].cost;
       }
     }
