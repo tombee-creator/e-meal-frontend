@@ -36,8 +36,11 @@ class IngredientViewState extends State<IngredientView> {
           final data = snapshot.data;
           if (data == null) {
             return const Center(
-              child: Text("データを取得中です"),
+              child: CircularProgressIndicator(),
             );
+          }
+          if (data.isEmpty) {
+            return const Center(child: Text("食材を投稿しましょう！"));
           }
           return IngredientListView(
             ingredients: data,

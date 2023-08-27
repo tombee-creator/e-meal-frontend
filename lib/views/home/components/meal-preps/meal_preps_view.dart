@@ -31,11 +31,11 @@ class MealPrepViewState extends State<MealPrepView> {
           final data = snapshot.data;
           if (data == null) {
             return const Center(
-              child: Text("データを取得中です"),
+              child: CircularProgressIndicator(),
             );
           }
           if (data.isEmpty) {
-            return const Center(child: Text("作り置きをしましょう！"));
+            return const Center(child: Text("作り置きを投稿しましょう！"));
           }
           return MealPrepsListView(key: _key, mealPreps: data);
         }));

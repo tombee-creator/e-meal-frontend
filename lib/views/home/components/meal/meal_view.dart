@@ -27,8 +27,11 @@ class MealViewState extends State<MealView> {
           final data = snapshot.data;
           if (data == null) {
             return const Center(
-              child: Text("データを取得中です"),
+              child: CircularProgressIndicator(),
             );
+          }
+          if (data.isEmpty) {
+            return const Center(child: Text("食事を投稿しましょう！"));
           }
           return MealListView(meals: data);
         }));
