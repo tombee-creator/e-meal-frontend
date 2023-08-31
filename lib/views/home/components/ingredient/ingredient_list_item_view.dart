@@ -2,7 +2,6 @@ import 'package:emeal_app/models/ingredient.dart';
 import 'package:emeal_app/models/prep_ingredient_relationship.dart';
 import 'package:emeal_app/services/database.dart';
 import 'package:emeal_app/services/firestore_crud_api.dart';
-import 'package:emeal_app/views/helper/image/image_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -44,9 +43,9 @@ class _IngredientListItemViewState extends State<IngredientListItemView> {
   @override
   Widget build(BuildContext context) {
     final list = <Widget>[];
-    list.add(AspectRatio(
+    list.add(const AspectRatio(
       aspectRatio: 1.0,
-      child: ImageHelper.image(widget.ingredient.url),
+      child: Icon(Icons.inventory, color: Colors.black),
     ));
     list.add(Expanded(
         flex: 5,
