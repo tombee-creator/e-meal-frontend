@@ -1,9 +1,6 @@
-import 'dart:io';
 import 'package:emeal_app/models/ingredient.dart';
 import 'package:emeal_app/models/meal_prep.dart';
 import 'package:emeal_app/models/prep_ingredient_relationship.dart';
-import 'package:uuid/uuid.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:emeal_app/services/authentication.dart';
 import 'package:emeal_app/services/database.dart';
@@ -15,7 +12,6 @@ class MealPrepPostButton extends StatefulWidget {
   final String name;
   final double cost;
   final int times;
-  final File? image;
   final List<Ingredient> ingredients;
 
   const MealPrepPostButton(
@@ -23,7 +19,6 @@ class MealPrepPostButton extends StatefulWidget {
       required this.name,
       required this.cost,
       required this.times,
-      required this.image,
       required this.ingredients});
 
   @override
@@ -36,8 +31,7 @@ class _MealPrepPostButtonState extends State<MealPrepPostButton> {
   ButtonState state = ButtonState.wating;
 
   bool get _isEnabled {
-    return widget.image != null &&
-        state == ButtonState.wating &&
+    return state == ButtonState.wating &&
         widget.name.isNotEmpty &&
         widget.cost != 0.0;
   }
@@ -69,13 +63,9 @@ class _MealPrepPostButtonState extends State<MealPrepPostButton> {
       return;
     }
     setState(() {
-      state = ButtonState.uploadImage;
-    });
-    final url = await uploadImageFile();
-    setState(() {
       state = ButtonState.postData;
     });
-    final mealPrep = await postRecipeData(url);
+    final mealPrep = await postRecipeData("");
     if (mealPrep == null) {
       setState(() {
         state = ButtonState.failed;
@@ -88,47 +78,6 @@ class _MealPrepPostButtonState extends State<MealPrepPostButton> {
     });
     Future.delayed(const Duration(seconds: 1))
         .then((value) => Navigator.of(context).pop());
-  }
-
-  Future<String> uploadImageFile() async {
-    try {
-      final fileBaseName =
-          "${const Uuid().v4()}-${DateTime.now().toIso8601String()}";
-      final storage = FirebaseStorage.instance.ref("$fileBaseName.png");
-      final image = widget.image;
-      if (image == null) {
-        throw UnsupportedError("画像が指定されていません");
-      }
-      final metadata = SettableMetadata(contentType: "image/png");
-      final uploadTask = storage.putFile(image, metadata);
-      uploadTask.snapshotEvents.listen((snapshot) {
-        switch (snapshot.state) {
-          case TaskState.running:
-            setState(() {
-              progress =
-                  snapshot.bytesTransferred.toDouble() / snapshot.totalBytes;
-            });
-            break;
-          case TaskState.paused:
-            // ...
-            break;
-          case TaskState.success:
-            print(storage.name);
-            print(storage.fullPath);
-            break;
-          case TaskState.canceled:
-            // ...
-            break;
-          case TaskState.error:
-            print(snapshot);
-            break;
-        }
-      });
-      final imgUrl = await (await uploadTask).ref.getDownloadURL();
-      return "${imgUrl.replaceAll(Uri.parse(imgUrl).query, "")}alt=media";
-    } catch (e) {
-      rethrow;
-    }
   }
 
   Future<MealPrep?> postRecipeData(String url) async {

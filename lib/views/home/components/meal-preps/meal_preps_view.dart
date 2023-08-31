@@ -25,8 +25,7 @@ class MealPrepViewState extends State<MealPrepView> {
             query: (ref) => ref
                 .orderBy("created", descending: true)
                 .where("user", isEqualTo: Authentication().currentUser.uid)
-                .where("is_used_up", isEqualTo: false)
-                .limit(15)),
+                .where("is_used_up", isEqualTo: false)),
         builder: ((context, snapshot) {
           final data = snapshot.data;
           if (data == null) {

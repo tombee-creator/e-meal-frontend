@@ -34,70 +34,44 @@ class _MealPrepPostViewState extends State<MealPrepPostView> {
 
   @override
   Widget build(BuildContext context) {
-    final src = image;
-    final imageWidget = src == null
-        ? const Icon(Icons.camera)
-        : Image.file(src, fit: BoxFit.cover);
-
     return Column(
       children: [
         Expanded(
-          flex: 2,
-          child: Padding(
-            padding: const EdgeInsets.all(12.0),
-            child: Center(
-              child: GestureDetector(
-                  onTap: () async {
-                    getImage();
-                  },
-                  child: AspectRatio(
-                    aspectRatio: 1.0,
-                    child: imageWidget,
-                  )),
-            ),
-          ),
-        ),
-        Expanded(
-            flex: 2,
             child: Column(
-              children: [
-                MealFieldForm(
-                  hintText: "名前",
-                  icon: Icons.description,
-                  onChange: (name) {
-                    setState(() {
-                      this.name = name;
-                    });
-                  },
-                ),
-                MealFieldForm(
-                  hintText: cost == 0.0 ? "コスト" : "$cost",
-                  icon: Icons.currency_yen,
-                  onChange: (cost) {
-                    final parsedCost = double.tryParse(cost) ?? 0.0;
-                    setState(() {
-                      this.cost = parsedCost;
-                    });
-                  },
-                ),
-                MealFieldForm(
-                  hintText: "使用回数",
-                  icon: Icons.countertops,
-                  onChange: (times) {
-                    final parsedTimes = int.tryParse(times) ?? 1;
-                    setState(() {
-                      this.times = parsedTimes;
-                    });
-                  },
-                ),
-                MealPrepPostButton(
-                    name: name,
-                    image: image,
-                    cost: cost,
-                    times: times,
-                    ingredients: selected)
-              ],
-            ))
+          children: [
+            MealFieldForm(
+              hintText: "名前",
+              icon: Icons.description,
+              onChange: (name) {
+                setState(() {
+                  this.name = name;
+                });
+              },
+            ),
+            MealFieldForm(
+              hintText: cost == 0.0 ? "コスト" : "$cost",
+              icon: Icons.currency_yen,
+              onChange: (cost) {
+                final parsedCost = double.tryParse(cost) ?? 0.0;
+                setState(() {
+                  this.cost = parsedCost;
+                });
+              },
+            ),
+            MealFieldForm(
+              hintText: "使用回数",
+              icon: Icons.countertops,
+              onChange: (times) {
+                final parsedTimes = int.tryParse(times) ?? 1;
+                setState(() {
+                  this.times = parsedTimes;
+                });
+              },
+            ),
+            MealPrepPostButton(
+                name: name, cost: cost, times: times, ingredients: selected)
+          ],
+        ))
       ],
     );
   }

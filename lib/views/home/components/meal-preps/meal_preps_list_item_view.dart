@@ -4,7 +4,6 @@ import 'package:emeal_app/models/meal_prep.dart';
 import 'package:emeal_app/services/database.dart';
 import 'package:emeal_app/models/meal_prep_contains.dart';
 import 'package:emeal_app/services/firestore_crud_api.dart';
-import 'package:emeal_app/views/helper/image/image_helper.dart';
 import 'package:emeal_app/views/home/components/meal-tab/meal_tab_bar_view.dart';
 
 class MealPrepListItemView extends StatefulWidget {
@@ -34,9 +33,9 @@ class _MealPrepListItemViewState extends State<MealPrepListItemView> {
   @override
   Widget build(BuildContext context) {
     final list = <Widget>[];
-    list.add(AspectRatio(
+    list.add(const AspectRatio(
       aspectRatio: 1.0,
-      child: ImageHelper.image(widget.mealPrep.url),
+      child: Icon(Icons.food_bank),
     ));
     list.add(Expanded(
       flex: 5,
