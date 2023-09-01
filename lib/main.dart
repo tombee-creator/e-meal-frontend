@@ -7,7 +7,7 @@ import 'package:emeal_app/services/authentication.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await initializeDateFormatting("ja_JP");
+  await initializeDateFormatting();
   await Authentication().initialize();
   runApp(const MyApp());
 }
