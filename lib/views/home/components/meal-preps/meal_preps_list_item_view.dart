@@ -1,4 +1,4 @@
-import 'package:intl/intl.dart';
+import 'package:emeal_app/views/helper/utils/date_formatter.dart';
 import 'package:flutter/material.dart';
 import 'package:emeal_app/models/meal_prep.dart';
 import 'package:emeal_app/services/database.dart';
@@ -46,8 +46,7 @@ class _MealPrepListItemViewState extends State<MealPrepListItemView> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(widget.mealPrep.name),
-            Text(DateFormat("yyyy/MM/dd HH:mm", "ja_JP")
-                .format(widget.mealPrep.created))
+            Text(DateFormatter().format(widget.mealPrep.created))
           ],
         ),
       ),

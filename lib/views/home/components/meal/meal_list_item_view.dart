@@ -1,7 +1,7 @@
+import 'package:emeal_app/views/helper/utils/date_formatter.dart';
 import 'package:emeal_app/models/meal.dart';
 import 'package:emeal_app/views/helper/image/image_helper.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
 class MealListItemView extends StatelessWidget {
   final Meal recipe;
@@ -13,10 +13,7 @@ class MealListItemView extends StatelessWidget {
     return Card(
         child: Row(
       children: [
-        AspectRatio(
-          aspectRatio: 1.0,
-          child: ImageHelper.image(recipe.url),
-        ),
+        AspectRatio(aspectRatio: 1.0, child: image()),
         Padding(
           padding: const EdgeInsets.all(12.0),
           child: Column(
@@ -24,12 +21,22 @@ class MealListItemView extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(recipe.comment),
-              Text(DateFormat("yyyy/MM/dd HH:mm", "ja_JP")
-                  .format(recipe.created))
+              Text(DateFormatter().format(recipe.created))
             ],
           ),
         ),
       ],
     ));
+  }
+
+  Widget image() {
+    final url = Uri.parse(recipe.url);
+    if (url.hasScheme) {
+      return ImageHelper.image(recipe.url);
+    }
+    return const AspectRatio(
+      aspectRatio: 1.0,
+      child: Icon(Icons.inventory, color: Colors.black),
+    );
   }
 }

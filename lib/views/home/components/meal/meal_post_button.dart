@@ -34,8 +34,7 @@ class _MealPostButtonState extends State<MealPostButton> {
   ButtonState state = ButtonState.wating;
 
   bool get _isEnabled {
-    return widget.image != null &&
-        state == ButtonState.wating &&
+    return state == ButtonState.wating &&
         widget.comment.isNotEmpty &&
         widget.cost != 0.0;
   }
@@ -55,7 +54,7 @@ class _MealPostButtonState extends State<MealPostButton> {
         child: switch (state) {
       ButtonState.wating => const Icon(Icons.post_add),
       ButtonState.uploadImage => CircularProgressIndicator(value: progress),
-      ButtonState.postData => CircularProgressIndicator(),
+      ButtonState.postData => const CircularProgressIndicator(),
       ButtonState.success => const Icon(Icons.check),
       ButtonState.failed => const Icon(Icons.close)
     });
@@ -70,9 +69,11 @@ class _MealPostButtonState extends State<MealPostButton> {
       state = ButtonState.uploadImage;
     });
     final url = await uploadImageFile();
-    setState(() {
-      state = ButtonState.postData;
-    });
+    if (Uri.parse(url).hasScheme) {
+      setState(() {
+        state = ButtonState.postData;
+      });
+    }
     final meal = await postRecipeData(url);
     if (meal == null) {
       setState(() {
@@ -95,7 +96,7 @@ class _MealPostButtonState extends State<MealPostButton> {
       final storage = FirebaseStorage.instance.ref("$fileBaseName.png");
       final image = widget.image;
       if (image == null) {
-        throw UnsupportedError("画像が指定されていません");
+        return "";
       }
       final metadata = SettableMetadata(contentType: "image/png");
       final uploadTask = storage.putFile(image, metadata);

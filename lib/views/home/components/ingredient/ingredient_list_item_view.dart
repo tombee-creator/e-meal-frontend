@@ -1,9 +1,9 @@
+import 'package:emeal_app/views/helper/utils/date_formatter.dart';
 import 'package:emeal_app/models/ingredient.dart';
 import 'package:emeal_app/models/prep_ingredient_relationship.dart';
 import 'package:emeal_app/services/database.dart';
 import 'package:emeal_app/services/firestore_crud_api.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
 class IngredientListItemView extends StatefulWidget {
   final Ingredient ingredient;
@@ -56,8 +56,7 @@ class _IngredientListItemViewState extends State<IngredientListItemView> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(widget.ingredient.name),
-              Text(DateFormat("yyyy/MM/dd HH:mm", "ja_JP")
-                  .format(widget.ingredient.created))
+              Text(DateFormatter().format(widget.ingredient.created))
             ],
           ),
         )));
