@@ -34,9 +34,7 @@ class _MealPostButtonState extends State<MealPostButton> {
   ButtonState state = ButtonState.wating;
 
   bool get _isEnabled {
-    return state == ButtonState.wating &&
-        widget.comment.isNotEmpty &&
-        widget.cost != 0.0;
+    return state == ButtonState.wating && widget.comment.isNotEmpty;
   }
 
   @override
