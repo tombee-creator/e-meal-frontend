@@ -22,8 +22,8 @@ class _CostChartControllerViewState extends State<CostChartControllerView> {
 
   @override
   Widget build(BuildContext context) {
-    final api =
-        Database().provider(FirestoreCRUDApi<Meal>("recipes", Meal.fromJson));
+    final api = Database()
+        .provider(FirestoreCRUDApi<Meal>(Meal.collection, Meal.fromJson));
     final startDate =
         DateTime(focusDate.year, focusDate.month, focusDate.day - 7);
     final endDate =

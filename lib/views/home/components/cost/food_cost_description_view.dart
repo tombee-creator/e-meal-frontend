@@ -1,6 +1,6 @@
 import 'package:emeal_app/services/database.dart';
 import 'package:emeal_app/services/firestore_crud_api.dart';
-import 'package:emeal_app/views/helper/utils/datetime_extension.dart';
+import 'package:emeal_app/views/helper/utils/date_formatter.dart';
 import 'package:flutter/material.dart';
 import 'package:emeal_app/models/meal.dart';
 import 'package:emeal_app/views/home/components/cost/cost_chart_controller.dart';
@@ -18,10 +18,12 @@ class _FoodCostDescriptionViewState extends State<FoodCostDescriptionView> {
 
   @override
   Widget build(BuildContext context) {
-    final api =
-        Database().provider(FirestoreCRUDApi<Meal>("recipes", Meal.fromJson));
+    final api = Database()
+        .provider(FirestoreCRUDApi<Meal>(Meal.collection, Meal.fromJson));
     final start = DateTime(focus.year, focus.month, 1);
     final end = DateTime(focus.year, focus.month + 1, 1);
+    final displayedDate =
+        DateFormatter().format(focus, type: DateFormatType.profileItem);
     return FutureBuilder(
         future: api.list(
             query: (ref) => ref.where("created",
@@ -31,7 +33,7 @@ class _FoodCostDescriptionViewState extends State<FoodCostDescriptionView> {
           final data = snapshot.data ?? [];
           return Column(
             children: [
-              Text("${focus.toFormattedString(format: "yyyy/MM")}の食費"),
+              Text("$displayedDateの食費"),
               const Divider(),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
