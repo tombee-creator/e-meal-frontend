@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'package:emeal_app/models/firebase_user.dart';
 import 'package:emeal_app/models/meal_prep.dart';
-import 'package:emeal_app/models/meal_prep_contains.dart';
 import 'package:emeal_app/services/emeal_crud_api.dart';
 import 'package:uuid/uuid.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -9,7 +8,6 @@ import 'package:flutter/material.dart';
 import 'package:emeal_app/models/meal.dart';
 import 'package:emeal_app/services/authentication.dart';
 import 'package:emeal_app/services/database.dart';
-import 'package:emeal_app/services/firestore_crud_api.dart';
 
 enum ButtonState { wating, uploadImage, postData, success, failed }
 
@@ -81,7 +79,6 @@ class _MealPostButtonState extends State<MealPostButton> {
       });
       return;
     }
-    await postMealPrepListData(meal);
     setState(() {
       state = ButtonState.success;
     });
@@ -134,39 +131,15 @@ class _MealPostButtonState extends State<MealPostButton> {
     final api =
         Database().provider(EMealCrudApi<Meal>(Meal.collection, Meal.fromJson));
     return await api.post((id) => Meal(
-        id,
-        FirebaseUser.from(Authentication().currentUser),
-        widget.comment,
-        url,
-        widget.cost,
-        DateTime.now(),
-        DateTime.now(), []).toJson());
-  }
-
-  Future<void> postMealPrepListData(Meal meal) async {
-    final api = Database().provider(FirestoreCRUDApi<MealPrepContains>(
-        MealPrepContains.collection, MealPrepContains.fromJson));
-    final ids = widget.mealPreps.map((item) => item.id).toSet();
-    for (final id in ids) {
-      final list = widget.mealPreps.where((item) => item.id == id);
-      final item = list.last;
-      await putMealPrep(item);
-      await api.post((id) => MealPrepContains(
-              id,
-              FirebaseUser.from(Authentication().currentUser),
-              meal,
-              item,
-              list.length,
-              DateTime.now(),
-              DateTime.now())
-          .toJson());
-    }
-  }
-
-  Future<void> putMealPrep(MealPrep prep) async {
-    final api = Database().provider(
-        FirestoreCRUDApi<MealPrep>(MealPrep.collection, MealPrep.fromJson));
-    await api.put(prep.id, prep, (item) => item.toJson());
+            id,
+            FirebaseUser.from(Authentication().currentUser),
+            widget.comment,
+            url,
+            widget.cost,
+            DateTime.now(),
+            DateTime.now(),
+            widget.mealPreps)
+        .toJson());
   }
 
   Future<bool> confirmUsedUp() async {
