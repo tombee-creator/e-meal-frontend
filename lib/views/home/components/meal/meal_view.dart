@@ -12,23 +12,30 @@ class MealView extends StatefulWidget {
 }
 
 class MealViewState extends State<MealView> {
+  List<Meal>? data;
+
+  @override
+  void didChangeDependencies() {
+    Database()
+        .provider<Meal>(EMealCrudApi(Meal.collection, Meal.fromJson))
+        .list()
+        .then((value) => setState(() {
+              data = value;
+            }));
+    super.didChangeDependencies();
+  }
+
   @override
   Widget build(BuildContext context) {
-    final api =
-        Database().provider<Meal>(EMealCrudApi(Meal.collection, Meal.fromJson));
-    return FutureBuilder(
-        future: api.list(),
-        builder: ((context, snapshot) {
-          final data = snapshot.data;
-          if (data == null) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-          if (data.isEmpty) {
-            return const Center(child: Text("食事を投稿しましょう！"));
-          }
-          return MealListView(meals: data);
-        }));
+    final data = this.data;
+    if (data == null) {
+      return const Center(
+        child: CircularProgressIndicator(),
+      );
+    }
+    if (data.isEmpty) {
+      return const Center(child: Text("食事を投稿しましょう！"));
+    }
+    return MealListView(meals: data);
   }
 }

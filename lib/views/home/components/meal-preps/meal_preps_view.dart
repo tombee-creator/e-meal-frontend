@@ -15,23 +15,32 @@ class MealPrepView extends StatefulWidget {
 
 class MealPrepViewState extends State<MealPrepView> {
   final _key = GlobalKey<MealPrepViewState>();
+
+  List<MealPrep>? data;
+
+  @override
+  void didChangeDependencies() {
+    Database()
+        .provider<MealPrep>(
+            EMealCrudApi(MealPrep.collection, MealPrep.fromJson))
+        .list()
+        .then((value) => setState(() {
+              data = value;
+            }));
+    super.didChangeDependencies();
+  }
+
   @override
   Widget build(BuildContext context) {
-    final api = Database().provider<MealPrep>(
-        EMealCrudApi(MealPrep.collection, MealPrep.fromJson));
-    return FutureBuilder(
-        future: api.list(),
-        builder: ((context, snapshot) {
-          final data = snapshot.data;
-          if (data == null) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-          if (data.isEmpty) {
-            return const Center(child: Text("作り置きを投稿しましょう！"));
-          }
-          return MealPrepsListView(key: _key, mealPreps: data);
-        }));
+    final data = this.data;
+    if (data == null) {
+      return const Center(
+        child: CircularProgressIndicator(),
+      );
+    }
+    if (data.isEmpty) {
+      return const Center(child: Text("作り置きを投稿しましょう！"));
+    }
+    return MealPrepsListView(key: _key, mealPreps: data);
   }
 }
