@@ -1,12 +1,10 @@
 import 'package:emeal_app/models/firebase_user.dart';
 import 'package:emeal_app/models/ingredient.dart';
 import 'package:emeal_app/models/meal_prep.dart';
-import 'package:emeal_app/models/prep_ingredient_relationship.dart';
 import 'package:emeal_app/services/emeal_crud_api.dart';
 import 'package:flutter/material.dart';
 import 'package:emeal_app/services/authentication.dart';
 import 'package:emeal_app/services/database.dart';
-import 'package:emeal_app/services/firestore_crud_api.dart';
 
 enum ButtonState { wating, uploadImage, postData, success, failed }
 
@@ -74,7 +72,6 @@ class _MealPrepPostButtonState extends State<MealPrepPostButton> {
       });
       return;
     }
-    await postIngredientListData(mealPrep);
     setState(() {
       state = ButtonState.success;
     });
@@ -84,7 +81,7 @@ class _MealPrepPostButtonState extends State<MealPrepPostButton> {
 
   Future<MealPrep?> postRecipeData(String url) async {
     final api = Database().provider(
-        FirestoreCRUDApi<MealPrep>(MealPrep.collection, MealPrep.fromJson));
+        EMealCrudApi<MealPrep>(MealPrep.collection, MealPrep.fromJson));
     return await api.post((id) => MealPrep(
             id,
             FirebaseUser.from(Authentication().currentUser),
@@ -96,27 +93,8 @@ class _MealPrepPostButtonState extends State<MealPrepPostButton> {
             DateTime.now(),
             DateTime.now(),
             0)
+        .setIngredients(widget.ingredients)
         .toJson());
-  }
-
-  postIngredientListData(MealPrep mealPrep) async {
-    final api = Database().provider(FirestoreCRUDApi<PrepIngredientRelation>(
-        PrepIngredientRelation.collection, PrepIngredientRelation.fromJson));
-    final ids = widget.ingredients.map((item) => item.id).toSet();
-    for (final id in ids) {
-      final list = widget.ingredients.where((item) => item.id == id);
-      final item = list.last;
-      await putIngredient(item);
-      await api.post((id) => PrepIngredientRelation(
-              id,
-              FirebaseUser.from(Authentication().currentUser),
-              item,
-              mealPrep,
-              list.length,
-              DateTime.now(),
-              DateTime.now())
-          .toJson());
-    }
   }
 
   Future<void> putIngredient(Ingredient ingredient) async {

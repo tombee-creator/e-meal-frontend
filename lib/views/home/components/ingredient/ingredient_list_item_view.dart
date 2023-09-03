@@ -53,7 +53,7 @@ class _IngredientListItemViewState extends State<IngredientListItemView> {
       ));
     }
     return GestureDetector(
-        onTap: onTap,
+        onTap: widget.ingredient.isUsedUp ? null : onTap,
         child: Card(
             color: widget.count > 0
                 ? Theme.of(context).colorScheme.background
@@ -62,8 +62,7 @@ class _IngredientListItemViewState extends State<IngredientListItemView> {
   }
 
   void onTap() {
-    final usedCount = widget.ingredient.usedCount;
-    final countUsedUp = widget.count + usedCount;
+    final countUsedUp = widget.count + widget.ingredient.usedCount;
     if (countUsedUp >= widget.ingredient.times) {
       widget.onRemove(widget.ingredient);
     } else {
