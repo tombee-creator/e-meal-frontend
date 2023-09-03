@@ -117,10 +117,9 @@ class _MealPrepListItemViewState extends State<MealPrepListItemView> {
         .list(
             query: (ref) =>
                 ref.where("meal_prep", isEqualTo: widget.mealPrep.id));
-    final contains = await Future.wait(items);
-    if (contains.isEmpty) {
+    if (items.isEmpty) {
       return 0;
     }
-    return contains.map((contain) => contain.count).reduce((v1, v2) => v1 + v2);
+    return items.map((contain) => contain.count).reduce((v1, v2) => v1 + v2);
   }
 }

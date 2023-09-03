@@ -1,6 +1,8 @@
+import 'package:emeal_app/models/firebase_user.dart';
 import 'package:emeal_app/models/ingredient.dart';
 import 'package:emeal_app/models/meal_prep.dart';
 import 'package:emeal_app/models/prep_ingredient_relationship.dart';
+import 'package:emeal_app/services/emeal_crud_api.dart';
 import 'package:flutter/material.dart';
 import 'package:emeal_app/services/authentication.dart';
 import 'package:emeal_app/services/database.dart';
@@ -85,7 +87,7 @@ class _MealPrepPostButtonState extends State<MealPrepPostButton> {
         FirestoreCRUDApi<MealPrep>(MealPrep.collection, MealPrep.fromJson));
     return await api.post((id) => MealPrep(
             id,
-            Authentication().currentUser,
+            FirebaseUser.from(Authentication().currentUser),
             widget.name,
             url,
             widget.cost,
@@ -97,10 +99,8 @@ class _MealPrepPostButtonState extends State<MealPrepPostButton> {
   }
 
   postIngredientListData(MealPrep mealPrep) async {
-    final api = Database().provider(
-        FirestoreCRUDApi<Future<PrepIngredientRelation>>(
-            PrepIngredientRelation.collection,
-            PrepIngredientRelation.fromJson));
+    final api = Database().provider(FirestoreCRUDApi<PrepIngredientRelation>(
+        PrepIngredientRelation.collection, PrepIngredientRelation.fromJson));
     final ids = widget.ingredients.map((item) => item.id).toSet();
     for (final id in ids) {
       final list = widget.ingredients.where((item) => item.id == id);
@@ -108,7 +108,7 @@ class _MealPrepPostButtonState extends State<MealPrepPostButton> {
       await putIngredient(item);
       await api.post((id) => PrepIngredientRelation(
               id,
-              Authentication().currentUser,
+              FirebaseUser.from(Authentication().currentUser),
               item,
               mealPrep,
               list.length,
@@ -119,8 +119,8 @@ class _MealPrepPostButtonState extends State<MealPrepPostButton> {
   }
 
   Future<void> putIngredient(Ingredient ingredient) async {
-    final api = Database().provider(FirestoreCRUDApi<Ingredient>(
-        Ingredient.collection, Ingredient.fromJson));
+    final api = Database().provider(
+        EMealCrudApi<Ingredient>(Ingredient.collection, Ingredient.fromJson));
     await api.put(ingredient.id, ingredient, (item) => item.toJson());
   }
 

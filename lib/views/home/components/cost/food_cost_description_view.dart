@@ -1,5 +1,5 @@
 import 'package:emeal_app/services/database.dart';
-import 'package:emeal_app/services/firestore_crud_api.dart';
+import 'package:emeal_app/services/emeal_crud_api.dart';
 import 'package:emeal_app/views/helper/utils/date_formatter.dart';
 import 'package:flutter/material.dart';
 import 'package:emeal_app/models/meal.dart';
@@ -18,8 +18,8 @@ class _FoodCostDescriptionViewState extends State<FoodCostDescriptionView> {
 
   @override
   Widget build(BuildContext context) {
-    final api = Database()
-        .provider(FirestoreCRUDApi<Meal>(Meal.collection, Meal.fromJson));
+    final api =
+        Database().provider(EMealCrudApi<Meal>(Meal.collection, Meal.fromJson));
     final start = DateTime(focus.year, focus.month, 1);
     final end = DateTime(focus.year, focus.month + 1, 1);
     final displayedDate =

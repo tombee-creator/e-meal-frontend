@@ -1,5 +1,5 @@
-import 'package:emeal_app/models/converters/user_converter.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:emeal_app/models/converters/firebase_user_converter.dart';
+import 'package:emeal_app/models/firebase_user.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'ingredient.g.dart';
@@ -10,8 +10,8 @@ class Ingredient {
 
   final String id;
 
-  @JsonKey(fromJson: UserConverter.fromJson, toJson: UserConverter.toJson)
-  final User user;
+  @FirebaseUserConverter()
+  final FirebaseUser user;
 
   final String name;
 

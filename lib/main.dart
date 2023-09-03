@@ -1,3 +1,4 @@
+import 'package:emeal_app/settings/settings_info.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:emeal_app/generated/l10n.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +8,7 @@ import 'package:emeal_app/services/authentication.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await SettingsInfo().load();
   await initializeDateFormatting();
   await Authentication().initialize();
   runApp(const MyApp());

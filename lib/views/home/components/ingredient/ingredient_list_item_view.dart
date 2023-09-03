@@ -111,10 +111,9 @@ class _IngredientListItemViewState extends State<IngredientListItemView> {
         .list(
             query: (ref) =>
                 ref.where("ingredient", isEqualTo: widget.ingredient.id));
-    final contains = await Future.wait(items);
     if (items.isEmpty) {
       return 0;
     }
-    return contains.map((contain) => contain.count).reduce((v1, v2) => v1 + v2);
+    return items.map((contain) => contain.count).reduce((v1, v2) => v1 + v2);
   }
 }

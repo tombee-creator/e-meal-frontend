@@ -8,7 +8,7 @@ part of 'meal.dart';
 
 Meal _$MealFromJson(Map<String, dynamic> json) => Meal(
       json['id'] as String,
-      UserConverter.fromJson(json['user'] as String),
+      FirebaseUser.fromJson(json['user'] as Map<String, dynamic>),
       json['comment'] as String,
       json['url'] as String,
       (json['cost'] as num).toDouble(),
@@ -18,7 +18,7 @@ Meal _$MealFromJson(Map<String, dynamic> json) => Meal(
 
 Map<String, dynamic> _$MealToJson(Meal instance) => <String, dynamic>{
       'id': instance.id,
-      'user': UserConverter.toJson(instance.user),
+      'user': instance.user,
       'comment': instance.comment,
       'url': instance.url,
       'cost': instance.cost,

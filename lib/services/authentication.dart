@@ -28,6 +28,10 @@ class Authentication {
     }
   }
 
+  Future<String?> getToken({bool forceRefresh = false}) async {
+    return await FirebaseAuth.instance.currentUser?.getIdToken(forceRefresh);
+  }
+
   bool get isAuthenticated => FirebaseAuth.instance.currentUser != null;
 
   Future<UserCredential> login(String email, String password) async {

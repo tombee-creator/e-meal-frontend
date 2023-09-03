@@ -1,7 +1,7 @@
+import 'package:emeal_app/services/emeal_crud_api.dart';
 import 'package:flutter/material.dart';
 import 'package:emeal_app/models/meal.dart';
 import 'package:emeal_app/services/database.dart';
-import 'package:emeal_app/services/firestore_crud_api.dart';
 import 'package:emeal_app/views/home/components/cost/cost_chart_view.dart';
 
 class CostChartControllerView extends StatefulWidget {
@@ -22,8 +22,8 @@ class _CostChartControllerViewState extends State<CostChartControllerView> {
 
   @override
   Widget build(BuildContext context) {
-    final api = Database()
-        .provider(FirestoreCRUDApi<Meal>(Meal.collection, Meal.fromJson));
+    final api =
+        Database().provider(EMealCrudApi<Meal>(Meal.collection, Meal.fromJson));
     final startDate =
         DateTime(focusDate.year, focusDate.month, focusDate.day - 7);
     final endDate =

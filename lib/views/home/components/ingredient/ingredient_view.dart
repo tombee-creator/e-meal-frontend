@@ -1,7 +1,7 @@
 import 'package:emeal_app/models/ingredient.dart';
 import 'package:emeal_app/services/authentication.dart';
 import 'package:emeal_app/services/database.dart';
-import 'package:emeal_app/services/firestore_crud_api.dart';
+import 'package:emeal_app/services/emeal_crud_api.dart';
 import 'package:emeal_app/views/home/components/ingredient/ingredient_list_view.dart';
 import 'package:flutter/material.dart';
 
@@ -24,7 +24,7 @@ class IngredientViewState extends State<IngredientView> {
   @override
   Widget build(BuildContext context) {
     final api = Database().provider<Ingredient>(
-        FirestoreCRUDApi(Ingredient.collection, Ingredient.fromJson));
+        EMealCrudApi(Ingredient.collection, Ingredient.fromJson));
     return FutureBuilder(
         future: api.list(
             query: (ref) => ref

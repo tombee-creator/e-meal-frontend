@@ -1,8 +1,9 @@
+import 'package:emeal_app/models/firebase_user.dart';
 import 'package:emeal_app/models/ingredient.dart';
+import 'package:emeal_app/services/emeal_crud_api.dart';
 import 'package:flutter/material.dart';
 import 'package:emeal_app/services/authentication.dart';
 import 'package:emeal_app/services/database.dart';
-import 'package:emeal_app/services/firestore_crud_api.dart';
 
 enum ButtonState { wating, uploadImage, postData, success, failed }
 
@@ -44,7 +45,7 @@ class _IngredientPostButtonState extends State<IngredientPostButton> {
         child: switch (state) {
       ButtonState.wating => const Icon(Icons.post_add),
       ButtonState.uploadImage => CircularProgressIndicator(value: progress),
-      ButtonState.postData => CircularProgressIndicator(),
+      ButtonState.postData => const CircularProgressIndicator(),
       ButtonState.success => const Icon(Icons.check),
       ButtonState.failed => const Icon(Icons.close)
     });
@@ -63,11 +64,11 @@ class _IngredientPostButtonState extends State<IngredientPostButton> {
   }
 
   Future postRecipeData(String url) async {
-    final api = Database().provider(FirestoreCRUDApi<Ingredient>(
-        Ingredient.collection, Ingredient.fromJson));
+    final api = Database().provider(
+        EMealCrudApi<Ingredient>(Ingredient.collection, Ingredient.fromJson));
     await api.post((id) => Ingredient(
             id,
-            Authentication().currentUser,
+            FirebaseUser.from(Authentication().currentUser),
             widget.name,
             url,
             widget.cost,
