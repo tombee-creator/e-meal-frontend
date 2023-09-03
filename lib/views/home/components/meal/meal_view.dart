@@ -19,9 +19,13 @@ class MealViewState extends State<MealView> {
     Database()
         .provider<Meal>(EMealCrudApi(Meal.collection, Meal.fromJson))
         .list()
-        .then((value) => setState(() {
-              data = value;
-            }));
+        .then((value) {
+      if (mounted) {
+        setState(() {
+          data = value;
+        });
+      }
+    });
     super.didChangeDependencies();
   }
 

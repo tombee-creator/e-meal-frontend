@@ -28,9 +28,13 @@ class IngredientViewState extends State<IngredientView> {
         .provider<Ingredient>(
             EMealCrudApi(Ingredient.collection, Ingredient.fromJson))
         .list()
-        .then((value) => setState(() {
-              data = value;
-            }));
+        .then((value) {
+      if (mounted) {
+        setState(() {
+          data = value;
+        });
+      }
+    });
     super.didChangeDependencies();
   }
 
@@ -42,11 +46,12 @@ class IngredientViewState extends State<IngredientView> {
         child: CircularProgressIndicator(),
       );
     }
-    if (data.isEmpty) {
+    final availableData = data.where((prep) => !prep.isUsedUp).toList();
+    if (availableData.isEmpty) {
       return const Center(child: Text("食材を投稿しましょう！"));
     }
     return IngredientListView(
-      ingredients: data,
+      ingredients: availableData,
       selected: widget.selected,
       onSelected: widget.onSelected,
       onRemove: widget.onRemove,

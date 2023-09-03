@@ -24,9 +24,13 @@ class MealPrepViewState extends State<MealPrepView> {
         .provider<MealPrep>(
             EMealCrudApi(MealPrep.collection, MealPrep.fromJson))
         .list()
-        .then((value) => setState(() {
-              data = value;
-            }));
+        .then((value) {
+      if (mounted) {
+        setState(() {
+          data = value;
+        });
+      }
+    });
     super.didChangeDependencies();
   }
 
@@ -38,9 +42,10 @@ class MealPrepViewState extends State<MealPrepView> {
         child: CircularProgressIndicator(),
       );
     }
-    if (data.isEmpty) {
+    final availableData = data.where((prep) => !prep.isUsedUp).toList();
+    if (availableData.isEmpty) {
       return const Center(child: Text("作り置きを投稿しましょう！"));
     }
-    return MealPrepsListView(key: _key, mealPreps: data);
+    return MealPrepsListView(key: _key, mealPreps: availableData);
   }
 }
