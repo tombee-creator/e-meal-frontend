@@ -14,13 +14,20 @@ class PrepIngredientRelation {
 
   final String id;
 
-  @FirebaseUserConverter()
+  @JsonKey(
+      fromJson: FirebaseUserConverter.fromJson,
+      toJson: FirebaseUserConverter.toJson)
   final FirebaseUser user;
 
-  @IngredientConverter()
+  @JsonKey(
+      fromJson: IngredientConverter.fromJson,
+      toJson: IngredientConverter.toJson)
   final Ingredient ingredient;
 
-  @MealPrepConverter()
+  @JsonKey(
+      name: "meal_prep",
+      fromJson: MealPrepConverter.fromJson,
+      toJson: MealPrepConverter.toJson)
   final MealPrep mealPrep;
 
   final int count;

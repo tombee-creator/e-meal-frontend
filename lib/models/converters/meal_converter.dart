@@ -1,15 +1,9 @@
-import 'dart:convert';
-
 import 'package:emeal_app/models/meal.dart';
-import 'package:json_annotation/json_annotation.dart';
 
-class MealConverter implements JsonConverter<Meal?, String?> {
+class MealConverter {
   const MealConverter();
 
-  @override
-  Meal? fromJson(String? text) =>
-      Meal.fromJson(json.decode(text ?? "") as Map<String, dynamic>);
+  static Meal fromJson(Map<String, dynamic> data) => Meal.fromJson(data);
 
-  @override
-  String? toJson(Meal? object) => object?.id;
+  static String toJson(Meal object) => object.id;
 }

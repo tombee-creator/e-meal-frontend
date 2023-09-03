@@ -10,7 +10,9 @@ class Ingredient {
 
   final String id;
 
-  @FirebaseUserConverter()
+  @JsonKey(
+      fromJson: FirebaseUserConverter.fromJson,
+      toJson: FirebaseUserConverter.toJson)
   final FirebaseUser user;
 
   final String name;
@@ -21,12 +23,14 @@ class Ingredient {
 
   final int times;
 
+  @JsonKey(name: "is_used_up")
   final bool isUsedUp;
 
   final DateTime created;
 
   final DateTime updated;
 
+  @JsonKey(name: "used_count")
   final int usedCount;
 
   Ingredient(this.id, this.user, this.name, this.url, this.cost, this.times,

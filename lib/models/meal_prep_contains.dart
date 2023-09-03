@@ -1,6 +1,6 @@
 import 'package:emeal_app/models/converters/firebase_user_converter.dart';
-import 'package:emeal_app/models/converters/ingredient_converter.dart';
 import 'package:emeal_app/models/converters/meal_converter.dart';
+import 'package:emeal_app/models/converters/meal_prep_converter.dart';
 import 'package:emeal_app/models/firebase_user.dart';
 import 'package:emeal_app/models/meal.dart';
 import 'package:emeal_app/models/meal_prep.dart';
@@ -14,13 +14,18 @@ class MealPrepContains {
 
   final String id;
 
-  @FirebaseUserConverter()
+  @JsonKey(
+      fromJson: FirebaseUserConverter.fromJson,
+      toJson: FirebaseUserConverter.toJson)
   final FirebaseUser user;
 
-  @MealConverter()
+  @JsonKey(fromJson: MealConverter.fromJson, toJson: MealConverter.toJson)
   final Meal meal;
 
-  @IngredientConverter()
+  @JsonKey(
+      name: "meal_prep",
+      fromJson: MealPrepConverter.fromJson,
+      toJson: MealPrepConverter.toJson)
   final MealPrep mealPrep;
 
   final int count;

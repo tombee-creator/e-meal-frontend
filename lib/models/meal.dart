@@ -11,7 +11,9 @@ class Meal {
 
   final String id;
 
-  @FirebaseUserConverter()
+  @JsonKey(
+      fromJson: FirebaseUserConverter.fromJson,
+      toJson: FirebaseUserConverter.toJson)
   final FirebaseUser user;
 
   final String comment;

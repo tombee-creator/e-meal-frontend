@@ -1,15 +1,10 @@
-import 'dart:convert';
-
 import 'package:emeal_app/models/ingredient.dart';
-import 'package:json_annotation/json_annotation.dart';
 
-class IngredientConverter implements JsonConverter<Ingredient?, String?> {
+class IngredientConverter {
   const IngredientConverter();
 
-  @override
-  Ingredient? fromJson(String? text) =>
-      Ingredient.fromJson(json.decode(text ?? "") as Map<String, dynamic>);
+  static Ingredient fromJson(Map<String, dynamic> data) =>
+      Ingredient.fromJson(data);
 
-  @override
-  String? toJson(Ingredient? object) => object?.id;
+  static String toJson(Ingredient object) => object.id;
 }
