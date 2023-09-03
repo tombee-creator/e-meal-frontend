@@ -1,3 +1,5 @@
+import 'dart:convert' show json;
+
 import 'package:emeal_app/models/converters/firebase_user_converter.dart';
 import 'package:emeal_app/models/firebase_user.dart';
 import 'package:emeal_app/models/meal_prep.dart';

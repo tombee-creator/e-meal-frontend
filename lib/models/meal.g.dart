@@ -27,5 +27,5 @@ Map<String, dynamic> _$MealToJson(Meal instance) => <String, dynamic>{
       'cost': instance.cost.toString(),
       'created': instance.created.toIso8601String(),
       'updated': instance.updated.toIso8601String(),
-      'preps': instance.preps.map((prep) => prep.id).toList().toString(),
+      'preps': json.encode(instance.preps.map((prep) => prep.id).toList()),
     };

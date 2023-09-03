@@ -24,10 +24,12 @@ Map<String, dynamic> _$MealPrepToJson(MealPrep instance) => <String, dynamic>{
       'user': FirebaseUserConverter.toJson(instance.user),
       'name': instance.name,
       'url': instance.url,
-      'cost': instance.cost,
-      'times': instance.times,
-      'is_used_up': instance.isUsedUp,
+      'cost': instance.cost.toString(),
+      'times': instance.times.toString(),
+      'is_used_up': instance.isUsedUp.toString(),
       'created': instance.created.toIso8601String(),
       'updated': instance.updated.toIso8601String(),
-      'used_count': instance.usedCount,
+      'used_count': instance.usedCount.toString(),
+      'recipe':
+          json.encode(instance.recipe?.map((item) => item.toJson()).toList())
     };
