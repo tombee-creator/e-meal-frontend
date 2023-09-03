@@ -52,6 +52,7 @@ dependencies:
   path_provider: ^2.1.0
   http: ^0.13.6
   intl: ^0.18.0
+  xml: ^6.3.0
 
 dev_dependencies:
   flutter_test:
@@ -70,6 +71,8 @@ dev_dependencies:
 # following page: https://dart.dev/tools/pub/pubspec
 # The following section is specific to Flutter packages.
 flutter:
+  assets:
+    - assets/settings/
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
