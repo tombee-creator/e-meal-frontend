@@ -27,17 +27,16 @@ class MealPrep {
 
   final DateTime updated;
 
-  final int? usedCount;
+  final int usedCount;
 
-  MealPrep usedUp() =>
-      MealPrep(id, user, name, url, cost, times, true, created, DateTime.now());
+  MealPrep usedUp() => MealPrep(id, user, name, url, cost, times, true, created,
+      DateTime.now(), usedCount);
 
   factory MealPrep.fromJson(Map<String, dynamic> json) =>
       _$MealPrepFromJson(json);
 
   MealPrep(this.id, this.user, this.name, this.url, this.cost, this.times,
-      this.isUsedUp, this.created, this.updated,
-      {this.usedCount});
+      this.isUsedUp, this.created, this.updated, this.usedCount);
 
   Map<String, dynamic> toJson() => _$MealPrepToJson(this);
 }

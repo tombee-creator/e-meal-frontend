@@ -75,7 +75,8 @@ class _IngredientPostButtonState extends State<IngredientPostButton> {
             widget.times,
             false,
             DateTime.now(),
-            DateTime.now())
+            DateTime.now(),
+            0)
         .toJson());
   }
 }

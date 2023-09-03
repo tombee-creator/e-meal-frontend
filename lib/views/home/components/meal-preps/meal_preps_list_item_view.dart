@@ -1,9 +1,6 @@
 import 'package:emeal_app/views/helper/utils/date_formatter.dart';
 import 'package:flutter/material.dart';
 import 'package:emeal_app/models/meal_prep.dart';
-import 'package:emeal_app/services/database.dart';
-import 'package:emeal_app/models/meal_prep_contains.dart';
-import 'package:emeal_app/services/firestore_crud_api.dart';
 import 'package:emeal_app/views/home/components/meal-tab/meal_tab_bar_view.dart';
 
 class MealPrepListItemView extends StatefulWidget {
@@ -18,18 +15,6 @@ class MealPrepListItemView extends StatefulWidget {
 }
 
 class _MealPrepListItemViewState extends State<MealPrepListItemView> {
-  int? usedCount;
-
-  @override
-  void didChangeDependencies() {
-    getUsedCount().then((value) {
-      if (mounted) {
-        setState(() => usedCount = value);
-      }
-    });
-    super.didChangeDependencies();
-  }
-
   @override
   Widget build(BuildContext context) {
     final list = <Widget>[];
@@ -64,7 +49,7 @@ class _MealPrepListItemViewState extends State<MealPrepListItemView> {
       ));
     }
     return GestureDetector(
-        onTap: onTap(),
+        onTap: onTap,
         child: Card(
             color: widget.count > 0
                 ? Theme.of(context).colorScheme.background
@@ -88,38 +73,17 @@ class _MealPrepListItemViewState extends State<MealPrepListItemView> {
     });
   }
 
-  void Function()? onTap() {
-    if (usedCount == null) {
-      return null;
-    }
-    return () {
-      final usedCount = this.usedCount;
-      if (usedCount == null) {
-        return;
-      }
-      final usedUpCount = widget.count + usedCount;
-      if (usedUpCount >= widget.mealPrep.times) {
-        onRemove(context, widget.mealPrep);
+  void onTap() {
+    final usedCount = widget.mealPrep.usedCount;
+    final usedUpCount = widget.count + usedCount;
+    if (usedUpCount >= widget.mealPrep.times) {
+      onRemove(context, widget.mealPrep);
+    } else {
+      if (usedUpCount < widget.mealPrep.times - 1) {
+        onSelected(context, widget.mealPrep);
       } else {
-        if (usedUpCount < widget.mealPrep.times - 1) {
-          onSelected(context, widget.mealPrep);
-        } else {
-          onSelected(context, widget.mealPrep.usedUp());
-        }
+        onSelected(context, widget.mealPrep.usedUp());
       }
-    };
-  }
-
-  Future<int> getUsedCount() async {
-    final items = await Database()
-        .provider(FirestoreCRUDApi(
-            MealPrepContains.collection, MealPrepContains.fromJson))
-        .list(
-            query: (ref) =>
-                ref.where("meal_prep", isEqualTo: widget.mealPrep.id));
-    if (items.isEmpty) {
-      return 0;
     }
-    return items.map((contain) => contain.count).reduce((v1, v2) => v1 + v2);
   }
 }

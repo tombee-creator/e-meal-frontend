@@ -27,11 +27,13 @@ class Ingredient {
 
   final DateTime updated;
 
-  Ingredient(this.id, this.user, this.name, this.url, this.cost, this.times,
-      this.isUsedUp, this.created, this.updated);
+  final int usedCount;
 
-  Ingredient usedUp() => Ingredient(
-      id, user, name, url, cost, times, true, created, DateTime.now());
+  Ingredient(this.id, this.user, this.name, this.url, this.cost, this.times,
+      this.isUsedUp, this.created, this.updated, this.usedCount);
+
+  Ingredient usedUp() => Ingredient(id, user, name, url, cost, times, true,
+      created, DateTime.now(), usedCount);
 
   factory Ingredient.fromJson(Map<String, dynamic> json) =>
       _$IngredientFromJson(json);

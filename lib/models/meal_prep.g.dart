@@ -7,19 +7,16 @@ part of 'meal_prep.dart';
 // **************************************************************************
 
 MealPrep _$MealPrepFromJson(Map<String, dynamic> json) => MealPrep(
-      json['id'] as String,
-      FirebaseUser.fromJson(json['user'] as Map<String, dynamic>),
-      json['name'] as String,
-      json['url'] as String,
-      (json['cost'] as num).toDouble(),
-      json['times'] as int,
-      json['isUsedUp'] as bool,
-      DateTime.parse(json['created'] as String),
-      DateTime.parse(json['updated'] as String),
-      usedCount: json.containsKey('used_count')
-          ? (json['used_count'] as num).toInt()
-          : null,
-    );
+    json['id'] as String,
+    FirebaseUser.fromJson(json['user'] as Map<String, dynamic>),
+    json['name'] as String,
+    json['url'] as String,
+    (json['cost'] as num).toDouble(),
+    json['times'] as int,
+    json['isUsedUp'] as bool,
+    DateTime.parse(json['created'] as String),
+    DateTime.parse(json['updated'] as String),
+    (json['used_count'] as num).toInt());
 
 Map<String, dynamic> _$MealPrepToJson(MealPrep instance) => <String, dynamic>{
       'id': instance.id,
