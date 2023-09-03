@@ -1,8 +1,8 @@
+import 'package:emeal_app/services/emeal_crud_api.dart';
 import 'package:emeal_app/views/home/components/meal/meal_post_view.dart';
 import 'package:flutter/material.dart';
 import 'package:emeal_app/models/meal.dart';
 import 'package:emeal_app/services/database.dart';
-import 'package:emeal_app/services/firestore_crud_api.dart';
 import 'package:emeal_app/views/home/components/meal/meal_detail_view.dart';
 
 class MealPage extends StatelessWidget {
@@ -14,8 +14,8 @@ class MealPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final id = this.id;
-    final api = Database()
-        .provider(FirestoreCRUDApi<Meal>(Meal.collection, Meal.fromJson));
+    final api =
+        Database().provider(EMealCrudApi<Meal>(Meal.collection, Meal.fromJson));
     if (id == null) {
       return Scaffold(
           appBar: AppBar(

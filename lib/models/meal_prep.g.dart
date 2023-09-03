@@ -16,6 +16,7 @@ MealPrep _$MealPrepFromJson(Map<String, dynamic> json) => MealPrep(
       json['isUsedUp'] as bool,
       DateTime.parse(json['created'] as String),
       DateTime.parse(json['updated'] as String),
+      usedCount: (json['used_count'] as num).toInt(),
     );
 
 Map<String, dynamic> _$MealPrepToJson(MealPrep instance) => <String, dynamic>{

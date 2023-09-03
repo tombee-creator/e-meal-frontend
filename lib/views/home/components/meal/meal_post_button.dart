@@ -134,14 +134,13 @@ class _MealPostButtonState extends State<MealPostButton> {
     final api =
         Database().provider(EMealCrudApi<Meal>(Meal.collection, Meal.fromJson));
     return await api.post((id) => Meal(
-            id,
-            FirebaseUser.from(Authentication().currentUser),
-            widget.comment,
-            url,
-            widget.cost,
-            DateTime.now(),
-            DateTime.now())
-        .toJson());
+        id,
+        FirebaseUser.from(Authentication().currentUser),
+        widget.comment,
+        url,
+        widget.cost,
+        DateTime.now(),
+        DateTime.now(), []).toJson());
   }
 
   Future<void> postMealPrepListData(Meal meal) async {

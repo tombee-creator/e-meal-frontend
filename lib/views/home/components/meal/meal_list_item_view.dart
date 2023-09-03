@@ -10,6 +10,7 @@ class MealListItemView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // print(recipe.preps);
     return Card(
         child: Row(
       children: [

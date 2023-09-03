@@ -14,9 +14,18 @@ class EMealCrudApi<T> implements CRUDApi<T> {
   EMealCrudApi(this.collection, this.converter);
 
   @override
-  Future<T?> get(String id) {
-    // TODO: implement get
-    throw UnimplementedError();
+  Future<T?> get(String id) async {
+    final backendUrl = SettingsInfo().backendUrl;
+    final collection = this.collection;
+    final uri = Uri.parse("$backendUrl$collection/$id/");
+    final token = await Authentication().getToken();
+    if (token == null) {
+      throw UnimplementedError();
+    }
+    final result = await http.get(uri,
+        headers: {"Authorization": await Authentication().getToken() ?? ""});
+    return converter(
+        json.decode(utf8.decode(result.bodyBytes)) as Map<String, dynamic>);
   }
 
   @override
@@ -55,8 +64,17 @@ class EMealCrudApi<T> implements CRUDApi<T> {
 
   @override
   Future<T?> put(
-      String id, T item, Map<String, dynamic> Function(T item) builder) {
-    // TODO: implement put
-    throw UnimplementedError();
+      String id, T item, Map<String, dynamic> Function(T item) builder) async {
+    final backendUrl = SettingsInfo().backendUrl;
+    final collection = this.collection;
+    final uri = Uri.parse("$backendUrl$collection/$id/");
+    final token = await Authentication().getToken();
+    if (token == null) {
+      throw UnimplementedError();
+    }
+    final result = await http.put(uri,
+        headers: {"Authorization": await Authentication().getToken() ?? ""},
+        body: builder(item));
+    return converter(json.decode(result.body));
   }
 }

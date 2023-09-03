@@ -27,6 +27,8 @@ class MealPrep {
 
   final DateTime updated;
 
+  final int? usedCount;
+
   MealPrep usedUp() =>
       MealPrep(id, user, name, url, cost, times, true, created, DateTime.now());
 
@@ -34,7 +36,8 @@ class MealPrep {
       _$MealPrepFromJson(json);
 
   MealPrep(this.id, this.user, this.name, this.url, this.cost, this.times,
-      this.isUsedUp, this.created, this.updated);
+      this.isUsedUp, this.created, this.updated,
+      {this.usedCount});
 
   Map<String, dynamic> toJson() => _$MealPrepToJson(this);
 }

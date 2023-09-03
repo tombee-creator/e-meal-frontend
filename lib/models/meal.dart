@@ -1,5 +1,6 @@
 import 'package:emeal_app/models/converters/firebase_user_converter.dart';
 import 'package:emeal_app/models/firebase_user.dart';
+import 'package:emeal_app/models/meal_prep.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'meal.g.dart';
@@ -23,8 +24,10 @@ class Meal {
 
   final DateTime updated;
 
+  final List<MealPrep> preps;
+
   Meal(this.id, this.user, this.comment, this.url, this.cost, this.created,
-      this.updated);
+      this.updated, this.preps);
 
   factory Meal.fromJson(Map<String, dynamic> json) => _$MealFromJson(json);
 
