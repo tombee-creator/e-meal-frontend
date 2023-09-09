@@ -5,7 +5,8 @@ import 'package:emeal_app/views/home/components/meal/meal_list_view.dart';
 import 'package:flutter/material.dart';
 
 class MealView extends StatefulWidget {
-  const MealView({super.key});
+  // ignore: prefer_const_constructors_in_immutables
+  MealView({super.key});
 
   @override
   State<StatefulWidget> createState() => MealViewState();
@@ -16,17 +17,14 @@ class MealViewState extends State<MealView> {
 
   @override
   void didChangeDependencies() {
-    Database()
-        .provider<Meal>(EMealCrudApi(Meal.collection, Meal.fromJson))
-        .list()
-        .then((value) {
-      if (mounted) {
-        setState(() {
-          data = value;
-        });
-      }
-    });
     super.didChangeDependencies();
+    updateData();
+  }
+
+  @override
+  void didUpdateWidget(covariant MealView oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    updateData();
   }
 
   @override
@@ -41,5 +39,18 @@ class MealViewState extends State<MealView> {
       return const Center(child: Text("食事を投稿しましょう！"));
     }
     return MealListView(meals: data);
+  }
+
+  void updateData() {
+    Database()
+        .provider<Meal>(EMealCrudApi(Meal.collection, Meal.fromJson))
+        .list()
+        .then((value) {
+      if (mounted) {
+        setState(() {
+          data = value;
+        });
+      }
+    });
   }
 }

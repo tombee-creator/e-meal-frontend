@@ -24,18 +24,14 @@ class IngredientViewState extends State<IngredientView> {
 
   @override
   void didChangeDependencies() {
-    Database()
-        .provider<Ingredient>(
-            EMealCrudApi(Ingredient.collection, Ingredient.fromJson))
-        .list()
-        .then((value) {
-      if (mounted) {
-        setState(() {
-          data = value;
-        });
-      }
-    });
     super.didChangeDependencies();
+    updateData();
+  }
+
+  @override
+  void didUpdateWidget(covariant IngredientView oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    updateData();
   }
 
   @override
@@ -56,5 +52,19 @@ class IngredientViewState extends State<IngredientView> {
       onSelected: widget.onSelected,
       onRemove: widget.onRemove,
     );
+  }
+
+  void updateData() {
+    Database()
+        .provider<Ingredient>(
+            EMealCrudApi(Ingredient.collection, Ingredient.fromJson))
+        .list()
+        .then((value) {
+      if (mounted) {
+        setState(() {
+          data = value;
+        });
+      }
+    });
   }
 }

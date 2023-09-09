@@ -20,18 +20,14 @@ class MealPrepViewState extends State<MealPrepView> {
 
   @override
   void didChangeDependencies() {
-    Database()
-        .provider<MealPrep>(
-            EMealCrudApi(MealPrep.collection, MealPrep.fromJson))
-        .list()
-        .then((value) {
-      if (mounted) {
-        setState(() {
-          data = value;
-        });
-      }
-    });
     super.didChangeDependencies();
+    updateData();
+  }
+
+  @override
+  void didUpdateWidget(covariant MealPrepView oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    updateData();
   }
 
   @override
@@ -47,5 +43,19 @@ class MealPrepViewState extends State<MealPrepView> {
       return const Center(child: Text("作り置きを投稿しましょう！"));
     }
     return MealPrepsListView(key: _key, mealPreps: availableData);
+  }
+
+  void updateData() {
+    Database()
+        .provider<MealPrep>(
+            EMealCrudApi(MealPrep.collection, MealPrep.fromJson))
+        .list()
+        .then((value) {
+      if (mounted) {
+        setState(() {
+          data = value;
+        });
+      }
+    });
   }
 }
