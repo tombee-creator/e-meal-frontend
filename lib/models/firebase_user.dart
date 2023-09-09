@@ -5,12 +5,12 @@ part 'firebase_user.g.dart';
 
 @JsonSerializable()
 class FirebaseUser {
-  final String id;
+  final String username;
   final String email;
 
-  FirebaseUser({required this.id, required this.email});
+  FirebaseUser({required this.username, required this.email});
   static FirebaseUser from(User user) =>
-      FirebaseUser(id: user.uid, email: user.email ?? "");
+      FirebaseUser(username: user.uid, email: user.email ?? "");
 
   factory FirebaseUser.fromJson(Map<String, dynamic> json) =>
       _$FirebaseUserFromJson(json);

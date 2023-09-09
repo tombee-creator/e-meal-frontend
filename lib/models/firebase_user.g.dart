@@ -7,12 +7,12 @@ part of 'firebase_user.dart';
 // **************************************************************************
 
 FirebaseUser _$FirebaseUserFromJson(Map<String, dynamic> json) => FirebaseUser(
-      id: json['id'] as String,
+      username: json['username'] as String,
       email: json['email'] as String,
     );
 
 Map<String, dynamic> _$FirebaseUserToJson(FirebaseUser instance) =>
     <String, dynamic>{
-      'id': instance.id,
+      'username': instance.username,
       'email': instance.email,
     };

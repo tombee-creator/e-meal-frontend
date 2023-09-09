@@ -25,9 +25,7 @@ class _IngredientPostButtonState extends State<IngredientPostButton> {
   ButtonState state = ButtonState.wating;
 
   bool get _isEnabled {
-    return state == ButtonState.wating &&
-        widget.name.isNotEmpty &&
-        widget.cost != 0.0;
+    return state == ButtonState.wating && widget.name.isNotEmpty;
   }
 
   @override

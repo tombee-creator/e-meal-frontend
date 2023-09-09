@@ -42,7 +42,7 @@ class MealPrep {
       DateTime.now(), usedCount);
 
   MealPrep setIngredients(List<Ingredient> recipe) => MealPrep(id, user, name,
-      url, cost, times, true, created, DateTime.now(), usedCount,
+      url, cost, times, isUsedUp, created, DateTime.now(), usedCount,
       recipe: recipe);
 
   factory MealPrep.fromJson(Map<String, dynamic> json) =>

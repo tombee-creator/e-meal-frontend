@@ -6,5 +6,5 @@ class FirebaseUserConverter {
   static FirebaseUser fromJson(Map<String, dynamic> data) =>
       FirebaseUser.fromJson(data);
 
-  static String toJson(FirebaseUser object) => object.id;
+  static String toJson(FirebaseUser object) => object.username;
 }
