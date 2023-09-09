@@ -12,9 +12,27 @@ class MealTabBarView extends StatefulWidget {
   State<StatefulWidget> createState() => MealTabBarViewState();
 }
 
-class MealTabBarViewState extends State<MealTabBarView> {
-  List<Ingredient> ingredients = [];
-  List<MealPrep> mealPreps = [];
+class MealTabBarViewState extends State<MealTabBarView> with RouteAware {
+  late List<Ingredient> ingredients;
+  late List<MealPrep> mealPreps;
+
+  @override
+  void initState() {
+    super.initState();
+
+    ingredients = [];
+    mealPreps = [];
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
+    setState(() {
+      ingredients = [];
+      mealPreps = [];
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +52,7 @@ class MealTabBarViewState extends State<MealTabBarView> {
               });
             }),
         MealPrepView(selected: mealPreps),
-        const MealView(),
+        MealView(),
       ]),
       Positioned(
           right: 20.0,
