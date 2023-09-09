@@ -5,9 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:emeal_app/views/routes/api_router.dart';
 import 'package:emeal_app/services/authentication.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  MobileAds.instance.initialize();
   await SettingsInfo().load();
   await initializeDateFormatting();
   await Authentication().initialize();
@@ -20,17 +22,17 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      localizationsDelegates: const [
-        S.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
-      supportedLocales: S.delegate.supportedLocales,
-      title: 'e-Meal',
-      theme: ThemeData(primarySwatch: Colors.teal),
-      onGenerateRoute: ApiRouter().generateRoute,
-      initialRoute: '/',
-    );
+        localizationsDelegates: const [
+          S.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        supportedLocales: S.delegate.supportedLocales,
+        title: 'e-Meal',
+        theme: ThemeData(primarySwatch: Colors.teal),
+        onGenerateRoute: ApiRouter().generateRoute,
+        initialRoute: '/',
+        navigatorObservers: [ApiRouter().routeObserver]);
   }
 }
