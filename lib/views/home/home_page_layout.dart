@@ -7,7 +7,7 @@ class HomePageLayout extends StatefulWidget {
   final List<Widget> screens;
   final List<HomeMenuModel> menu;
   final List<Widget> actions;
-  final List<TabBar?> bottoms;
+  final List<PreferredSizeWidget?> bottoms;
   final int tabCount;
 
   const HomePageLayout(
