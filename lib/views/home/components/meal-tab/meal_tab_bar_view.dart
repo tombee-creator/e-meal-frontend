@@ -12,26 +12,16 @@ class MealTabBarView extends StatefulWidget {
   State<StatefulWidget> createState() => MealTabBarViewState();
 }
 
-class MealTabBarViewState extends State<MealTabBarView> with RouteAware {
+class MealTabBarViewState extends State<MealTabBarView> {
+  late bool isFetch;
   late List<Ingredient> ingredients;
   late List<MealPrep> mealPreps;
-
-  @override
-  void initState() {
-    super.initState();
-
-    ingredients = [];
-    mealPreps = [];
-  }
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
 
-    setState(() {
-      ingredients = [];
-      mealPreps = [];
-    });
+    setState(initSelectedItems);
   }
 
   @override
@@ -50,9 +40,10 @@ class MealTabBarViewState extends State<MealTabBarView> with RouteAware {
                     .where((item) => item.id != ingredient.id)
                     .toList();
               });
-            }),
-        MealPrepView(selected: mealPreps),
-        MealView(),
+            },
+            isFetch: isFetch),
+        MealPrepView(selected: mealPreps, isFetch: isFetch),
+        MealView(isFetch: isFetch),
       ]),
       Positioned(
           right: 20.0,
@@ -62,14 +53,48 @@ class MealTabBarViewState extends State<MealTabBarView> with RouteAware {
               height: 64,
               child: FloatingActionButton(
                   child: const Icon(Icons.post_add),
-                  onPressed: () {
-                    Navigator.of(context).pushNamed(
+                  onPressed: () async {
+                    await Navigator.of(context).pushNamed(
                         links[DefaultTabController.of(context).index],
                         arguments: {
                           'ingredients': ingredients,
                           'meal_preps': mealPreps
                         });
+                    setState(initSelectedItems);
                   })))
     ]);
+  }
+
+  void initSelectedItems() {
+    isFetch = true;
+    ingredients = [];
+    mealPreps = [];
+  }
+
+  void chooseIngredient(Ingredient ingredient) {
+    setState(() {
+      ingredients.add(ingredient);
+      isFetch = false;
+    });
+  }
+
+  void chooseMealPrep(MealPrep prep) {
+    setState(() {
+      mealPreps.add(prep);
+      isFetch = false;
+    });
+  }
+
+  void clearSelectedIngredients(Ingredient ingredient) {
+    setState(() {
+      ingredients =
+          ingredients.where((item) => item.id != ingredient.id).toList();
+    });
+  }
+
+  void clearSelectedMealPreps(MealPrep prep) {
+    setState(() {
+      mealPreps = mealPreps.where((item) => item.id != prep.id).toList();
+    });
   }
 }

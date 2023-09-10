@@ -5,8 +5,8 @@ import 'package:emeal_app/views/home/components/meal/meal_list_view.dart';
 import 'package:flutter/material.dart';
 
 class MealView extends StatefulWidget {
-  // ignore: prefer_const_constructors_in_immutables
-  MealView({super.key});
+  final bool isFetch;
+  const MealView({super.key, required this.isFetch});
 
   @override
   State<StatefulWidget> createState() => MealViewState();
@@ -18,13 +18,15 @@ class MealViewState extends State<MealView> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    updateData();
+    fetchData();
   }
 
   @override
   void didUpdateWidget(covariant MealView oldWidget) {
     super.didUpdateWidget(oldWidget);
-    updateData();
+    if (widget.isFetch) {
+      fetchData();
+    }
   }
 
   @override
@@ -41,7 +43,7 @@ class MealViewState extends State<MealView> {
     return MealListView(meals: data);
   }
 
-  void updateData() {
+  void fetchData() {
     Database()
         .provider<Meal>(EMealCrudApi(Meal.collection, Meal.fromJson))
         .list()

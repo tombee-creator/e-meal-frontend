@@ -1,19 +1,14 @@
 import 'package:emeal_app/views/helper/utils/date_formatter.dart';
 import 'package:emeal_app/models/ingredient.dart';
+import 'package:emeal_app/views/home/components/meal-tab/meal_tab_bar_view.dart';
 import 'package:flutter/material.dart';
 
 class IngredientListItemView extends StatefulWidget {
   final Ingredient ingredient;
   final int count;
-  final void Function(Ingredient) onSelected;
-  final void Function(Ingredient) onRemove;
 
   const IngredientListItemView(
-      {super.key,
-      required this.ingredient,
-      required this.count,
-      required this.onSelected,
-      required this.onRemove});
+      {super.key, required this.ingredient, required this.count});
 
   @override
   State<StatefulWidget> createState() => _IngredientListItemViewState();
@@ -61,15 +56,25 @@ class _IngredientListItemViewState extends State<IngredientListItemView> {
             child: Row(children: list)));
   }
 
+  void onSelected(BuildContext context, Ingredient item) {
+    final currentState = context.findAncestorStateOfType<MealTabBarViewState>();
+    currentState?.chooseIngredient(item);
+  }
+
+  void onRemove(BuildContext context, Ingredient ingredient) {
+    final currentState = context.findAncestorStateOfType<MealTabBarViewState>();
+    currentState?.clearSelectedIngredients(ingredient);
+  }
+
   void onTap() {
     final countUsedUp = widget.count + widget.ingredient.usedCount;
     if (countUsedUp >= widget.ingredient.times) {
-      widget.onRemove(widget.ingredient);
+      onRemove(context, widget.ingredient);
     } else {
       if (countUsedUp < widget.ingredient.times - 1) {
-        widget.onSelected(widget.ingredient);
+        onSelected(context, widget.ingredient);
       } else {
-        widget.onSelected(widget.ingredient.usedUp());
+        onSelected(context, widget.ingredient.usedUp());
       }
     }
   }

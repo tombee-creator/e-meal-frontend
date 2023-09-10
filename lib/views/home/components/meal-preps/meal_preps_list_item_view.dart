@@ -59,18 +59,12 @@ class _MealPrepListItemViewState extends State<MealPrepListItemView> {
 
   void onSelected(BuildContext context, MealPrep mealPrep) {
     final currentState = context.findAncestorStateOfType<MealTabBarViewState>();
-    // ignore: invalid_use_of_protected_member
-    currentState?.setState(() => currentState.mealPreps.add(mealPrep));
+    currentState?.chooseMealPrep(mealPrep);
   }
 
   void onRemove(BuildContext context, MealPrep mealPrep) {
     final currentState = context.findAncestorStateOfType<MealTabBarViewState>();
-    // ignore: invalid_use_of_protected_member
-    currentState?.setState(() {
-      currentState.mealPreps = currentState.mealPreps
-          .where((item) => item.id != mealPrep.id)
-          .toList();
-    });
+    currentState?.clearSelectedMealPreps(mealPrep);
   }
 
   void onTap() {

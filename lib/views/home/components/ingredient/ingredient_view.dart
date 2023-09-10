@@ -8,12 +8,14 @@ class IngredientView extends StatefulWidget {
   final List<Ingredient> selected;
   final void Function(Ingredient) onSelected;
   final void Function(Ingredient) onRemove;
+  final bool isFetch;
 
   const IngredientView(
       {super.key,
       required this.selected,
       required this.onSelected,
-      required this.onRemove});
+      required this.onRemove,
+      required this.isFetch});
 
   @override
   State<StatefulWidget> createState() => IngredientViewState();
@@ -25,13 +27,15 @@ class IngredientViewState extends State<IngredientView> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    updateData();
+    fetchData();
   }
 
   @override
   void didUpdateWidget(covariant IngredientView oldWidget) {
     super.didUpdateWidget(oldWidget);
-    updateData();
+    if (widget.isFetch) {
+      fetchData();
+    }
   }
 
   @override
@@ -47,14 +51,10 @@ class IngredientViewState extends State<IngredientView> {
       return const Center(child: Text("食材を投稿しましょう！"));
     }
     return IngredientListView(
-      ingredients: availableData,
-      selected: widget.selected,
-      onSelected: widget.onSelected,
-      onRemove: widget.onRemove,
-    );
+        ingredients: availableData, selected: widget.selected);
   }
 
-  void updateData() {
+  void fetchData() {
     Database()
         .provider<Ingredient>(
             EMealCrudApi(Ingredient.collection, Ingredient.fromJson))

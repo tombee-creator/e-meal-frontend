@@ -5,15 +5,9 @@ import 'package:flutter/material.dart';
 class IngredientListView extends StatelessWidget {
   final List<Ingredient> ingredients;
   final List<Ingredient> selected;
-  final void Function(Ingredient) onSelected;
-  final void Function(Ingredient) onRemove;
 
   const IngredientListView(
-      {super.key,
-      required this.ingredients,
-      required this.selected,
-      required this.onSelected,
-      required this.onRemove});
+      {super.key, required this.ingredients, required this.selected});
 
   @override
   Widget build(BuildContext context) {
@@ -25,11 +19,7 @@ class IngredientListView extends StatelessWidget {
         final count = selected.where((item) => item.id == ingredient.id).length;
         return SizedBox(
           height: 100,
-          child: IngredientListItemView(
-              ingredient: ingredient,
-              count: count,
-              onSelected: (ingredient) => onSelected(ingredient),
-              onRemove: (ingredient) => onRemove(ingredient)),
+          child: IngredientListItemView(ingredient: ingredient, count: count),
         );
       }).toList(),
     );

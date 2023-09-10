@@ -6,8 +6,10 @@ import 'package:flutter/material.dart';
 
 class MealPrepView extends StatefulWidget {
   final List<MealPrep> selected;
+  final bool isFetch;
 
-  const MealPrepView({super.key, required this.selected});
+  const MealPrepView(
+      {super.key, required this.selected, required this.isFetch});
 
   @override
   State<StatefulWidget> createState() => MealPrepViewState();
@@ -21,13 +23,15 @@ class MealPrepViewState extends State<MealPrepView> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    updateData();
+    fetchData();
   }
 
   @override
   void didUpdateWidget(covariant MealPrepView oldWidget) {
     super.didUpdateWidget(oldWidget);
-    updateData();
+    if (widget.isFetch) {
+      fetchData();
+    }
   }
 
   @override
@@ -45,7 +49,7 @@ class MealPrepViewState extends State<MealPrepView> {
     return MealPrepsListView(key: _key, mealPreps: availableData);
   }
 
-  void updateData() {
+  void fetchData() {
     Database()
         .provider<MealPrep>(
             EMealCrudApi(MealPrep.collection, MealPrep.fromJson))
