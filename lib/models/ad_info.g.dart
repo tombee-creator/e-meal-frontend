@@ -12,6 +12,6 @@ AdInfo _$AdInfoFromJson(Map<String, dynamic> json) => AdInfo(
     );
 
 Map<String, dynamic> _$AdInfoToJson(AdInfo instance) => <String, dynamic>{
-      'androidAdId': instance.googleAppId,
+      'androidAppId': instance.googleAppId,
       'iOSAppId': instance.iOSAppId,
     };
