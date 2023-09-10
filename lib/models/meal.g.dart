@@ -12,8 +12,8 @@ Meal _$MealFromJson(Map<String, dynamic> json) => Meal(
     json['comment'] as String,
     json['url'] as String,
     (json['cost'] as num).toDouble(),
-    DateTime.parse(json['created'] as String),
-    DateTime.parse(json['updated'] as String),
+    DateTime.parse(json['created'] as String).toLocal(),
+    DateTime.parse(json['updated'] as String).toLocal(),
     (json['preps'] as List<dynamic>)
         .map((e) => MealPrep.fromJson(e as Map<String, dynamic>))
         .toList());

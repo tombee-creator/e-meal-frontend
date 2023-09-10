@@ -14,8 +14,8 @@ Ingredient _$IngredientFromJson(Map<String, dynamic> json) => Ingredient(
       (json['cost'] as num).toDouble(),
       (json['times'] as num).toInt(),
       json['is_used_up'] as bool,
-      DateTime.parse(json['created'] as String),
-      DateTime.parse(json['updated'] as String),
+      DateTime.parse(json['created'] as String).toLocal(),
+      DateTime.parse(json['updated'] as String).toLocal(),
       (json['used_count'] as num).toInt(),
     );
 
