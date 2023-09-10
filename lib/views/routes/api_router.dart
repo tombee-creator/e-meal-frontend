@@ -14,9 +14,6 @@ class ApiRouter {
 
   factory() => _instance ??= ApiRouter();
 
-  final routeObserver = RouteObserver<PageRoute>();
-
-  // 各ページを定義
   static const String root = '/';
   static const String home = '/home';
   static const String ingredient = '/ingredients';

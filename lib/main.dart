@@ -1,11 +1,11 @@
-import 'package:emeal_app/settings/settings_info.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:emeal_app/generated/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:emeal_app/settings/settings_info.dart';
+import 'package:emeal_app/generated/l10n.dart';
 import 'package:emeal_app/views/routes/api_router.dart';
 import 'package:emeal_app/services/authentication.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -32,7 +32,6 @@ class MyApp extends StatelessWidget {
         title: 'e-Meal',
         theme: ThemeData(primarySwatch: Colors.teal),
         onGenerateRoute: ApiRouter().generateRoute,
-        initialRoute: '/',
-        navigatorObservers: [ApiRouter().routeObserver]);
+        initialRoute: '/');
   }
 }
