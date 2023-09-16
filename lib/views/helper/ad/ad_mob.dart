@@ -15,17 +15,14 @@ class AdMob extends StatelessWidget {
           },
         ),
         request: const AdRequest(),
-        size: AdSize.largeBanner);
+        size: AdSize.fullBanner);
 
     return SizedBox(
         width: double.infinity,
         height: bannerAd.size.height.toDouble(),
         child: FutureBuilder(
-            future: Future.delayed(const Duration(seconds: 1), bannerAd.load),
+            future: bannerAd.load(),
             builder: ((context, snapshot) {
-              if (!snapshot.hasData) {
-                return Container();
-              }
               return AdWidget(ad: bannerAd);
             })));
   }

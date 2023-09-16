@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -11,14 +10,9 @@ import 'package:emeal_app/helper/att_hlper.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  MobileAds.instance.initialize();
   await SettingsInfo().load();
   await initializeDateFormatting();
   await MobileAds.instance.initialize();
-  if (kDebugMode) {
-    MobileAds.instance.updateRequestConfiguration(RequestConfiguration(
-        testDeviceIds: const ["f5ce1d29ff3d5e7c7f57910209a8d1a8"]));
-  }
   await Authentication().initialize();
   runApp(const MyApp());
 }
