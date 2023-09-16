@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:emeal_app/models/meal_prep/meal_prep.dart';
+import 'package:emeal_app/models/ingredient/ingredient.dart';
 import 'package:flutter/material.dart';
 import 'package:emeal_app/helper/image_picker_provider.dart';
 import 'package:emeal_app/views/home/components/meal/meal_field_form.dart';
@@ -14,7 +14,7 @@ class MealPostView extends StatefulWidget {
 }
 
 class _MealPostViewState extends State<MealPostView> {
-  List<MealPrep> selected = <MealPrep>[];
+  List<Ingredient> selected = <Ingredient>[];
   double cost = 0.0;
   String comment = "";
   File? image;
@@ -81,10 +81,7 @@ class _MealPostViewState extends State<MealPostView> {
                 ),
                 const Spacer(),
                 MealPostButton(
-                    comment: comment,
-                    image: image,
-                    cost: cost,
-                    mealPreps: selected)
+                    comment: comment, image: image, cost: cost, preps: selected)
               ],
             ))
       ],

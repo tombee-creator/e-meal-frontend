@@ -1,7 +1,5 @@
 import 'package:emeal_app/models/ingredient/ingredient.dart';
-import 'package:emeal_app/models/meal_prep/meal_prep.dart';
 import 'package:emeal_app/views/home/components/ingredient/ingredient_view.dart';
-import 'package:emeal_app/views/home/components/meal-preps/meal_preps_view.dart';
 import 'package:emeal_app/views/home/components/meal/meal_view.dart';
 import 'package:flutter/material.dart';
 
@@ -15,7 +13,6 @@ class MealTabBarView extends StatefulWidget {
 class MealTabBarViewState extends State<MealTabBarView> {
   late bool isFetch;
   late List<Ingredient> ingredients;
-  late List<MealPrep> mealPreps;
 
   @override
   void didChangeDependencies() {
@@ -29,20 +26,8 @@ class MealTabBarViewState extends State<MealTabBarView> {
     final links = ["/ingredients", "/preps", "/meals"];
     return Stack(children: [
       TabBarView(children: [
-        IngredientView(
-            selected: ingredients,
-            onSelected: (ingredient) {
-              setState(() => ingredients.add(ingredient));
-            },
-            onRemove: (ingredient) {
-              setState(() {
-                ingredients = ingredients
-                    .where((item) => item.id != ingredient.id)
-                    .toList();
-              });
-            },
-            isFetch: isFetch),
-        MealPrepView(selected: mealPreps, isFetch: isFetch),
+        IngredientView(selected: ingredients, isFetch: isFetch),
+        IngredientView(selected: ingredients, isFetch: isFetch),
         MealView(isFetch: isFetch),
       ]),
       Positioned(
@@ -56,10 +41,7 @@ class MealTabBarViewState extends State<MealTabBarView> {
                   onPressed: () async {
                     await Navigator.of(context).pushNamed(
                         links[DefaultTabController.of(context).index],
-                        arguments: {
-                          'ingredients': ingredients,
-                          'meal_preps': mealPreps
-                        });
+                        arguments: {'ingredients': ingredients});
                     setState(initSelectedItems);
                   })))
     ]);
@@ -68,7 +50,6 @@ class MealTabBarViewState extends State<MealTabBarView> {
   void initSelectedItems() {
     isFetch = true;
     ingredients = [];
-    mealPreps = [];
   }
 
   void chooseIngredient(Ingredient ingredient) {
@@ -78,23 +59,10 @@ class MealTabBarViewState extends State<MealTabBarView> {
     });
   }
 
-  void chooseMealPrep(MealPrep prep) {
-    setState(() {
-      mealPreps.add(prep);
-      isFetch = false;
-    });
-  }
-
   void clearSelectedIngredients(Ingredient ingredient) {
     setState(() {
       ingredients =
           ingredients.where((item) => item.id != ingredient.id).toList();
-    });
-  }
-
-  void clearSelectedMealPreps(MealPrep prep) {
-    setState(() {
-      mealPreps = mealPreps.where((item) => item.id != prep.id).toList();
     });
   }
 }

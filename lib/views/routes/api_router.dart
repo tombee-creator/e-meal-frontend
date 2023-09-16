@@ -1,12 +1,10 @@
-import 'package:emeal_app/views/pages/ingredient_page.dart';
-import 'package:emeal_app/views/pages/meal_preps_page.dart';
 import 'package:flutter/material.dart';
+import 'package:emeal_app/views/pages/home_page.dart';
+import 'package:emeal_app/views/pages/ingredient_page.dart';
 import 'package:emeal_app/services/authentication.dart';
 import 'package:emeal_app/views/auth/login_page.dart';
 import 'package:emeal_app/views/auth/signup_page.dart';
 import 'package:emeal_app/views/pages/meal_page.dart';
-
-import '../pages/home_page.dart';
 
 /// flutterアプリのルートを作成するクラス
 class ApiRouter {
@@ -30,10 +28,6 @@ class ApiRouter {
       case home:
         return MaterialPageRoute(
             builder: (_) => const HomePage(title: "e-Meal"),
-            settings: settings);
-      case prep:
-        return MaterialPageRoute(
-            builder: (_) => const MealPrepsPage(title: "e-Meal"),
             settings: settings);
       case ingredient:
         return MaterialPageRoute(

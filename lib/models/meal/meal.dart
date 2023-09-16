@@ -2,7 +2,7 @@ import 'dart:convert' show json;
 
 import 'package:emeal_app/models/converters/firebase_user_converter.dart';
 import 'package:emeal_app/models/firebase_user/firebase_user.dart';
-import 'package:emeal_app/models/meal_prep/meal_prep.dart';
+import 'package:emeal_app/models/ingredient/ingredient.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'meal.g.dart';
@@ -28,7 +28,7 @@ class Meal {
 
   final DateTime updated;
 
-  final List<MealPrep> preps;
+  final List<Ingredient> preps;
 
   Meal(this.id, this.user, this.comment, this.url, this.cost, this.created,
       this.updated, this.preps);

@@ -1,8 +1,11 @@
 import 'package:emeal_app/models/converters/firebase_user_converter.dart';
+import 'package:emeal_app/models/converters/ingredient_type_converter.dart';
 import 'package:emeal_app/models/firebase_user/firebase_user.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'ingredient.g.dart';
+
+enum Category { ingredient, prep, gift }
 
 @JsonSerializable()
 class Ingredient {
@@ -23,6 +26,8 @@ class Ingredient {
 
   final int times;
 
+  final Category category;
+
   @JsonKey(name: "is_used_up")
   final bool isUsedUp;
 
@@ -34,10 +39,10 @@ class Ingredient {
   final int usedCount;
 
   Ingredient(this.id, this.user, this.name, this.url, this.cost, this.times,
-      this.isUsedUp, this.created, this.updated, this.usedCount);
+      this.category, this.isUsedUp, this.created, this.updated, this.usedCount);
 
-  Ingredient usedUp() => Ingredient(id, user, name, url, cost, times, true,
-      created, DateTime.now(), usedCount);
+  Ingredient usedUp() => Ingredient(id, user, name, url, cost, times, category,
+      true, created, DateTime.now(), usedCount);
 
   factory Ingredient.fromJson(Map<String, dynamic> json) =>
       _$IngredientFromJson(json);

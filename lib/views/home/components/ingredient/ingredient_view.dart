@@ -6,16 +6,10 @@ import 'package:flutter/material.dart';
 
 class IngredientView extends StatefulWidget {
   final List<Ingredient> selected;
-  final void Function(Ingredient) onSelected;
-  final void Function(Ingredient) onRemove;
   final bool isFetch;
 
   const IngredientView(
-      {super.key,
-      required this.selected,
-      required this.onSelected,
-      required this.onRemove,
-      required this.isFetch});
+      {super.key, required this.selected, required this.isFetch});
 
   @override
   State<StatefulWidget> createState() => IngredientViewState();

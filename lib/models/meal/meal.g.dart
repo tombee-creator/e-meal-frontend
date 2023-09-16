@@ -15,7 +15,7 @@ Meal _$MealFromJson(Map<String, dynamic> json) => Meal(
     DateTime.parse(json['created'] as String).toLocal(),
     DateTime.parse(json['updated'] as String).toLocal(),
     (json['preps'] as List<dynamic>)
-        .map((e) => MealPrep.fromJson(e as Map<String, dynamic>))
+        .map((e) => Ingredient.fromJson(e as Map<String, dynamic>))
         .toList());
 
 Map<String, dynamic> _$MealToJson(Meal instance) => <String, dynamic>{

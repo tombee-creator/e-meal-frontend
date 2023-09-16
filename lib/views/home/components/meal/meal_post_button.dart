@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:emeal_app/models/firebase_user/firebase_user.dart';
+import 'package:emeal_app/models/ingredient/ingredient.dart';
 import 'package:emeal_app/models/meal/meal.dart';
-import 'package:emeal_app/models/meal_prep/meal_prep.dart';
 import 'package:emeal_app/services/emeal_crud_api.dart';
 import 'package:uuid/uuid.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -15,14 +15,14 @@ class MealPostButton extends StatefulWidget {
   final String comment;
   final double cost;
   final File? image;
-  final List<MealPrep> mealPreps;
+  final List<Ingredient> preps;
 
   const MealPostButton(
       {super.key,
       required this.comment,
       required this.cost,
       required this.image,
-      required this.mealPreps});
+      required this.preps});
 
   @override
   State<StatefulWidget> createState() => _MealPostButtonState();
@@ -138,14 +138,14 @@ class _MealPostButtonState extends State<MealPostButton> {
             widget.cost,
             DateTime.now(),
             DateTime.now(),
-            widget.mealPreps)
+            widget.preps)
         .toJson());
   }
 
   Future<bool> confirmUsedUp() async {
-    final ids = widget.mealPreps.map((item) => item.id).toSet();
+    final ids = widget.preps.map((item) => item.id).toSet();
     for (final id in ids) {
-      final list = widget.mealPreps.where((item) => item.id == id);
+      final list = widget.preps.where((item) => item.id == id);
       final item = list.last;
       if (item.isUsedUp) {
         final result = await showDialog(

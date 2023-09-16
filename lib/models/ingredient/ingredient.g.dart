@@ -13,6 +13,8 @@ Ingredient _$IngredientFromJson(Map<String, dynamic> json) => Ingredient(
       json['url'] as String,
       (json['cost'] as num).toDouble(),
       (json['times'] as num).toInt(),
+      const IngredientTypeConverter()
+          .valueOf((json['category'] as num).toInt()),
       json['is_used_up'] as bool,
       DateTime.parse(json['created'] as String).toLocal(),
       DateTime.parse(json['updated'] as String).toLocal(),
@@ -27,6 +29,8 @@ Map<String, dynamic> _$IngredientToJson(Ingredient instance) =>
       'url': instance.url,
       'cost': instance.cost.toString(),
       'times': instance.times.toString(),
+      'category':
+          const IngredientTypeConverter().indexOf(instance.category).toString(),
       'is_used_up': instance.isUsedUp.toString(),
       'created': instance.created.toIso8601String(),
       'updated': instance.updated.toIso8601String(),
