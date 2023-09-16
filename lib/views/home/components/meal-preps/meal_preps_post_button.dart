@@ -1,6 +1,8 @@
 import 'package:emeal_app/models/firebase_user/firebase_user.dart';
 import 'package:emeal_app/models/ingredient/ingredient.dart';
 import 'package:emeal_app/models/meal_prep/meal_prep.dart';
+import 'package:emeal_app/models/meal_prep/meal_prep_post_data.dart';
+import 'package:emeal_app/models/meal_prep/used_ingredient_data.dart';
 import 'package:emeal_app/services/emeal_crud_api.dart';
 import 'package:flutter/material.dart';
 import 'package:emeal_app/services/authentication.dart';
@@ -80,7 +82,7 @@ class _MealPrepPostButtonState extends State<MealPrepPostButton> {
   Future<MealPrep?> postRecipeData(String url) async {
     final api = Database().provider(
         EMealCrudApi<MealPrep>(MealPrep.collection, MealPrep.fromJson));
-    return await api.post((id) => MealPrep(
+    return await api.post((id) => MealPrepPostData(
             id,
             FirebaseUser.from(Authentication().currentUser),
             widget.name,
@@ -90,8 +92,8 @@ class _MealPrepPostButtonState extends State<MealPrepPostButton> {
             false,
             DateTime.now(),
             DateTime.now(),
-            0)
-        .setIngredients(widget.ingredients)
+            0,
+            UsedIngredientData.create(widget.ingredients))
         .toJson());
   }
 
