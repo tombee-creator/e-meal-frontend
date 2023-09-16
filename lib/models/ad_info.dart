@@ -7,14 +7,14 @@ part 'ad_info.g.dart';
 
 @JsonSerializable()
 class AdInfo {
-  //
+  /// Google Ad Mobのテスト用Ad ID
   static const String testAdId = "ca-app-pub-3940256099942544/6300978111";
 
   final String googleAppId;
   final String iOSAppId;
 
   String get unitId {
-    if (kDebugMode) {
+    if (kDebugMode || kProfileMode) {
       return testAdId;
     }
     if (Platform.isAndroid) {
