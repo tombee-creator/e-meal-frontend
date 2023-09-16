@@ -1,7 +1,9 @@
 import 'dart:io';
 import 'package:emeal_app/models/firebase_user/firebase_user.dart';
 import 'package:emeal_app/models/ingredient/ingredient.dart';
+import 'package:emeal_app/models/ingredient/used_ingredient_info.dart';
 import 'package:emeal_app/models/meal/meal.dart';
+import 'package:emeal_app/models/meal/meal_post_data.dart';
 import 'package:emeal_app/services/emeal_crud_api.dart';
 import 'package:uuid/uuid.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -130,7 +132,7 @@ class _MealPostButtonState extends State<MealPostButton> {
   Future<Meal?> postRecipeData(String url) async {
     final api =
         Database().provider(EMealCrudApi<Meal>(Meal.collection, Meal.fromJson));
-    return await api.post((id) => Meal(
+    return await api.post((id) => MealPostData(
             id,
             FirebaseUser.from(Authentication().currentUser),
             widget.comment,
@@ -138,7 +140,8 @@ class _MealPostButtonState extends State<MealPostButton> {
             widget.cost,
             DateTime.now(),
             DateTime.now(),
-            widget.preps)
+            widget.preps,
+            UsedIngredientPostInfo.create(widget.preps))
         .toJson());
   }
 

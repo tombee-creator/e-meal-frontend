@@ -1,3 +1,5 @@
+import 'package:emeal_app/models/ingredient/ingredient_post_data.dart';
+import 'package:emeal_app/models/ingredient/used_ingredient_info.dart';
 import 'package:flutter/material.dart';
 import 'package:emeal_app/models/firebase_user/firebase_user.dart';
 import 'package:emeal_app/models/ingredient/ingredient.dart';
@@ -23,9 +25,19 @@ class _IngredientPostButtonState extends State<IngredientPostButton> {
   String path = "";
   double progress = 0.0;
   ButtonState state = ButtonState.wating;
+  Category category = Category.ingredient;
+  List<Ingredient> selected = [];
 
   bool get _isEnabled {
     return state == ButtonState.wating && widget.name.isNotEmpty;
+  }
+
+  @override
+  void didChangeDependencies() {
+    final args = ModalRoute.of(context)?.settings.arguments as Map;
+    category = args['category'] ?? Category.ingredient;
+    selected = args['ingredients'] ?? [];
+    super.didChangeDependencies();
   }
 
   @override
@@ -50,6 +62,10 @@ class _IngredientPostButtonState extends State<IngredientPostButton> {
   }
 
   Future postRecipe() async {
+    final isConfirmed = await confirmUsedUp();
+    if (!isConfirmed) {
+      return;
+    }
     setState(() {
       state = ButtonState.uploadImage;
     });
@@ -64,18 +80,53 @@ class _IngredientPostButtonState extends State<IngredientPostButton> {
   Future postRecipeData(String url) async {
     final api = Database().provider(
         EMealCrudApi<Ingredient>(Ingredient.collection, Ingredient.fromJson));
-    await api.post((id) => Ingredient(
+
+    await api.post((id) => IngredientPostData(
             id,
             FirebaseUser.from(Authentication().currentUser),
             widget.name,
             url,
             widget.cost,
             widget.times,
-            Category.ingredient,
+            category,
             false,
             DateTime.now(),
             DateTime.now(),
-            0)
+            0,
+            UsedIngredientPostInfo.create(selected))
         .toJson());
+  }
+
+  Future<bool> confirmUsedUp() async {
+    final ids = selected.map((item) => item.id).toSet();
+    for (final id in ids) {
+      final list = selected.where((item) => item.id == id);
+      final item = list.last;
+      if (item.isUsedUp) {
+        final result = await showDialog(
+            barrierDismissible: false,
+            context: context,
+            builder: (_) => AlertDialog(
+                  title: const Text("確認"),
+                  content: Text("${item.name}を使い切ります。\nよろしいですか？"),
+                  actions: [
+                    TextButton(
+                        child: const Text("OK"),
+                        onPressed: () {
+                          Navigator.pop(context, true);
+                        }),
+                    TextButton(
+                        child: const Text("Cancel"),
+                        onPressed: () {
+                          Navigator.pop(context, false);
+                        })
+                  ],
+                ));
+        if (!result) {
+          return false;
+        }
+      }
+    }
+    return true;
   }
 }

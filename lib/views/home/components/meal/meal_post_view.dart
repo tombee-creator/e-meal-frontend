@@ -22,7 +22,7 @@ class _MealPostViewState extends State<MealPostView> {
   @override
   void didChangeDependencies() {
     final args = ModalRoute.of(context)?.settings.arguments as Map;
-    selected = args['meal_preps'] ?? [];
+    selected = args['ingredients'] ?? [];
 
     if (selected.isNotEmpty) {
       cost = selected

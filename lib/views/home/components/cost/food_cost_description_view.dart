@@ -20,15 +20,12 @@ class _FoodCostDescriptionViewState extends State<FoodCostDescriptionView> {
   Widget build(BuildContext context) {
     final api =
         Database().provider(EMealCrudApi<Meal>(Meal.collection, Meal.fromJson));
-    final start = DateTime(focus.year, focus.month, 1);
-    final end = DateTime(focus.year, focus.month + 1, 1);
+    final startDate = DateTime(focus.year, focus.month, 1).toIso8601String();
+    final endDate = DateTime(focus.year, focus.month + 1, 1).toIso8601String();
     final displayedDate =
         DateFormatter().format(focus, type: DateFormatType.profileItem);
     return FutureBuilder(
-        future: api.list(
-            query: (ref) => ref.where("created",
-                isGreaterThanOrEqualTo: start.toIso8601String(),
-                isLessThanOrEqualTo: end.toIso8601String())),
+        future: api.list(query: "created_from=$startDate&created_to=$endDate"),
         builder: ((context, snapshot) {
           final data = snapshot.data ?? [];
           return Column(

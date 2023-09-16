@@ -4,7 +4,6 @@ import 'package:emeal_app/services/authentication.dart';
 import 'package:emeal_app/settings/settings_info.dart';
 import 'package:http/http.dart' as http;
 
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:emeal_app/helper/crud_api.dart';
 
 class EMealCrudApi<T> implements CRUDApi<T> {
@@ -29,13 +28,11 @@ class EMealCrudApi<T> implements CRUDApi<T> {
   }
 
   @override
-  Future<List<T>> list(
-      {Query<Map<String, dynamic>> Function(
-              CollectionReference<Map<String, dynamic>> p1)?
-          query}) async {
+  Future<List<T>> list({String? query}) async {
     final backendUrl = SettingsInfo().backendUrl;
     final collection = this.collection;
-    final uri = Uri.parse("$backendUrl$collection/");
+    final _query = query == null ? "" : "?$query";
+    final uri = Uri.parse("$backendUrl$collection/$_query");
     final token = await Authentication().getToken();
     if (token == null) {
       throw UnimplementedError();

@@ -23,11 +23,18 @@ class MealTabBarViewState extends State<MealTabBarView> {
 
   @override
   Widget build(BuildContext context) {
-    final links = ["/ingredients", "/preps", "/meals"];
+    final links = ["/ingredients", "/ingredients", "/meals"];
+    final categories = [Category.ingredient, Category.prep, null];
     return Stack(children: [
       TabBarView(children: [
-        IngredientView(selected: ingredients, isFetch: isFetch),
-        IngredientView(selected: ingredients, isFetch: isFetch),
+        IngredientView(
+            categories: const [Category.ingredient, Category.gift],
+            selected: ingredients,
+            isFetch: isFetch),
+        IngredientView(
+            categories: const [Category.prep],
+            selected: ingredients,
+            isFetch: isFetch),
         MealView(isFetch: isFetch),
       ]),
       Positioned(
@@ -41,7 +48,11 @@ class MealTabBarViewState extends State<MealTabBarView> {
                   onPressed: () async {
                     await Navigator.of(context).pushNamed(
                         links[DefaultTabController.of(context).index],
-                        arguments: {'ingredients': ingredients});
+                        arguments: {
+                          'ingredients': ingredients,
+                          'category':
+                              categories[DefaultTabController.of(context).index]
+                        });
                     setState(initSelectedItems);
                   })))
     ]);

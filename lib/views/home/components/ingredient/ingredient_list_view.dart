@@ -12,16 +12,14 @@ class IngredientListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView(
-      padding: const EdgeInsets.all(12.0),
-      children: ingredients
-          .where((ingredient) => !ingredient.isUsedUp)
-          .map((ingredient) {
-        final count = selected.where((item) => item.id == ingredient.id).length;
-        return SizedBox(
-          height: 100,
-          child: IngredientListItemView(ingredient: ingredient, count: count),
-        );
-      }).toList(),
-    );
+        padding: const EdgeInsets.all(12.0),
+        children: ingredients.map((ingredient) {
+          final count =
+              selected.where((item) => item.id == ingredient.id).length;
+          return SizedBox(
+            height: 100,
+            child: IngredientListItemView(ingredient: ingredient, count: count),
+          );
+        }).toList());
   }
 }

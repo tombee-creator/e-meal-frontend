@@ -30,7 +30,7 @@ class _IngredientListItemViewState extends State<IngredientListItemView> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(widget.ingredient.name),
+              Text(widget.ingredient.name, overflow: TextOverflow.ellipsis),
               Text(DateFormatter().format(widget.ingredient.created))
             ],
           ),

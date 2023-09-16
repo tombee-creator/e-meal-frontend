@@ -25,9 +25,11 @@ class _CostChartControllerViewState extends State<CostChartControllerView> {
     final api =
         Database().provider(EMealCrudApi<Meal>(Meal.collection, Meal.fromJson));
     final startDate =
-        DateTime(focusDate.year, focusDate.month, focusDate.day - 7);
+        DateTime(focusDate.year, focusDate.month, focusDate.day - 7)
+            .toIso8601String();
     final endDate =
-        DateTime(focusDate.year, focusDate.month, focusDate.day, 23, 59, 59);
+        DateTime(focusDate.year, focusDate.month, focusDate.day, 23, 59, 59)
+            .toIso8601String();
     return Row(
       children: [
         SizedBox(
@@ -44,12 +46,8 @@ class _CostChartControllerViewState extends State<CostChartControllerView> {
         ),
         Expanded(
             child: FutureBuilder(
-          future: api.list(
-              query: (ref) => ref
-                  .where("created",
-                      isGreaterThan: startDate.toIso8601String(),
-                      isLessThanOrEqualTo: endDate.toIso8601String())
-                  .orderBy("created")),
+          future:
+              api.list(query: "created_from=$startDate&created_to=$endDate"),
           builder: (context, snapshot) {
             final meals = snapshot.data;
             if (meals == null) {

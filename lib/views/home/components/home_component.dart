@@ -21,11 +21,7 @@ class _HomeComponentState extends State<HomeComponent> {
     return Column(
       children: [
         const AdMob(),
-        Expanded(
-            child: MealListGridView(
-                future: api.list(
-                    query: (ref) =>
-                        ref.orderBy("created", descending: true).limit(15))))
+        Expanded(child: MealListGridView(future: api.list()))
       ],
     );
   }
