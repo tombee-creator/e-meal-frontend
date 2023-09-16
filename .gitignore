@@ -53,9 +53,5 @@ GoogleService-Info.plist
 .env
 .envrc
 
-android/
-ios/
-linux/
-web/
-windows/
-macos/
+*.plist
+AndroidManifest.xml
