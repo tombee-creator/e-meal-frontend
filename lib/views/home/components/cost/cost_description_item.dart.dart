@@ -1,5 +1,5 @@
+import 'package:emeal_app/models/meal/meal.dart';
 import 'package:flutter/material.dart';
-import 'package:emeal_app/models/meal.dart';
 
 class CostDescriptionItem extends StatelessWidget {
   final IconData icon;

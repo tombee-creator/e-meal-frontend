@@ -1,8 +1,8 @@
+import 'package:emeal_app/models/meal/meal.dart';
 import 'package:emeal_app/services/database.dart';
 import 'package:emeal_app/services/emeal_crud_api.dart';
 import 'package:emeal_app/views/helper/utils/date_formatter.dart';
 import 'package:flutter/material.dart';
-import 'package:emeal_app/models/meal.dart';
 import 'package:emeal_app/views/home/components/cost/cost_chart_controller.dart';
 import 'package:emeal_app/views/home/components/cost/cost_description_item.dart.dart';
 

@@ -1,6 +1,6 @@
+import 'package:emeal_app/models/meal/meal.dart';
 import 'package:emeal_app/services/emeal_crud_api.dart';
 import 'package:flutter/material.dart';
-import 'package:emeal_app/models/meal.dart';
 import 'package:emeal_app/services/database.dart';
 import 'package:emeal_app/views/home/components/cost/cost_chart_view.dart';
 

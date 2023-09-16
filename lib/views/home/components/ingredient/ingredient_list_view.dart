@@ -1,4 +1,4 @@
-import 'package:emeal_app/models/ingredient.dart';
+import 'package:emeal_app/models/ingredient/ingredient.dart';
 import 'package:emeal_app/views/home/components/ingredient/ingredient_list_item_view.dart';
 import 'package:flutter/material.dart';
 

@@ -1,4 +1,4 @@
-import 'package:emeal_app/models/ingredient.dart';
+import 'package:emeal_app/models/ingredient/ingredient.dart';
 import 'package:emeal_app/services/database.dart';
 import 'package:emeal_app/services/emeal_crud_api.dart';
 import 'package:emeal_app/views/home/components/ingredient/ingredient_list_view.dart';

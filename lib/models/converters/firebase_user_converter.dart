@@ -1,4 +1,4 @@
-import 'package:emeal_app/models/firebase_user.dart';
+import 'package:emeal_app/models/firebase_user/firebase_user.dart';
 
 class FirebaseUserConverter {
   const FirebaseUserConverter();

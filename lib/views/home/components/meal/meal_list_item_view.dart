@@ -1,5 +1,5 @@
+import 'package:emeal_app/models/meal/meal.dart';
 import 'package:emeal_app/views/helper/utils/date_formatter.dart';
-import 'package:emeal_app/models/meal.dart';
 import 'package:emeal_app/views/helper/image/image_helper.dart';
 import 'package:flutter/material.dart';
 

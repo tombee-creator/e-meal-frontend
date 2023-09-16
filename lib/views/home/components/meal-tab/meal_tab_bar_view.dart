@@ -1,5 +1,5 @@
-import 'package:emeal_app/models/ingredient.dart';
-import 'package:emeal_app/models/meal_prep.dart';
+import 'package:emeal_app/models/ingredient/ingredient.dart';
+import 'package:emeal_app/models/meal_prep/meal_prep.dart';
 import 'package:emeal_app/views/home/components/ingredient/ingredient_view.dart';
 import 'package:emeal_app/views/home/components/meal-preps/meal_preps_view.dart';
 import 'package:emeal_app/views/home/components/meal/meal_view.dart';

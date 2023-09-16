@@ -1,5 +1,5 @@
 import 'package:emeal_app/models/converters/firebase_user_converter.dart';
-import 'package:emeal_app/models/firebase_user.dart';
+import 'package:emeal_app/models/firebase_user/firebase_user.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'ingredient.g.dart';

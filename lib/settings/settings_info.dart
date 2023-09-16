@@ -1,7 +1,7 @@
 import 'dart:convert';
 
+import 'package:emeal_app/models/ad/ad_info.dart';
 import 'package:flutter/services.dart';
-import 'package:emeal_app/models/ad_info.dart';
 
 class SettingsInfo {
   static const settingsFile = "assets/settings/settings.json";

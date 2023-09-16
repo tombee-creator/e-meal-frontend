@@ -1,4 +1,4 @@
-import 'package:emeal_app/models/ingredient.dart';
+import 'package:emeal_app/models/ingredient/ingredient.dart';
 import 'package:flutter/material.dart';
 import 'package:emeal_app/views/helper/image/image_helper.dart';
 

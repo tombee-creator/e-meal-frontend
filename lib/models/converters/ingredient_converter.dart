@@ -1,4 +1,4 @@
-import 'package:emeal_app/models/ingredient.dart';
+import 'package:emeal_app/models/ingredient/ingredient.dart';
 
 class IngredientConverter {
   const IngredientConverter();

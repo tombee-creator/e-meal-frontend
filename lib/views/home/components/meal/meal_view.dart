@@ -1,4 +1,4 @@
-import 'package:emeal_app/models/meal.dart';
+import 'package:emeal_app/models/meal/meal.dart';
 import 'package:emeal_app/services/database.dart';
 import 'package:emeal_app/services/emeal_crud_api.dart';
 import 'package:emeal_app/views/home/components/meal/meal_list_view.dart';

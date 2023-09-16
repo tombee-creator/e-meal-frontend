@@ -1,11 +1,11 @@
 import 'dart:io';
-import 'package:emeal_app/models/firebase_user.dart';
-import 'package:emeal_app/models/meal_prep.dart';
+import 'package:emeal_app/models/firebase_user/firebase_user.dart';
+import 'package:emeal_app/models/meal/meal.dart';
+import 'package:emeal_app/models/meal_prep/meal_prep.dart';
 import 'package:emeal_app/services/emeal_crud_api.dart';
 import 'package:uuid/uuid.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:emeal_app/models/meal.dart';
 import 'package:emeal_app/services/authentication.dart';
 import 'package:emeal_app/services/database.dart';
 

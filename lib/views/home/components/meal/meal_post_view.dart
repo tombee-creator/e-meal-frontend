@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:emeal_app/models/meal_prep.dart';
+import 'package:emeal_app/models/meal_prep/meal_prep.dart';
 import 'package:flutter/material.dart';
 import 'package:emeal_app/helper/image_picker_provider.dart';
 import 'package:emeal_app/views/home/components/meal/meal_field_form.dart';

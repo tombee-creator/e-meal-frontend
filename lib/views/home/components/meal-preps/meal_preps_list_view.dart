@@ -1,4 +1,4 @@
-import 'package:emeal_app/models/meal_prep.dart';
+import 'package:emeal_app/models/meal_prep/meal_prep.dart';
 import 'package:emeal_app/views/home/components/meal-preps/meal_preps_list_item_view.dart';
 import 'package:emeal_app/views/home/components/meal-tab/meal_tab_bar_view.dart';
 import 'package:flutter/material.dart';

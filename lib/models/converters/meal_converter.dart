@@ -1,4 +1,4 @@
-import 'package:emeal_app/models/meal.dart';
+import 'package:emeal_app/models/meal/meal.dart';
 
 class MealConverter {
   const MealConverter();

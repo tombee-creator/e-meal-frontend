@@ -1,5 +1,5 @@
 import 'dart:io';
-import 'package:emeal_app/models/ingredient.dart';
+import 'package:emeal_app/models/ingredient/ingredient.dart';
 import 'package:emeal_app/views/home/components/meal-preps/meal_preps_post_button.dart';
 import 'package:flutter/material.dart';
 import 'package:emeal_app/helper/image_picker_provider.dart';

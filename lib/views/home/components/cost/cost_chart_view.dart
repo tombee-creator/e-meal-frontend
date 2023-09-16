@@ -1,8 +1,8 @@
 import 'dart:math';
 
+import 'package:emeal_app/models/meal/meal.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:emeal_app/models/meal.dart';
 
 class CostChartView extends StatelessWidget {
   final List<Meal> meals;

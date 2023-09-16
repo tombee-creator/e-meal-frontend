@@ -1,5 +1,5 @@
+import 'package:emeal_app/models/meal/meal.dart';
 import 'package:flutter/material.dart';
-import 'package:emeal_app/models/meal.dart';
 import 'package:emeal_app/views/home/components/meal/meal_list_item_view.dart';
 
 class MealListView extends StatelessWidget {

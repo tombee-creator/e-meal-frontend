@@ -1,7 +1,7 @@
+import 'package:emeal_app/models/meal/meal.dart';
 import 'package:emeal_app/views/home/components/meal-grid/meal_list_grid_item_view.dart';
 import 'package:emeal_app/views/home/components/meal-grid/meal_loading_view.dart';
 import 'package:flutter/material.dart';
-import 'package:emeal_app/models/meal.dart';
 
 class MealListGridView extends StatelessWidget {
   final Future<List<Meal>> future;

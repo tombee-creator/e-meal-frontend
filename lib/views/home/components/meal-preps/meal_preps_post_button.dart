@@ -1,6 +1,6 @@
-import 'package:emeal_app/models/firebase_user.dart';
-import 'package:emeal_app/models/ingredient.dart';
-import 'package:emeal_app/models/meal_prep.dart';
+import 'package:emeal_app/models/firebase_user/firebase_user.dart';
+import 'package:emeal_app/models/ingredient/ingredient.dart';
+import 'package:emeal_app/models/meal_prep/meal_prep.dart';
 import 'package:emeal_app/services/emeal_crud_api.dart';
 import 'package:flutter/material.dart';
 import 'package:emeal_app/services/authentication.dart';
