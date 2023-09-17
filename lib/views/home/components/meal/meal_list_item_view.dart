@@ -1,5 +1,4 @@
 import 'package:emeal_app/models/meal/meal.dart';
-import 'package:emeal_app/views/helper/utils/date_formatter.dart';
 import 'package:emeal_app/views/helper/image/image_helper.dart';
 import 'package:flutter/material.dart';
 
@@ -10,7 +9,6 @@ class MealListItemView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // print(recipe.preps);
     return Card(
         child: Row(
       children: [
@@ -22,7 +20,8 @@ class MealListItemView extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(recipe.comment),
-              Text(DateFormatter().format(recipe.created))
+              Text(recipe.createdText(context),
+                  style: const TextStyle(fontSize: 12.0))
             ],
           ),
         ),
