@@ -1,6 +1,9 @@
+import 'package:emeal_app/generated/l10n.dart';
 import 'package:emeal_app/models/converters/category_converter.dart';
 import 'package:emeal_app/models/converters/firebase_user_converter.dart';
 import 'package:emeal_app/models/firebase_user/firebase_user.dart';
+import 'package:emeal_app/views/helper/utils/date_formatter.dart';
+import 'package:flutter/widgets.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'ingredient.g.dart';
@@ -37,6 +40,16 @@ class Ingredient {
 
   @JsonKey(name: "used_count")
   final int usedCount;
+
+  String createdText(BuildContext context) =>
+      "${S.of(context).list_item_label_CREATED}${DateFormatter().format(created)}";
+
+  String displayUsageText(BuildContext context, {int current = 0}) {
+    if (current == 0) {
+      return "${S.of(context).list_item_label_USAGE}$usedCount/$times";
+    }
+    return "${S.of(context).list_item_label_USAGE}$usedCount/$times → ${usedCount + current}/$times";
+  }
 
   Ingredient(this.id, this.user, this.name, this.url, this.cost, this.times,
       this.category, this.isUsedUp, this.created, this.updated, this.usedCount);

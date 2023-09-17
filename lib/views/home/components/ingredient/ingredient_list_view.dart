@@ -12,12 +12,12 @@ class IngredientListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView(
-        padding: const EdgeInsets.all(12.0),
+        padding: const EdgeInsets.all(4.0),
         children: ingredients.map((ingredient) {
           final count =
               selected.where((item) => item.id == ingredient.id).length;
           return SizedBox(
-            height: 100,
+            height: 120,
             child: IngredientListItemView(ingredient: ingredient, count: count),
           );
         }).toList());

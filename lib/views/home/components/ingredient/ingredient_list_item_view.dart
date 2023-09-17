@@ -1,5 +1,4 @@
 import 'package:emeal_app/models/ingredient/ingredient.dart';
-import 'package:emeal_app/views/helper/utils/date_formatter.dart';
 import 'package:emeal_app/views/home/components/meal-tab/meal_tab_bar_view.dart';
 import 'package:flutter/material.dart';
 
@@ -31,29 +30,26 @@ class _IngredientListItemViewState extends State<IngredientListItemView> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(widget.ingredient.name, overflow: TextOverflow.ellipsis),
-              Text(DateFormatter().format(widget.ingredient.created))
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    widget.ingredient
+                        .displayUsageText(context, current: widget.count),
+                    style: TextStyle(
+                        color: widget.count > 0
+                            ? Theme.of(context).colorScheme.primary
+                            : null),
+                  ),
+                  Text(widget.ingredient.createdText(context))
+                ],
+              )
             ],
           ),
         )));
-    if (widget.count > 0) {
-      list.add(Padding(
-        padding: const EdgeInsets.all(12.0),
-        child: CircleAvatar(
-          radius: 18.0,
-          child: Text(
-            "${widget.count}",
-            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-          ),
-        ),
-      ));
-    }
     return GestureDetector(
         onTap: widget.ingredient.isUsedUp ? null : onTap,
-        child: Card(
-            color: widget.count > 0
-                ? Theme.of(context).colorScheme.background
-                : null,
-            child: Row(children: list)));
+        child: Card(child: Row(children: list)));
   }
 
   void onSelected(BuildContext context, Ingredient item) {
