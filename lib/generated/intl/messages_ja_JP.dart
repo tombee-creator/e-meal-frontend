@@ -26,6 +26,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "home_menu_button_HOME": MessageLookupByLibrary.simpleMessage("ホーム"),
         "home_menu_button_PROFILE":
             MessageLookupByLibrary.simpleMessage("プロフィール"),
+        "list_item_label_COST": MessageLookupByLibrary.simpleMessage("価格: "),
         "list_item_label_CREATED":
             MessageLookupByLibrary.simpleMessage("作成日時: "),
         "list_item_label_USAGE": MessageLookupByLibrary.simpleMessage("使用済み: ")

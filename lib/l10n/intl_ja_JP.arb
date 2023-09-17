@@ -3,5 +3,6 @@
     "home_menu_button_COST": "食事管理",
     "home_menu_button_PROFILE": "プロフィール",
     "list_item_label_CREATED": "作成日時: ",
-    "list_item_label_USAGE": "使用済み: "
+    "list_item_label_USAGE": "使用済み: ",
+    "list_item_label_COST": "価格: "
 }

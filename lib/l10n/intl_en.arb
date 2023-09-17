@@ -3,5 +3,6 @@
     "home_menu_button_COST": "Meals",
     "home_menu_button_PROFILE": "Profile",
     "list_item_label_CREATED": "Created at ",
-    "list_item_label_USAGE": "Usage: "
+    "list_item_label_USAGE": "Usage: ",
+    "list_item_label_COST": "Cost: "
 }

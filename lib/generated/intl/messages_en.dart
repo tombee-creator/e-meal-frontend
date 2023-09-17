@@ -26,6 +26,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "home_menu_button_HOME": MessageLookupByLibrary.simpleMessage("Home"),
         "home_menu_button_PROFILE":
             MessageLookupByLibrary.simpleMessage("Profile"),
+        "list_item_label_COST": MessageLookupByLibrary.simpleMessage("Cost: "),
         "list_item_label_CREATED":
             MessageLookupByLibrary.simpleMessage("Created at "),
         "list_item_label_USAGE": MessageLookupByLibrary.simpleMessage("Usage: ")

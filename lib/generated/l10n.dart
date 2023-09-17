@@ -99,6 +99,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Cost: `
+  String get list_item_label_COST {
+    return Intl.message(
+      'Cost: ',
+      name: 'list_item_label_COST',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
