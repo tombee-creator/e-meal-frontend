@@ -55,6 +55,7 @@ dependencies:
   xml: ^6.3.0
   app_tracking_transparency: ^2.0.4
   google_mobile_ads: ^3.0.0
+  flutter_slidable: ^3.0.0
 
 dev_dependencies:
   flutter_test:
