@@ -79,6 +79,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Created at `
+  String get list_item_label_CREATED {
+    return Intl.message(
+      'Created at ',
+      name: 'list_item_label_CREATED',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Usage: `
+  String get list_item_label_USAGE {
+    return Intl.message(
+      'Usage: ',
+      name: 'list_item_label_USAGE',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
