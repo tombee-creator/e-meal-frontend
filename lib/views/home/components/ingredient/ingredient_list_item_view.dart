@@ -1,6 +1,7 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:emeal_app/models/ingredient/ingredient.dart';
 import 'package:emeal_app/views/home/components/meal-tab/meal_tab_bar_view.dart';
-import 'package:flutter/material.dart';
 
 class IngredientListItemView extends StatefulWidget {
   final Ingredient ingredient;
@@ -24,34 +25,52 @@ class _IngredientListItemViewState extends State<IngredientListItemView> {
     list.add(Expanded(
         flex: 5,
         child: Padding(
-          padding: const EdgeInsets.all(12.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(widget.ingredient.name, overflow: TextOverflow.ellipsis),
-              Column(
+            padding: const EdgeInsets.all(12.0),
+            child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    widget.ingredient
-                        .displayUsageText(context, current: widget.count),
-                    style: TextStyle(
-                        fontSize: 12.0,
-                        color: widget.count > 0
-                            ? Theme.of(context).colorScheme.primary
-                            : null),
-                  ),
-                  Text(widget.ingredient.createdText(context),
-                      style: const TextStyle(fontSize: 12.0))
-                ],
-              )
-            ],
-          ),
-        )));
+                  Text(widget.ingredient.name, overflow: TextOverflow.ellipsis),
+                  Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(widget.ingredient.displayCostText(context),
+                            style: const TextStyle(fontSize: 12.0)),
+                        Text(
+                            widget.ingredient.displayUsageText(context,
+                                current: widget.count),
+                            style: TextStyle(
+                                fontSize: 12.0,
+                                color: widget.count > 0
+                                    ? Theme.of(context).colorScheme.primary
+                                    : null)),
+                        Text(widget.ingredient.createdText(context),
+                            style: const TextStyle(fontSize: 12.0))
+                      ])
+                ]))));
     return GestureDetector(
         onTap: widget.ingredient.isUsedUp ? null : onTap,
-        child: Card(child: Row(children: list)));
+        child: Slidable(
+            endActionPane: ActionPane(
+                extentRatio: 0.6,
+                motion: const DrawerMotion(),
+                children: [
+                  SlidableAction(
+                      onPressed: (_) => onRemove(context, widget.ingredient),
+                      backgroundColor: Theme.of(context).colorScheme.primary,
+                      foregroundColor:
+                          Theme.of(context).colorScheme.inversePrimary,
+                      icon: Icons.clear,
+                      label: 'リセット'),
+                  SlidableAction(
+                      onPressed: (_) {},
+                      backgroundColor: Theme.of(context).colorScheme.error,
+                      foregroundColor:
+                          Theme.of(context).colorScheme.inversePrimary,
+                      icon: Icons.remove,
+                      label: '削除')
+                ]),
+            child: Card(child: Row(children: list))));
   }
 
   void onSelected(BuildContext context, Ingredient item) {
