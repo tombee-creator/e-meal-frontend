@@ -18,36 +18,29 @@ class _IngredientListItemViewState extends State<IngredientListItemView> {
   @override
   Widget build(BuildContext context) {
     final list = <Widget>[];
-    list.add(const AspectRatio(
-      aspectRatio: 1.0,
-      child: Icon(Icons.inventory, color: Colors.black),
-    ));
-    list.add(Expanded(
-        flex: 5,
-        child: Padding(
-            padding: const EdgeInsets.all(12.0),
-            child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(widget.ingredient.name, overflow: TextOverflow.ellipsis),
-                  Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(widget.ingredient.displayCostText(context),
-                            style: const TextStyle(fontSize: 12.0)),
-                        Text(
-                            widget.ingredient.displayUsageText(context,
-                                current: widget.count),
-                            style: TextStyle(
-                                fontSize: 12.0,
-                                color: widget.count > 0
-                                    ? Theme.of(context).colorScheme.primary
-                                    : null)),
-                        Text(widget.ingredient.createdText(context),
-                            style: const TextStyle(fontSize: 12.0))
-                      ])
-                ]))));
+    list.add(const Padding(
+        padding: EdgeInsets.symmetric(horizontal: 12.0),
+        child: Icon(Icons.inventory)));
+    list.add(Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(widget.ingredient.name, overflow: TextOverflow.ellipsis),
+          Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+            Text(widget.ingredient.displayCostText(context),
+                style: const TextStyle(fontSize: 12.0)),
+            Text(
+                widget.ingredient
+                    .displayUsageText(context, current: widget.count),
+                style: TextStyle(
+                    fontSize: 12.0,
+                    color: widget.count > 0
+                        ? Theme.of(context).colorScheme.primary
+                        : null)),
+            Text(widget.ingredient.createdText(context),
+                style: const TextStyle(fontSize: 12.0))
+          ])
+        ]));
     return GestureDetector(
         onTap: widget.ingredient.isUsedUp ? null : onTap,
         child: Slidable(
@@ -70,7 +63,9 @@ class _IngredientListItemViewState extends State<IngredientListItemView> {
                       icon: Icons.remove,
                       label: '削除')
                 ]),
-            child: Card(child: Row(children: list))));
+            child: ConstrainedBox(
+                constraints: const BoxConstraints(minHeight: 120),
+                child: Row(children: list))));
   }
 
   void onSelected(BuildContext context, Ingredient item) {
