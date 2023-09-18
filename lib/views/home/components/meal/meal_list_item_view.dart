@@ -9,24 +9,25 @@ class MealListItemView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-        child: Row(
-      children: [
-        AspectRatio(aspectRatio: 1.0, child: image()),
-        Padding(
-          padding: const EdgeInsets.all(12.0),
-          child: Column(
+    final items = <Widget>[];
+    items.add(const Padding(
+        padding: EdgeInsets.symmetric(horizontal: 12.0),
+        child: Icon(Icons.inventory)));
+    items.add(Padding(
+        padding: const EdgeInsets.all(12.0),
+        child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(recipe.comment),
               Text(recipe.createdText(context),
                   style: const TextStyle(fontSize: 12.0))
-            ],
-          ),
-        ),
-      ],
-    ));
+            ])));
+    items.add(const Spacer());
+    items.add(AspectRatio(aspectRatio: 1.0, child: image()));
+    return ConstrainedBox(
+        constraints: const BoxConstraints(minHeight: 120),
+        child: Row(children: items));
   }
 
   Widget image() {
