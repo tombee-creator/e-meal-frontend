@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:emeal_app/models/ingredient/ingredient.dart';
 import 'package:emeal_app/views/home/components/meal-tab/meal_tab_bar_view.dart';
 
@@ -18,63 +17,61 @@ class _IngredientListItemViewState extends State<IngredientListItemView> {
   @override
   Widget build(BuildContext context) {
     final list = <Widget>[];
-    list.add(const Padding(
-        padding: EdgeInsets.symmetric(horizontal: 12.0),
-        child: Icon(Icons.inventory)));
     list.add(Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(widget.ingredient.name, overflow: TextOverflow.ellipsis),
-          Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            Text(widget.ingredient.displayCostText(context),
-                style: const TextStyle(fontSize: 12.0)),
-            Text(
-                widget.ingredient
-                    .displayUsageText(context, current: widget.count),
-                style: TextStyle(
-                    fontSize: 12.0,
-                    color: widget.count > 0
-                        ? Theme.of(context).colorScheme.primary
-                        : null)),
-            Text(widget.ingredient.createdText(context),
-                style: const TextStyle(fontSize: 12.0))
-          ])
-        ]));
-    return GestureDetector(
-        onTap: widget.ingredient.isUsedUp ? null : onTap,
-        child: Slidable(
-            endActionPane: ActionPane(
-                extentRatio: 0.6,
-                motion: const DrawerMotion(),
+          Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: Row(
                 children: [
-                  SlidableAction(
-                      onPressed: (_) => useUp(context, widget.ingredient),
-                      backgroundColor: Theme.of(context).colorScheme.primary,
-                      foregroundColor:
-                          Theme.of(context).colorScheme.inversePrimary,
-                      icon: Icons.clear,
-                      label: '使い切る'),
-                  SlidableAction(
-                      onPressed: (_) => onRemove(context, widget.ingredient),
-                      backgroundColor: Theme.of(context).colorScheme.secondary,
-                      foregroundColor:
-                          Theme.of(context).colorScheme.inversePrimary,
-                      icon: Icons.clear,
-                      label: 'リセット'),
-                  SlidableAction(
-                      onPressed: (_) {
-                        onDelete(context, widget.ingredient);
-                      },
-                      backgroundColor: Theme.of(context).colorScheme.error,
-                      foregroundColor:
-                          Theme.of(context).colorScheme.inversePrimary,
-                      icon: Icons.remove,
-                      label: '削除')
-                ]),
-            child: ConstrainedBox(
-                constraints: const BoxConstraints(minHeight: 120),
-                child: Row(children: list))));
+                  const Padding(
+                      padding: EdgeInsets.all(4.0),
+                      child: Icon(Icons.inventory)),
+                  Text(widget.ingredient.name, overflow: TextOverflow.ellipsis)
+                ],
+              )),
+          Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 12.0),
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(widget.ingredient.displayCostText(context),
+                        style: const TextStyle(fontSize: 12.0)),
+                    Text(
+                        widget.ingredient
+                            .displayUsageText(context, current: widget.count),
+                        style: TextStyle(
+                            fontSize: 12.0,
+                            color: widget.count > 0
+                                ? Theme.of(context).colorScheme.primary
+                                : null)),
+                    Text(widget.ingredient.createdText(context),
+                        style: const TextStyle(fontSize: 12.0))
+                  ]))
+        ]));
+    return Card(
+        child: InkWell(
+            onTap: onTap,
+            child: Column(children: [
+              ConstrainedBox(
+                  constraints: const BoxConstraints(minHeight: 120),
+                  child: Row(children: list)),
+              Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+                Expanded(
+                    child: TextButton(
+                        onPressed: () => onRemove(context, widget.ingredient),
+                        child: const Text("リセット"))),
+                Expanded(
+                    child: TextButton(
+                        onPressed: () => useUp(context, widget.ingredient),
+                        child: const Text("使い切る"))),
+                Expanded(
+                    child: TextButton(
+                        onPressed: () => onDelete(context, widget.ingredient),
+                        child: const Text("削除")))
+              ])
+            ])));
   }
 
   void onSelected(BuildContext context, Ingredient item) {

@@ -96,7 +96,7 @@ class MealTabBarViewState extends State<MealTabBarView> {
       });
     } else {
       AlertView()
-          .show(context, body: "${ingredient.name}を「使い切り」に変更します")
+          .show(context, body: "${ingredient.name}を「使い切り」に変更しますか？")
           .then((result) async {
         if (result) {
           final item = await Database()

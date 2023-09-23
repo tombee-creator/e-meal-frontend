@@ -12,13 +12,12 @@ class IngredientListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.separated(
+    return ListView.builder(
         itemBuilder: (context, index) {
           final ingredient = ingredients[index];
           final count = getUsedIngredientCount(ingredient);
           return IngredientListItemView(ingredient: ingredient, count: count);
         },
-        separatorBuilder: (context, index) => const Divider(height: 1),
         itemCount: ingredients.length);
   }
 
