@@ -51,9 +51,9 @@ class Ingredient {
 
   String displayUsageText(BuildContext context, {int current = 0}) {
     if (current == 0) {
-      return "${S.of(context).list_item_label_USAGE}$usedCount/$times";
+      return "${S.of(context).list_item_label_USAGE}$usedCount";
     }
-    return "${S.of(context).list_item_label_USAGE}$usedCount/$times → ${usedCount + current}/$times";
+    return "${S.of(context).list_item_label_USAGE}$usedCount → ${usedCount + current}";
   }
 
   Ingredient(this.id, this.user, this.name, this.url, this.cost, this.times,

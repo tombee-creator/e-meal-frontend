@@ -79,15 +79,6 @@ class _IngredientListItemViewState extends State<IngredientListItemView> {
   }
 
   void onTap() {
-    final countUsedUp = widget.count + widget.ingredient.usedCount;
-    if (countUsedUp >= widget.ingredient.times) {
-      onRemove(context, widget.ingredient);
-    } else {
-      if (countUsedUp < widget.ingredient.times - 1) {
-        onSelected(context, widget.ingredient);
-      } else {
-        onSelected(context, widget.ingredient.usedUp());
-      }
-    }
+    onSelected(context, widget.ingredient);
   }
 }

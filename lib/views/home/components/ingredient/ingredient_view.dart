@@ -1,5 +1,6 @@
 import 'package:emeal_app/models/converters/category_converter.dart';
 import 'package:emeal_app/models/ingredient/ingredient.dart';
+import 'package:emeal_app/models/ingredient/used_ingredient_info.dart';
 import 'package:emeal_app/services/database.dart';
 import 'package:emeal_app/services/emeal_crud_api.dart';
 import 'package:emeal_app/views/home/components/ingredient/ingredient_list_view.dart';
@@ -7,7 +8,7 @@ import 'package:flutter/material.dart';
 
 class IngredientView extends StatefulWidget {
   final List<Category> categories;
-  final List<Ingredient> selected;
+  final List<UsedIngredientPostInfo> selected;
   final bool isFetch;
 
   const IngredientView(

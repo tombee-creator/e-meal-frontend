@@ -1,4 +1,4 @@
-import 'package:emeal_app/models/ingredient/ingredient.dart';
+import 'package:emeal_app/models/ingredient/used_ingredient_info.dart';
 import 'package:flutter/material.dart';
 import 'package:emeal_app/views/home/components/ingredient/ingredient_post_button.dart';
 import 'package:emeal_app/views/home/components/meal/meal_field_form.dart';
@@ -18,12 +18,13 @@ class _IngredientPostViewState extends State<IngredientPostView> {
   @override
   void didChangeDependencies() {
     final args = ModalRoute.of(context)?.settings.arguments as Map;
-    final selected = (args['ingredients'] ?? []) as List<Ingredient>;
+    final selected =
+        (args['ingredients'] ?? []) as List<UsedIngredientPostInfo>;
     super.didChangeDependencies();
 
     if (selected.isNotEmpty) {
       cost = selected
-          .map((e) => e.cost / e.times)
+          .map((e) => e.ingredient.cost)
           .reduce((cost1, cost2) => cost1 + cost2);
     }
   }

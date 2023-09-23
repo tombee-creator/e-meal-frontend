@@ -26,7 +26,7 @@ class _IngredientPostButtonState extends State<IngredientPostButton> {
   double progress = 0.0;
   ButtonState state = ButtonState.wating;
   Category category = Category.ingredient;
-  List<Ingredient> selected = [];
+  List<UsedIngredientPostInfo> selected = [];
 
   bool get _isEnabled {
     return state == ButtonState.wating && widget.name.isNotEmpty;
@@ -36,7 +36,8 @@ class _IngredientPostButtonState extends State<IngredientPostButton> {
   void didChangeDependencies() {
     final args = ModalRoute.of(context)?.settings.arguments as Map;
     category = args['category'] ?? Category.ingredient;
-    selected = args['ingredients'] ?? [];
+    selected = (args['ingredients'] ?? []) as List<UsedIngredientPostInfo>;
+
     super.didChangeDependencies();
   }
 
@@ -93,40 +94,41 @@ class _IngredientPostButtonState extends State<IngredientPostButton> {
             DateTime.now(),
             DateTime.now(),
             0,
-            UsedIngredientPostInfo.create(selected))
+            selected)
         .toJson());
   }
 
   Future<bool> confirmUsedUp() async {
-    final ids = selected.map((item) => item.id).toSet();
-    for (final id in ids) {
-      final list = selected.where((item) => item.id == id);
-      final item = list.last;
+    for (final item in selected) {
       if (item.isUsedUp) {
-        final result = await showDialog(
-            barrierDismissible: false,
-            context: context,
-            builder: (_) => AlertDialog(
-                  title: const Text("確認"),
-                  content: Text("${item.name}を使い切ります。\nよろしいですか？"),
-                  actions: [
-                    TextButton(
-                        child: const Text("OK"),
-                        onPressed: () {
-                          Navigator.pop(context, true);
-                        }),
-                    TextButton(
-                        child: const Text("Cancel"),
-                        onPressed: () {
-                          Navigator.pop(context, false);
-                        })
-                  ],
-                ));
+        final result = await showConfirmDialog(item.ingredient);
         if (!result) {
           return false;
         }
       }
     }
     return true;
+  }
+
+  Future<bool> showConfirmDialog(Ingredient ingredient) async {
+    return await showDialog(
+        barrierDismissible: false,
+        context: context,
+        builder: (_) => AlertDialog(
+              title: const Text("確認"),
+              content: Text("${ingredient.name}を使い切ります。\nよろしいですか？"),
+              actions: [
+                TextButton(
+                    child: const Text("OK"),
+                    onPressed: () {
+                      Navigator.pop(context, true);
+                    }),
+                TextButton(
+                    child: const Text("Cancel"),
+                    onPressed: () {
+                      Navigator.pop(context, false);
+                    })
+              ],
+            ));
   }
 }

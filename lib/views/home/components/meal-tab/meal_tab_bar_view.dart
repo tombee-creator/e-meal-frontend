@@ -1,4 +1,5 @@
 import 'package:emeal_app/models/ingredient/ingredient.dart';
+import 'package:emeal_app/models/ingredient/used_ingredient_info.dart';
 import 'package:emeal_app/views/home/components/ingredient/ingredient_view.dart';
 import 'package:emeal_app/views/home/components/meal/meal_view.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +13,7 @@ class MealTabBarView extends StatefulWidget {
 
 class MealTabBarViewState extends State<MealTabBarView> {
   late bool isFetch;
-  late List<Ingredient> ingredients;
+  late List<UsedIngredientPostInfo> selected;
 
   @override
   void didChangeDependencies() {
@@ -29,11 +30,11 @@ class MealTabBarViewState extends State<MealTabBarView> {
       TabBarView(children: [
         IngredientView(
             categories: const [Category.ingredient, Category.gift],
-            selected: ingredients,
+            selected: selected,
             isFetch: isFetch),
         IngredientView(
             categories: const [Category.prep],
-            selected: ingredients,
+            selected: selected,
             isFetch: isFetch),
         MealView(isFetch: isFetch),
       ]),
@@ -49,7 +50,7 @@ class MealTabBarViewState extends State<MealTabBarView> {
                     await Navigator.of(context).pushNamed(
                         links[DefaultTabController.of(context).index],
                         arguments: {
-                          'ingredients': ingredients,
+                          'ingredients': selected,
                           'category':
                               categories[DefaultTabController.of(context).index]
                         });
@@ -60,20 +61,46 @@ class MealTabBarViewState extends State<MealTabBarView> {
 
   void initSelectedItems() {
     isFetch = true;
-    ingredients = [];
+    selected = <UsedIngredientPostInfo>[];
   }
 
   void chooseIngredient(Ingredient ingredient) {
     setState(() {
-      ingredients.add(ingredient);
+      final selectedItems = selected;
+      final items = selectedItems
+          .where((item) => item.ingredient.id == ingredient.id)
+          .toList();
+      if (items.isEmpty) {
+        selectedItems.add(UsedIngredientPostInfo(
+            ingredient: ingredient, isUsedUp: false, count: 1));
+      } else {
+        final item = items.first;
+        item.count++;
+      }
+      selected = selectedItems;
+      isFetch = false;
+    });
+  }
+
+  void usedUpIngredient(Ingredient ingredient) {
+    setState(() {
+      final items = selected
+          .where((item) => item.ingredient.id == ingredient.id)
+          .toList();
+      if (items.isNotEmpty) {
+        final item = items.first;
+        item.isUsedUp = true;
+      }
       isFetch = false;
     });
   }
 
   void clearSelectedIngredients(Ingredient ingredient) {
     setState(() {
-      ingredients =
-          ingredients.where((item) => item.id != ingredient.id).toList();
+      selected = selected
+          .where((item) => item.ingredient.id != ingredient.id)
+          .toList();
+      isFetch = false;
     });
   }
 }
