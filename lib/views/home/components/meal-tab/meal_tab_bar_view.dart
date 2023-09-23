@@ -2,6 +2,7 @@ import 'package:emeal_app/models/ingredient/ingredient.dart';
 import 'package:emeal_app/models/ingredient/used_ingredient_info.dart';
 import 'package:emeal_app/services/database.dart';
 import 'package:emeal_app/services/emeal_crud_api.dart';
+import 'package:emeal_app/views/common/alert_view.dart';
 import 'package:emeal_app/views/home/components/ingredient/ingredient_view.dart';
 import 'package:emeal_app/views/home/components/meal/meal_view.dart';
 import 'package:flutter/material.dart';
@@ -85,16 +86,32 @@ class MealTabBarViewState extends State<MealTabBarView> {
   }
 
   void useUpIngredient(Ingredient ingredient) {
-    setState(() {
-      final items = selected
-          .where((item) => item.ingredient.id == ingredient.id)
-          .toList();
-      if (items.isNotEmpty) {
+    final items =
+        selected.where((item) => item.ingredient.id == ingredient.id).toList();
+    if (items.isNotEmpty) {
+      setState(() {
         final item = items.first;
         item.isUsedUp = true;
-      }
-      isFetch = false;
-    });
+        isFetch = false;
+      });
+    } else {
+      AlertView()
+          .show(context, body: "${ingredient.name}を「使い切り」に変更します")
+          .then((result) async {
+        if (result) {
+          final item = await Database()
+              .provider(
+                  EMealCrudApi(Ingredient.collection, Ingredient.fromJson))
+              .put(ingredient.id, ingredient.usedUp(),
+                  (instance) => instance.toJson());
+          if (item != null) {
+            setState(() {
+              initSelectedItems();
+            });
+          }
+        }
+      });
+    }
   }
 
   void clearSelectedIngredients(Ingredient ingredient) {
