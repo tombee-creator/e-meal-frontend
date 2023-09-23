@@ -84,7 +84,7 @@ class MealTabBarViewState extends State<MealTabBarView> {
     });
   }
 
-  void usedUpIngredient(Ingredient ingredient) {
+  void useUpIngredient(Ingredient ingredient) {
     setState(() {
       final items = selected
           .where((item) => item.ingredient.id == ingredient.id)

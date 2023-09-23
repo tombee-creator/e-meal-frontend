@@ -49,8 +49,15 @@ class _IngredientListItemViewState extends State<IngredientListItemView> {
                 motion: const DrawerMotion(),
                 children: [
                   SlidableAction(
-                      onPressed: (_) => onRemove(context, widget.ingredient),
+                      onPressed: (_) => useUp(context, widget.ingredient),
                       backgroundColor: Theme.of(context).colorScheme.primary,
+                      foregroundColor:
+                          Theme.of(context).colorScheme.inversePrimary,
+                      icon: Icons.clear,
+                      label: '使い切る'),
+                  SlidableAction(
+                      onPressed: (_) => onRemove(context, widget.ingredient),
+                      backgroundColor: Theme.of(context).colorScheme.secondary,
                       foregroundColor:
                           Theme.of(context).colorScheme.inversePrimary,
                       icon: Icons.clear,
@@ -78,6 +85,11 @@ class _IngredientListItemViewState extends State<IngredientListItemView> {
   void onRemove(BuildContext context, Ingredient ingredient) {
     final currentState = context.findAncestorStateOfType<MealTabBarViewState>();
     currentState?.clearSelectedIngredients(ingredient);
+  }
+
+  void useUp(BuildContext context, Ingredient ingredient) {
+    final currentState = context.findAncestorStateOfType<MealTabBarViewState>();
+    currentState?.useUpIngredient(ingredient);
   }
 
   void onDelete(BuildContext context, Ingredient ingredient) {
