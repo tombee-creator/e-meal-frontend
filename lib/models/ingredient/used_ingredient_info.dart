@@ -2,8 +2,8 @@ import 'package:emeal_app/models/ingredient/ingredient.dart';
 
 class UsedIngredientPostInfo {
   final Ingredient ingredient;
-  final bool isUsedUp;
-  final int count;
+  bool isUsedUp;
+  int count;
 
   UsedIngredientPostInfo(
       {required this.ingredient, required this.isUsedUp, required this.count});
