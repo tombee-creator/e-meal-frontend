@@ -1,5 +1,7 @@
 import 'package:emeal_app/models/ingredient/ingredient.dart';
 import 'package:emeal_app/models/ingredient/used_ingredient_info.dart';
+import 'package:emeal_app/services/database.dart';
+import 'package:emeal_app/services/emeal_crud_api.dart';
 import 'package:emeal_app/views/home/components/ingredient/ingredient_view.dart';
 import 'package:emeal_app/views/home/components/meal/meal_view.dart';
 import 'package:flutter/material.dart';
@@ -102,5 +104,17 @@ class MealTabBarViewState extends State<MealTabBarView> {
           .toList();
       isFetch = false;
     });
+  }
+
+  Future deleteIngredient(Ingredient ingredient) async {
+    final statusCode = await Database()
+        .provider<Ingredient>(
+            EMealCrudApi(Ingredient.collection, Ingredient.fromJson))
+        .delete(ingredient.id);
+    if (statusCode == 204) {
+      setState(() {
+        initSelectedItems();
+      });
+    }
   }
 }

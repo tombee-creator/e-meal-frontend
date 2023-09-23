@@ -74,4 +74,18 @@ class EMealCrudApi<T> implements CRUDApi<T> {
         body: builder(item));
     return converter(json.decode(result.body));
   }
+
+  @override
+  Future<int> delete(String id) async {
+    final backendUrl = SettingsInfo().backendUrl;
+    final collection = this.collection;
+    final uri = Uri.parse("$backendUrl$collection/$id/");
+    final token = await Authentication().getToken();
+    if (token == null) {
+      throw UnimplementedError();
+    }
+    final result = await http.delete(uri,
+        headers: {"Authorization": await Authentication().getToken() ?? ""});
+    return result.statusCode;
+  }
 }

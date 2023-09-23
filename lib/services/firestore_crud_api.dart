@@ -50,4 +50,9 @@ class FirestoreCRUDApi<T> implements CRUDApi<T> {
         .set(itemJson);
     return await get(id);
   }
+
+  @override
+  Future<int> delete(String id) {
+    throw UnimplementedError();
+  }
 }

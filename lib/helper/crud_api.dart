@@ -4,4 +4,5 @@ abstract class CRUDApi<T> {
   Future<T?> post(Map<String, dynamic> Function(String id) builder);
   Future<T?> put(
       String id, T item, Map<String, dynamic> Function(T item) builder);
+  Future<int> delete(String id);
 }
