@@ -1,10 +1,10 @@
 import 'dart:io';
 import 'package:emeal_app/models/firebase_user/firebase_user.dart';
-import 'package:emeal_app/models/ingredient/ingredient.dart';
 import 'package:emeal_app/models/ingredient/used_ingredient_info.dart';
 import 'package:emeal_app/models/meal/meal.dart';
 import 'package:emeal_app/models/meal/meal_post_data.dart';
 import 'package:emeal_app/services/emeal_crud_api.dart';
+import 'package:emeal_app/views/common/alert_view.dart';
 import 'package:uuid/uuid.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
@@ -148,34 +148,13 @@ class _MealPostButtonState extends State<MealPostButton> {
   Future<bool> confirmUsedUp() async {
     for (final item in widget.preps) {
       if (item.isUsedUp) {
-        final result = await showConfirmDialog(item.ingredient);
+        final result = await AlertView()
+            .show(context, body: "${item.ingredient.name}を使い切ります。\nよろしいですか？");
         if (!result) {
           return false;
         }
       }
     }
     return true;
-  }
-
-  Future<bool> showConfirmDialog(Ingredient ingredient) async {
-    return await showDialog(
-        barrierDismissible: false,
-        context: context,
-        builder: (_) => AlertDialog(
-              title: const Text("確認"),
-              content: Text("${ingredient.name}を使い切ります。\nよろしいですか？"),
-              actions: [
-                TextButton(
-                    child: const Text("OK"),
-                    onPressed: () {
-                      Navigator.pop(context, true);
-                    }),
-                TextButton(
-                    child: const Text("Cancel"),
-                    onPressed: () {
-                      Navigator.pop(context, false);
-                    })
-              ],
-            ));
   }
 }
