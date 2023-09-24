@@ -124,14 +124,19 @@ class MealTabBarViewState extends State<MealTabBarView> {
   }
 
   Future deleteIngredient(Ingredient ingredient) async {
-    final statusCode = await Database()
-        .provider<Ingredient>(
-            EMealCrudApi(Ingredient.collection, Ingredient.fromJson))
-        .delete(ingredient.id);
-    if (statusCode == 204) {
-      setState(() {
-        initSelectedItems();
-      });
+    final name = ingredient.name;
+    final result =
+        await AlertView().show(context, body: "$nameを素材一覧から削除してもよろしいですか？");
+    if (result) {
+      final statusCode = await Database()
+          .provider<Ingredient>(
+              EMealCrudApi(Ingredient.collection, Ingredient.fromJson))
+          .delete(ingredient.id);
+      if (statusCode == 204) {
+        setState(() {
+          initSelectedItems();
+        });
+      }
     }
   }
 }

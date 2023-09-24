@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:emeal_app/models/ingredient/used_ingredient_info.dart';
 import 'package:flutter/material.dart';
 import 'package:emeal_app/helper/image_picker_provider.dart';
-import 'package:emeal_app/views/home/components/meal/meal_field_form.dart';
+import 'package:emeal_app/views/common/meal_text_field_form.dart';
 import 'package:emeal_app/views/home/components/meal/meal_post_button.dart';
 
 class MealPostView extends StatefulWidget {
@@ -60,7 +60,7 @@ class _MealPostViewState extends State<MealPostView> {
             flex: 2,
             child: Column(
               children: [
-                MealFieldForm(
+                MealTextFieldForm(
                   hintText: "コメント",
                   icon: Icons.description,
                   onChange: (comment) {
@@ -69,7 +69,7 @@ class _MealPostViewState extends State<MealPostView> {
                     });
                   },
                 ),
-                MealFieldForm(
+                MealTextFieldForm(
                   hintText: "$cost",
                   icon: Icons.currency_yen,
                   onChange: (cost) {

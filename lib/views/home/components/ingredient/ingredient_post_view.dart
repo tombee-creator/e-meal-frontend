@@ -1,7 +1,7 @@
 import 'package:emeal_app/models/ingredient/used_ingredient_info.dart';
 import 'package:flutter/material.dart';
 import 'package:emeal_app/views/home/components/ingredient/ingredient_post_button.dart';
-import 'package:emeal_app/views/home/components/meal/meal_field_form.dart';
+import 'package:emeal_app/views/common/meal_text_field_form.dart';
 
 class IngredientPostView extends StatefulWidget {
   const IngredientPostView({super.key});
@@ -36,7 +36,7 @@ class _IngredientPostViewState extends State<IngredientPostView> {
         Expanded(
             child: Column(
           children: [
-            MealFieldForm(
+            MealTextFieldForm(
               hintText: "名前",
               icon: Icons.description,
               onChange: (name) {
@@ -45,23 +45,13 @@ class _IngredientPostViewState extends State<IngredientPostView> {
                 });
               },
             ),
-            MealFieldForm(
+            MealTextFieldForm(
               hintText: cost == 0.0 ? "コスト" : "$cost",
               icon: Icons.currency_yen,
               onChange: (cost) {
                 final parsedCost = double.tryParse(cost) ?? 0.0;
                 setState(() {
                   this.cost = parsedCost;
-                });
-              },
-            ),
-            MealFieldForm(
-              hintText: "使用回数",
-              icon: Icons.countertops,
-              onChange: (times) {
-                final parsedTimes = int.tryParse(times) ?? 1;
-                setState(() {
-                  this.times = parsedTimes;
                 });
               },
             ),
