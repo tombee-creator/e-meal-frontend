@@ -16,23 +16,24 @@ class IngredientListItemView extends StatefulWidget {
 class _IngredientListItemViewState extends State<IngredientListItemView> {
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     final list = <Widget>[];
     list.add(Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          Row(
+            children: [
+              const Padding(
+                  padding: EdgeInsets.all(4.0), child: Icon(Icons.inventory)),
+              Padding(
+                  padding: const EdgeInsets.all(4.0),
+                  child: Text(widget.ingredient.name,
+                      overflow: TextOverflow.ellipsis))
+            ],
+          ),
           Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: Row(
-                children: [
-                  const Padding(
-                      padding: EdgeInsets.all(4.0),
-                      child: Icon(Icons.inventory)),
-                  Text(widget.ingredient.name, overflow: TextOverflow.ellipsis)
-                ],
-              )),
-          Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 12.0),
+              padding: const EdgeInsets.all(4.0),
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -50,28 +51,33 @@ class _IngredientListItemViewState extends State<IngredientListItemView> {
                         style: const TextStyle(fontSize: 12.0))
                   ]))
         ]));
+    final buttons = [
+      TextButton(
+          onPressed: () => onRemove(context, widget.ingredient),
+          child: const Text("リセット")),
+      TextButton(
+          onPressed: () => useUp(context, widget.ingredient),
+          child: const Text("使い切る")),
+      TextButton(
+          style: TextButton.styleFrom(
+              backgroundColor: colorScheme.error,
+              foregroundColor: colorScheme.inversePrimary),
+          onPressed: () => onDelete(context, widget.ingredient),
+          child: const Text("削除"))
+    ];
     return Card(
         child: InkWell(
             onTap: onTap,
-            child: Column(children: [
-              ConstrainedBox(
-                  constraints: const BoxConstraints(minHeight: 120),
-                  child: Row(children: list)),
-              Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-                Expanded(
-                    child: TextButton(
-                        onPressed: () => onRemove(context, widget.ingredient),
-                        child: const Text("リセット"))),
-                Expanded(
-                    child: TextButton(
-                        onPressed: () => useUp(context, widget.ingredient),
-                        child: const Text("使い切る"))),
-                Expanded(
-                    child: TextButton(
-                        onPressed: () => onDelete(context, widget.ingredient),
-                        child: const Text("削除")))
-              ])
-            ])));
+            child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(children: [
+                  ConstrainedBox(
+                      constraints: const BoxConstraints(minHeight: 120),
+                      child: Row(children: list)),
+                  Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: buttons)
+                ]))));
   }
 
   void onSelected(BuildContext context, Ingredient item) {
