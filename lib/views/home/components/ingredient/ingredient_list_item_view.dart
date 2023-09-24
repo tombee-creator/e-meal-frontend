@@ -19,19 +19,18 @@ class _IngredientListItemViewState extends State<IngredientListItemView> {
     final colorScheme = Theme.of(context).colorScheme;
     final list = <Widget>[];
     list.add(Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            children: [
-              const Padding(
-                  padding: EdgeInsets.all(4.0), child: Icon(Icons.inventory)),
-              Padding(
-                  padding: const EdgeInsets.all(4.0),
-                  child: Text(widget.ingredient.name,
-                      overflow: TextOverflow.ellipsis))
-            ],
-          ),
+          Row(children: [
+            const Padding(
+                padding: EdgeInsets.all(4.0), child: Icon(Icons.inventory)),
+            Padding(
+                padding: const EdgeInsets.all(4.0),
+                child: Text(widget.ingredient.name,
+                    overflow: TextOverflow.ellipsis))
+          ]),
+          const Divider(),
           Padding(
               padding: const EdgeInsets.all(4.0),
               child: Column(
@@ -44,9 +43,8 @@ class _IngredientListItemViewState extends State<IngredientListItemView> {
                             .displayUsageText(context, current: widget.count),
                         style: TextStyle(
                             fontSize: 12.0,
-                            color: widget.count > 0
-                                ? Theme.of(context).colorScheme.primary
-                                : null)),
+                            color:
+                                widget.count > 0 ? colorScheme.primary : null)),
                     Text(widget.ingredient.createdText(context),
                         style: const TextStyle(fontSize: 12.0))
                   ]))
