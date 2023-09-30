@@ -20,6 +20,9 @@ class MealListItemView extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(recipe.comment),
+              const Spacer(),
+              Text(recipe.costText(context),
+                  style: const TextStyle(fontSize: 12.0)),
               Text(recipe.createdText(context),
                   style: const TextStyle(fontSize: 12.0))
             ])));
