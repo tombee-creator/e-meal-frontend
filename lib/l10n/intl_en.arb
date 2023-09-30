@@ -4,5 +4,8 @@
     "home_menu_button_PROFILE": "Profile",
     "list_item_label_CREATED": "Created at ",
     "list_item_label_USAGE": "Usage: ",
-    "list_item_label_COST": "Cost: "
+    "list_item_label_COST": "Cost: ",
+    "category_label_INGREDIENT": "Ingredient",
+    "category_label_MEAL_PREP": "Meal Prep",
+    "category_label_GIFT": "Gift"
 }

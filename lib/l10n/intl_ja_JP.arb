@@ -4,5 +4,8 @@
     "home_menu_button_PROFILE": "プロフィール",
     "list_item_label_CREATED": "作成日時: ",
     "list_item_label_USAGE": "使用済み: ",
-    "list_item_label_COST": "価格: "
+    "list_item_label_COST": "価格: ",
+    "category_label_INGREDIENT": "食材",
+    "category_label_MEAL_PREP": "作り置き",
+    "category_label_GIFT": "贈り物"
 }
