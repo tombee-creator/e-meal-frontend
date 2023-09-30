@@ -109,6 +109,36 @@ class S {
       args: [],
     );
   }
+
+  /// `Ingredient`
+  String get category_label_INGREDIENT {
+    return Intl.message(
+      'Ingredient',
+      name: 'category_label_INGREDIENT',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Meal Prep`
+  String get category_label_MEAL_PREP {
+    return Intl.message(
+      'Meal Prep',
+      name: 'category_label_MEAL_PREP',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Gift`
+  String get category_label_GIFT {
+    return Intl.message(
+      'Gift',
+      name: 'category_label_GIFT',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

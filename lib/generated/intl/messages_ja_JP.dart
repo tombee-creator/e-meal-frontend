@@ -22,6 +22,10 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "category_label_GIFT": MessageLookupByLibrary.simpleMessage("贈り物"),
+        "category_label_INGREDIENT": MessageLookupByLibrary.simpleMessage("食材"),
+        "category_label_MEAL_PREP":
+            MessageLookupByLibrary.simpleMessage("作り置き"),
         "home_menu_button_COST": MessageLookupByLibrary.simpleMessage("食事管理"),
         "home_menu_button_HOME": MessageLookupByLibrary.simpleMessage("ホーム"),
         "home_menu_button_PROFILE":
