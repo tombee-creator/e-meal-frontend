@@ -14,9 +14,14 @@ class IngredientPostButton extends StatefulWidget {
   final String name;
   final double cost;
   final int times;
+  final Category category;
 
   const IngredientPostButton(
-      {super.key, required this.name, required this.cost, required this.times});
+      {super.key,
+      required this.name,
+      required this.cost,
+      required this.times,
+      required this.category});
 
   @override
   State<StatefulWidget> createState() => _IngredientPostButtonState();
@@ -26,7 +31,6 @@ class _IngredientPostButtonState extends State<IngredientPostButton> {
   String path = "";
   double progress = 0.0;
   ButtonState state = ButtonState.wating;
-  Category category = Category.ingredient;
   List<UsedIngredientPostInfo> selected = [];
 
   bool get _isEnabled {
@@ -36,7 +40,6 @@ class _IngredientPostButtonState extends State<IngredientPostButton> {
   @override
   void didChangeDependencies() {
     final args = ModalRoute.of(context)?.settings.arguments as Map;
-    category = args['category'] ?? Category.ingredient;
     selected = (args['ingredients'] ?? []) as List<UsedIngredientPostInfo>;
 
     super.didChangeDependencies();
@@ -90,7 +93,7 @@ class _IngredientPostButtonState extends State<IngredientPostButton> {
             url,
             widget.cost,
             widget.times,
-            category,
+            widget.category,
             false,
             DateTime.now(),
             DateTime.now(),

@@ -19,7 +19,7 @@ class IngredientView extends StatefulWidget {
 }
 
 class IngredientViewState extends State<IngredientView> {
-  List<Category> categories = Category.values;
+  List<Category> categories = Category.values.map((e) => e).toList();
 
   @override
   Widget build(BuildContext context) {
@@ -65,7 +65,7 @@ class IngredientViewState extends State<IngredientView> {
     return (isSelected) {
       if (isSelected) {
         setState(() => categories.add(category));
-      } else {
+      } else if (categories.length > 1) {
         setState(() => categories.remove(category));
       }
     };
@@ -74,8 +74,8 @@ class IngredientViewState extends State<IngredientView> {
   Future<List<Ingredient>> fetchData() async {
     var query = categories
         .map((category) {
-          final name = const CategoryConverter().indexOf(category);
-          return "category=$name";
+          final index = const CategoryConverter().indexOf(category);
+          return "category=$index";
         })
         .toList()
         .join("&");
