@@ -22,15 +22,12 @@ class HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return HomePageLayout(
       title: "e-Meal",
-      tabCount: 3,
+      tabCount: 2,
       bottoms: const [
         null,
         TabBar(tabs: [
           Tab(
             icon: Icon(Icons.inventory),
-          ),
-          Tab(
-            icon: Icon(Icons.archive),
           ),
           Tab(
             icon: Icon(Icons.lunch_dining),

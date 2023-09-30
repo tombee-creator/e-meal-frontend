@@ -27,18 +27,11 @@ class MealTabBarViewState extends State<MealTabBarView> {
 
   @override
   Widget build(BuildContext context) {
-    final links = ["/ingredients", "/ingredients", "/meals"];
-    final categories = [Category.ingredient, Category.prep, null];
+    final links = ["/ingredients", "/meals"];
+    final categories = [Category.ingredient, null];
     return Stack(children: [
       TabBarView(children: [
-        IngredientView(
-            categories: const [Category.ingredient, Category.gift],
-            selected: selected,
-            isFetch: isFetch),
-        IngredientView(
-            categories: const [Category.prep],
-            selected: selected,
-            isFetch: isFetch),
+        IngredientView(selected: selected, isFetch: isFetch),
         MealView(isFetch: isFetch),
       ]),
       Positioned(
