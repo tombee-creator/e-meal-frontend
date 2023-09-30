@@ -35,6 +35,9 @@ class IngredientViewState extends State<IngredientView> {
                     child: CircularProgressIndicator(),
                   );
                 }
+                if (data.isEmpty) {
+                  return const Center(child: Text("素材を追加しましょう！"));
+                }
                 return IngredientListView(
                     ingredients: data, selected: widget.selected);
               }))
