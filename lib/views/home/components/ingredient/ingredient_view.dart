@@ -36,7 +36,8 @@ class IngredientViewState extends State<IngredientView> {
                   );
                 }
                 if (data.isEmpty) {
-                  return const Center(child: Text("素材を追加しましょう！"));
+                  return Center(
+                      child: Text(S.of(context).add_ingredient_label_text));
                 }
                 return IngredientListView(
                     ingredients: data, selected: widget.selected);
@@ -45,19 +46,28 @@ class IngredientViewState extends State<IngredientView> {
   }
 
   Widget categoryChips() {
-    return Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-      ChoiceChip(
-          label: Text(S.of(context).category_label_INGREDIENT),
-          onSelected: selectedAction(Category.ingredient),
-          selected: categories.contains(Category.ingredient)),
-      ChoiceChip(
-          label: Text(S.of(context).category_label_GIFT),
-          onSelected: selectedAction(Category.gift),
-          selected: categories.contains(Category.gift)),
-      ChoiceChip(
-          label: Text(S.of(context).category_label_MEAL_PREP),
-          onSelected: selectedAction(Category.prep),
-          selected: categories.contains(Category.prep))
+    return Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+      Text(S.of(context).category_label),
+      Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+        Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 4.0),
+            child: ChoiceChip(
+                label: Text(S.of(context).category_label_INGREDIENT),
+                onSelected: selectedAction(Category.ingredient),
+                selected: categories.contains(Category.ingredient))),
+        Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 4.0),
+            child: ChoiceChip(
+                label: Text(S.of(context).category_label_GIFT),
+                onSelected: selectedAction(Category.gift),
+                selected: categories.contains(Category.gift))),
+        Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 4.0),
+            child: ChoiceChip(
+                label: Text(S.of(context).category_label_MEAL_PREP),
+                onSelected: selectedAction(Category.prep),
+                selected: categories.contains(Category.prep)))
+      ])
     ]);
   }
 

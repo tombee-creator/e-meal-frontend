@@ -28,9 +28,10 @@ class MealListItemView extends StatelessWidget {
             ])));
     items.add(const Spacer());
     items.add(AspectRatio(aspectRatio: 1.0, child: image()));
-    return ConstrainedBox(
-        constraints: const BoxConstraints(minHeight: 120),
-        child: Row(children: items));
+    return Card(
+        child: ConstrainedBox(
+            constraints: const BoxConstraints(minHeight: 120),
+            child: Row(children: items)));
   }
 
   Widget image() {

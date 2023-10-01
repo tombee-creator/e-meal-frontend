@@ -7,5 +7,7 @@
     "list_item_label_COST": "価格: ",
     "category_label_INGREDIENT": "食材",
     "category_label_MEAL_PREP": "作り置き",
-    "category_label_GIFT": "贈り物"
+    "category_label_GIFT": "贈り物",
+    "category_label": "カテゴリ",
+    "add_ingredient_label_text": "食材を追加してください"
 }

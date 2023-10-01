@@ -7,5 +7,7 @@
     "list_item_label_COST": "Cost: ",
     "category_label_INGREDIENT": "Ingredient",
     "category_label_MEAL_PREP": "Meal Prep",
-    "category_label_GIFT": "Gift"
+    "category_label_GIFT": "Gift",
+    "category_label": "Category",
+    "add_ingredient_label_text": "Please add your ingredients"
 }

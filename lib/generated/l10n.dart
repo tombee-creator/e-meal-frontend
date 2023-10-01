@@ -139,6 +139,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Category`
+  String get category_label {
+    return Intl.message(
+      'Category',
+      name: 'category_label',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please add your ingredients`
+  String get add_ingredient_label_text {
+    return Intl.message(
+      'Please add your ingredients',
+      name: 'add_ingredient_label_text',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
