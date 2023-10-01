@@ -24,7 +24,10 @@ class IngredientViewState extends State<IngredientView> {
   @override
   Widget build(BuildContext context) {
     return Column(children: [
-      Padding(padding: const EdgeInsets.all(12.0), child: categoryChips()),
+      SizedBox(
+          height: 72.0,
+          child: Padding(
+              padding: const EdgeInsets.all(12.0), child: categoryChips())),
       Expanded(
           child: FutureBuilder(
               future: fetchData(),
