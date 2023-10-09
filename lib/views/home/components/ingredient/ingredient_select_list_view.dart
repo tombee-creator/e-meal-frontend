@@ -16,20 +16,11 @@ class IngredientSelectListView extends StatefulWidget {
 }
 
 class IngredientSelectListViewState extends State<IngredientSelectListView> {
-  late List<Ingredient> ingredients;
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-
-    ingredients = widget.ingredients;
-  }
-
   @override
   Widget build(BuildContext context) {
     return ListView.separated(
         itemBuilder: (context, index) {
-          final ingredient = ingredients[index];
+          final ingredient = widget.ingredients[index];
           final isChecked = widget.selected
               .where((item) => item.ingredient.id == ingredient.id)
               .isNotEmpty;
@@ -44,7 +35,7 @@ class IngredientSelectListViewState extends State<IngredientSelectListView> {
                 }
               });
         },
-        itemCount: ingredients.length,
+        itemCount: widget.ingredients.length,
         separatorBuilder: (BuildContext context, int index) => const Divider());
   }
 
