@@ -21,15 +21,24 @@ class IngredientForm extends StatelessWidget {
             onCheckboxChanged(ingredient);
           }),
       Expanded(
+          flex: 2,
           child:
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        Text(ingredient.name, style: Theme.of(context).textTheme.labelLarge),
-        Text(ingredient.displayCreatedText(context),
-            style: Theme.of(context).textTheme.labelSmall)
-      ])),
+            Text(ingredient.name,
+                style: Theme.of(context).textTheme.labelLarge),
+            Text(ingredient.displayCreatedText(context),
+                style: Theme.of(context).textTheme.labelSmall)
+          ])),
       Expanded(
+          flex: 1,
           child: Text(ingredient.displayCostText(context),
-              style: Theme.of(context).textTheme.labelLarge))
+              style: Theme.of(context).textTheme.labelLarge)),
+      Expanded(
+          flex: 1,
+          child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 4.0),
+              child: ingredient.categoryWidget(context,
+                  style: Theme.of(context).textTheme.labelSmall)))
     ]);
   }
 }
