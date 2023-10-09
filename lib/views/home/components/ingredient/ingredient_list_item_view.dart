@@ -45,7 +45,7 @@ class _IngredientListItemViewState extends State<IngredientListItemView> {
                             fontSize: 12.0,
                             color:
                                 widget.count > 0 ? colorScheme.primary : null)),
-                    Text(widget.ingredient.createdText(context),
+                    Text(widget.ingredient.displayCreatedText(context),
                         style: const TextStyle(fontSize: 12.0))
                   ]))
         ]));

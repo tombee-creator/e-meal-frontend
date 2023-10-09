@@ -42,7 +42,7 @@ class Ingredient {
   @JsonKey(name: "used_count")
   final int usedCount;
 
-  String createdText(BuildContext context) =>
+  String displayCreatedText(BuildContext context) =>
       "${S.of(context).list_item_label_CREATED}${DateFormatter().format(created, type: DateFormatType.listIngredientItem)}";
 
   String displayCostText(BuildContext context) {

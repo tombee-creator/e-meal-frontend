@@ -20,8 +20,16 @@ class IngredientForm extends StatelessWidget {
           onChanged: (isChecked) {
             onCheckboxChanged(ingredient);
           }),
-      Expanded(child: Text(ingredient.name)),
-      Expanded(child: Text(ingredient.displayCostText(context)))
+      Expanded(
+          child:
+              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+        Text(ingredient.name, style: Theme.of(context).textTheme.labelLarge),
+        Text(ingredient.displayCreatedText(context),
+            style: Theme.of(context).textTheme.labelSmall)
+      ])),
+      Expanded(
+          child: Text(ingredient.displayCostText(context),
+              style: Theme.of(context).textTheme.labelLarge))
     ]);
   }
 }
