@@ -62,19 +62,8 @@ class MealTabBarViewState extends State<MealTabBarView> {
 
   void chooseIngredient(Ingredient ingredient) {
     setState(() {
-      final selectedItems = selected;
-      final items = selectedItems
-          .where((item) => item.ingredient.id == ingredient.id)
-          .toList();
-      if (items.isEmpty) {
-        selectedItems.add(UsedIngredientPostInfo(
-            ingredient: ingredient, isUsedUp: false, count: 1));
-      } else {
-        final item = items.first;
-        item.count++;
-      }
-      selected = selectedItems;
-      isFetch = false;
+      selected.add(UsedIngredientPostInfo(
+          ingredient: ingredient, isUsedUp: false, count: 1));
     });
   }
 

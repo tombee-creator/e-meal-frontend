@@ -4,7 +4,7 @@ import 'package:emeal_app/models/ingredient/ingredient.dart';
 import 'package:emeal_app/models/ingredient/used_ingredient_info.dart';
 import 'package:emeal_app/services/database.dart';
 import 'package:emeal_app/services/emeal_crud_api.dart';
-import 'package:emeal_app/views/home/components/ingredient/ingredient_list_view.dart';
+import 'package:emeal_app/views/home/components/ingredient/ingredient_select_list_view.dart';
 import 'package:flutter/material.dart';
 
 class IngredientView extends StatefulWidget {
@@ -42,7 +42,7 @@ class IngredientViewState extends State<IngredientView> {
                   return Center(
                       child: Text(S.of(context).add_ingredient_label_text));
                 }
-                return IngredientListView(
+                return IngredientSelectListView(
                     ingredients: data, selected: widget.selected);
               }))
     ]);
