@@ -4,7 +4,6 @@ import 'package:emeal_app/models/converters/firebase_user_converter.dart';
 import 'package:emeal_app/models/firebase_user/firebase_user.dart';
 import 'package:emeal_app/views/helper/utils/date_formatter.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 import 'package:json_annotation/json_annotation.dart';
 
