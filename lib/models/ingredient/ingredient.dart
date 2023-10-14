@@ -23,11 +23,10 @@ class Ingredient {
       toJson: FirebaseUserConverter.toJson)
   final FirebaseUser user;
 
-  final String name;
+  String name;
+  double cost;
 
   final String url;
-
-  final double cost;
 
   final int times;
 

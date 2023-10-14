@@ -1,5 +1,6 @@
 import 'package:emeal_app/models/ingredient/ingredient.dart';
 import 'package:emeal_app/views/home/components/ingredient/ingredient_detail_view.dart';
+import 'package:emeal_app/views/home/components/ingredient/ingredient_list_post_view.dart';
 import 'package:emeal_app/views/home/components/ingredient/ingredient_post_view.dart';
 import 'package:flutter/material.dart';
 import 'package:emeal_app/services/database.dart';
@@ -17,13 +18,20 @@ class IngredientPage extends StatelessWidget {
     final api = Database().provider(FirestoreCRUDApi<Ingredient>(
         Ingredient.collection, Ingredient.fromJson));
     if (id == null) {
-      return Scaffold(
-          appBar: AppBar(
-            title: const Text("投稿"),
-          ),
-          body: const SafeArea(
-            child: IngredientPostView(),
-          ));
+      return DefaultTabController(
+          length: 2,
+          child: Scaffold(
+              appBar: AppBar(
+                  title: const Text("投稿"),
+                  bottom: const TabBar(tabs: [
+                    Tab(child: Icon(Icons.post_add)),
+                    Tab(child: Icon(Icons.camera_alt))
+                  ])),
+              body: const SafeArea(
+                  child: TabBarView(children: [
+                IngredientPostView(),
+                IngredientListPostView()
+              ]))));
     }
 
     return Scaffold(

@@ -1,7 +1,7 @@
 import 'package:emeal_app/models/ingredient/ingredient.dart';
 import 'package:flutter/material.dart';
 
-class IngredientForm extends StatelessWidget {
+class IngredientForm extends StatefulWidget {
   final bool isChecked;
   final Ingredient ingredient;
   final void Function(Ingredient) onCheckboxChanged;
@@ -13,25 +13,50 @@ class IngredientForm extends StatelessWidget {
       required this.onCheckboxChanged});
 
   @override
+  State<StatefulWidget> createState() => IngredientFormState();
+}
+
+class IngredientFormState extends State<IngredientForm> {
+  late Ingredient ingredient;
+
+  @override
+  void initState() {
+    super.initState();
+    ingredient = widget.ingredient;
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Row(children: [
       Checkbox(
-          value: isChecked,
+          value: widget.isChecked,
           onChanged: (isChecked) {
-            onCheckboxChanged(ingredient);
+            widget.onCheckboxChanged(ingredient);
           }),
       Expanded(
           flex: 2,
           child:
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            Text(ingredient.name,
+            TextFormField(
+                initialValue: ingredient.name,
+                onChanged: (name) {
+                  setState(() {
+                    ingredient.name = name;
+                  });
+                },
                 style: Theme.of(context).textTheme.labelLarge),
             Text(ingredient.displayCreatedText(context),
                 style: Theme.of(context).textTheme.labelSmall)
           ])),
       Expanded(
           flex: 1,
-          child: Text(ingredient.displayCostText(context),
+          child: TextFormField(
+              initialValue: ingredient.cost.toString(),
+              onChanged: (cost) {
+                setState(() {
+                  ingredient.cost = double.parse(cost);
+                });
+              },
               style: Theme.of(context).textTheme.labelLarge)),
       Expanded(
           flex: 1,
