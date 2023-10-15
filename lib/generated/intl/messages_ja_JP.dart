@@ -36,6 +36,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "list_item_label_COST": MessageLookupByLibrary.simpleMessage("価格: "),
         "list_item_label_CREATED":
             MessageLookupByLibrary.simpleMessage("作成日時: "),
+        "list_item_label_NAME": MessageLookupByLibrary.simpleMessage("商品名: "),
+        "list_item_label_RECEIPT":
+            MessageLookupByLibrary.simpleMessage("レシートから食材リストを生成"),
         "list_item_label_USAGE": MessageLookupByLibrary.simpleMessage("使用済み: ")
       };
 }

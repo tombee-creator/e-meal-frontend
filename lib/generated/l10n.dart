@@ -80,6 +80,26 @@ class S {
     );
   }
 
+  /// `Generate ingredients list from receipt`
+  String get list_item_label_RECEIPT {
+    return Intl.message(
+      'Generate ingredients list from receipt',
+      name: 'list_item_label_RECEIPT',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Name: `
+  String get list_item_label_NAME {
+    return Intl.message(
+      'Name: ',
+      name: 'list_item_label_NAME',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Created at `
   String get list_item_label_CREATED {
     return Intl.message(

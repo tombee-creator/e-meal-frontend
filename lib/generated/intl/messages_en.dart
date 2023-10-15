@@ -37,6 +37,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "list_item_label_COST": MessageLookupByLibrary.simpleMessage("Cost: "),
         "list_item_label_CREATED":
             MessageLookupByLibrary.simpleMessage("Created at "),
+        "list_item_label_NAME": MessageLookupByLibrary.simpleMessage("Name: "),
+        "list_item_label_RECEIPT": MessageLookupByLibrary.simpleMessage(
+            "Generate ingredients list from receipt"),
         "list_item_label_USAGE": MessageLookupByLibrary.simpleMessage("Usage: ")
       };
 }
