@@ -46,12 +46,9 @@ class IngredientListPostViewState extends State<IngredientListPostView> {
           right: 20.0,
           bottom: 20.0,
           child: FloatingActionButton(
-              onPressed: selected.isNotEmpty
-                  ? () {
-                      pushPurchases()
-                          .then((value) => Navigator.of(context).pop());
-                    }
-                  : null,
+              onPressed: () {
+                pushPurchases().then((value) => Navigator.of(context).pop());
+              },
               child: const Icon(Icons.upload)))
     ]);
   }
