@@ -1,5 +1,6 @@
 import 'package:emeal_app/generated/l10n.dart';
 import 'package:emeal_app/models/ingredient/ingredient.dart';
+import 'package:emeal_app/views/home/components/meal-tab/meal_tab_bar_view.dart';
 import 'package:flutter/material.dart';
 
 class IngredientForm extends StatefulWidget {
@@ -28,6 +29,7 @@ class IngredientFormState extends State<IngredientForm> {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     return Column(children: [
       Row(children: [
         Expanded(
@@ -61,7 +63,9 @@ class IngredientFormState extends State<IngredientForm> {
                         label: Text(S.of(context).list_item_label_COST)),
                     onChanged: (cost) {
                       setState(() {
-                        ingredient.cost = double.parse(cost);
+                        try {
+                          ingredient.cost = double.parse(cost);
+                        } catch (_) {}
                       });
                     },
                     style: Theme.of(context).textTheme.labelLarge)))
@@ -80,7 +84,39 @@ class IngredientFormState extends State<IngredientForm> {
                       ingredient.categoryWidget(context,
                           style: Theme.of(context).textTheme.labelSmall)
                     ])))
-      ])
+      ]),
+      Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 4.0),
+          child:
+              Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+            TextButton(
+                onPressed: () => onRemove(context, widget.ingredient),
+                child: const Text("リセット")),
+            TextButton(
+                onPressed: () => useUp(context, widget.ingredient),
+                child: const Text("使い切る")),
+            TextButton(
+                style: TextButton.styleFrom(
+                    backgroundColor: colorScheme.error,
+                    foregroundColor: colorScheme.inversePrimary),
+                onPressed: () => onDelete(context, widget.ingredient),
+                child: const Text("削除"))
+          ]))
     ]);
+  }
+
+  void onRemove(BuildContext context, Ingredient ingredient) {
+    final currentState = context.findAncestorStateOfType<MealTabBarViewState>();
+    currentState?.clearSelectedIngredients(ingredient);
+  }
+
+  void useUp(BuildContext context, Ingredient ingredient) {
+    final currentState = context.findAncestorStateOfType<MealTabBarViewState>();
+    currentState?.useUpIngredient(ingredient);
+  }
+
+  void onDelete(BuildContext context, Ingredient ingredient) {
+    final currentState = context.findAncestorStateOfType<MealTabBarViewState>();
+    currentState?.deleteIngredient(ingredient);
   }
 }
